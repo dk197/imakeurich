@@ -6,21 +6,22 @@
 <h1>All Games</h1>
 
 <div class="row">
-	<ul>
 
 		@foreach($games as $game)
 
-			<div class="card" style="width: 18rem;">
+			<div class="card" id="game_card">
 				<div class="card-body">
-					<li> Min bid: {{ $game->min_bid }}</li>
-					<li>Max bid: {{ $game->max_bid }}</li>
-					<li>Max Players: {{ $game->max_players }}</li>
+					<h5 class="card-title text-center">{{  $game->single_bid === 1 ? "Single Bid" : "Multi Bid" }}</h5>
+					<ul id="game_list">
+						<li>Min bid: {{ $game->min_bid }}</li>
+						<li>Max bid: {{ $game->max_bid }}</li>
+						<li>Max Players: {{ $game->max_players }}</li>
+					</ul>
 				</div>
 			</div>
 
 		@endforeach
 
-	</ul>
 </div>
 
 @endsection

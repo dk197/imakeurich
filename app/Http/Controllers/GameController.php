@@ -41,17 +41,12 @@ class GameController extends Controller
         // dd($request->all());
 
         $attributes = request()->validate([
-            'min_bid' => ['required', 'min:1'],
-            'max_bid' => ['required', 'min:1'],
+            'min_bid' => ['required', 'min:1', 'numeric'],
+            'max_bid' => ['required', 'min:1', 'numeric'],
             'game_end' => ['required', 'min:1'],
-            'max_players' => ['required', 'min:1']
+            'single_bid' => ['required', 'min:0', 'max:1', 'numeric'],
+            'max_players' => ['required', 'min:1', 'numeric']
         ]);
-
-        if($request->multi_bid == 'on'){
-            $attributes['single_bid'] = 0;
-        }else{
-            $attributes['single_bid'] = 1;
-        }
 
         $attributes['game_end'] = Carbon::now()->toDateTimeString();
         $attributes['win_1'] = 2;
@@ -60,7 +55,7 @@ class GameController extends Controller
 
         GameSettings::create($attributes);
 
-        return redirect('/game');
+        return redirect('/games');
     }
 
     /**

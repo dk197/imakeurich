@@ -5,7 +5,7 @@
 <h1>Create new Game</h1>
 
 
-	<form id="create_game_form" action="/game" method="POST">
+	<form id="create_game_form" action="/games" method="POST">
 		@csrf
 		<div class="form-group">
 			<label for="game_min_bid">Min Bid</label>
@@ -18,8 +18,8 @@
 		</div>
 
 		<div class="form-group">
-			<label class="radio-inline mr-1"><input type="radio" class="mr-1" name="single_bid">Single Bid</label>
-			<label class="radio-inline"><input type="radio" class="mr-1" name="multi_bid">Multi Bid</label>
+			<label class="radio-inline mr-1"><input type="radio" checked class="mr-1" value="1" name="single_bid">Single Bid</label>
+			<label class="radio-inline"><input type="radio" class="mr-1" value="0" name="single_bid">Multi Bid</label>
 		</div>
 
 		<div class="form-group">
