@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\GameSettings;
+use Carbon\Carbon;
 
 class GameController extends Controller
 {
@@ -13,7 +15,9 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        $games = GameSettings::all();
+
+        return view('game.index', compact('games'));
     }
 
     /**
@@ -34,7 +38,29 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+
+        $attributes = request()->validate([
+            'min_bid' => ['required', 'min:1'],
+            'max_bid' => ['required', 'min:1'],
+            'game_end' => ['required', 'min:1'],
+            'max_players' => ['required', 'min:1']
+        ]);
+
+        if($request->multi_bid == 'on'){
+            $attributes['single_bid'] = 0;
+        }else{
+            $attributes['single_bid'] = 1;
+        }
+
+        $attributes['game_end'] = Carbon::now()->toDateTimeString();
+        $attributes['win_1'] = 2;
+        $attributes['win_2'] = 3;
+        $attributes['win_3'] = 4;
+
+        GameSettings::create($attributes);
+
+        return redirect('/game');
     }
 
     /**
