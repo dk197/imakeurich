@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\GameSettings;
+use App\Game;
 use Carbon\Carbon;
 
 class GameController extends Controller
@@ -64,9 +65,25 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(GameSettings $game_settings)
     {
-        //
+        $test = $game_settings;
+        return view('game.show', compact('test'));
+    }
+
+    public function enter($id)
+    {
+        // $attributes = request()->validate([
+        //     'bid' => ['required', 'min:1', 'numeric'],
+        // ]);
+
+        $attributes['user_id'] = 1;
+        $attributes['game_id'] = 1;
+        $attributes['bid'] = 5;
+
+        dd($id);
+        // Game::create($attributes);
+
     }
 
     /**

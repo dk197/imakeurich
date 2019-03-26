@@ -2,6 +2,7 @@
 #game_card{
 	padding: 20px;
 	margin-right: 20px;
+	cursor: pointer;
 }
 #game_card:hover{
 	background-color: lightgrey;
