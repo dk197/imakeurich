@@ -2,7 +2,19 @@
 
 @section('content')
 <div class="row">
-	<h1>{{ $game->single_bid === 1 ? "Single Bid" : "Multi Bid"}}</h1>
+	<div class="col-12">
+		<h1>{{ $game->single_bid === 1 ? "Single Bid" : "Multi Bid"}}</h1>
+	</div>
+	<div class="col-4">
+		<p>Spieler x/x</p>
+	</div>
+	<div class="col-4">
+		<p>Winning Places: {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
+	</div>
+	<div class="col-4">
+		<p>Game ending: {{ $game->game_end }}</p>
+	</div>
+	
 </div>
 
 <div class="row">

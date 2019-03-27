@@ -53,14 +53,31 @@ class GameController extends Controller
             'max_players' => ['required', 'min:1', 'numeric']
         ]);
 
+        //$this, da Funktion nicht global sichtbar ist
+        $winning_places = $this->setWinningPlaces($attributes['max_players']);
+
         $attributes['game_end'] = Carbon::now()->toDateTimeString();
-        $attributes['win_1'] = 2;
-        $attributes['win_2'] = 3;
-        $attributes['win_3'] = 4;
+        $attributes['win_1'] = $winning_places[0];
+        $attributes['win_2'] = $winning_places[1];
+        $attributes['win_3'] = $winning_places[2];
 
         Game::create($attributes);
 
         return redirect('/games');
+    }
+
+    function setWinningPlaces($max_players)
+    {
+        $winning_places = [];
+
+        while (sizeof($winning_places) < 3) {
+            $random = rand(2, $max_players); 
+            if(!in_array($random, $winning_places)){
+                array_push($winning_places, $random);
+            }
+            $random = '';
+        }
+        return $winning_places;       
     }
 
     /**
