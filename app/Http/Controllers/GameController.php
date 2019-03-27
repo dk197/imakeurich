@@ -66,8 +66,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        $test = $game;
-        return view('game.show', compact('test'));
+        return view('game.show', compact('game'));
     }
 
     public function enter($id)
