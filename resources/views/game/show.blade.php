@@ -6,7 +6,7 @@
 		<h1>{{ $game->single_bid === 1 ? "Single Bid" : "Multi Bid"}}</h1>
 	</div>
 	<div class="col-4">
-		<p>Spieler x/x</p>
+		<p>Spieler {{ $player_number }}/{{ $game->max_players }}</p>
 	</div>
 	<div class="col-4">
 		<p>Winning Places: {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>

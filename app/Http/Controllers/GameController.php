@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Game;
 use App\Player;
 use Carbon\Carbon;
@@ -88,7 +89,10 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        return view('game.show', compact('game'));
+        // mehrere entries pro user bei einem game! -> update entry 
+        $player_number = DB::table('players')->where(['game_id' => $game->id])->count();
+        // dd($player_number);
+        return view('game.show', compact('game', 'player_number'));
     }
 
     public function enter(Game $game)
