@@ -19,6 +19,6 @@ Auth::routes();
 
 Route::resource('games', 'GameController');
 
-Route::post('/games/{id}/enter', 'GameController@enter');
+Route::post('/games/{game}/enter', 'GameController@enter');
 
 Route::get('/home', 'HomeController@index')->name('home');

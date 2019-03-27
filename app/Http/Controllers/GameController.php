@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Game;
+use App\Player;
 use Carbon\Carbon;
 
 class GameController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -69,19 +74,14 @@ class GameController extends Controller
         return view('game.show', compact('game'));
     }
 
-    public function enter($id)
+    public function enter(Game $game)
     {
-        // $attributes = request()->validate([
-        //     'bid' => ['required', 'min:1', 'numeric'],
-        // ]);
+        $bid = request()->game_bid;
 
-        $attributes['user_id'] = 1;
-        $attributes['game_id'] = 1;
-        $attributes['bid'] = 5;
-
-        dd($id);
-        // Game::create($attributes);
-
+        // dd($game);
+        $game->addPlayer($bid);
+        
+        return redirect()->back();
     }
 
     /**
