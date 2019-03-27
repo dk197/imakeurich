@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\GameSettings;
 use App\Game;
 use Carbon\Carbon;
 
@@ -16,7 +15,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = GameSettings::all();
+        $games = Game::all();
 
         return view('game.index', compact('games'));
     }
@@ -54,7 +53,7 @@ class GameController extends Controller
         $attributes['win_2'] = 3;
         $attributes['win_3'] = 4;
 
-        GameSettings::create($attributes);
+        Game::create($attributes);
 
         return redirect('/games');
     }
@@ -65,9 +64,9 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(GameSettings $game_settings)
+    public function show(Game $game)
     {
-        $test = $game_settings;
+        $test = $game;
         return view('game.show', compact('test'));
     }
 

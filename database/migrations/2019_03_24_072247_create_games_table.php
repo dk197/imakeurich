@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGameSettingsTable extends Migration
+class CreateGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGameSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_settings', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('min_bid');
             $table->unsignedInteger('max_bid');
@@ -34,6 +34,6 @@ class CreateGameSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_settings');
+        Schema::dropIfExists('games');
     }
 }
