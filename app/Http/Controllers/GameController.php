@@ -99,12 +99,14 @@ class GameController extends Controller
 
     public function enter(Game $game)
     {
+        $bid = request()->game_bid;
+
         // check if game is full
         if($this->getPlayerNumber($game) == $game->max_players){
-            return response()->json(['message' => 'Game is full']);
+            return response()->json(['message' => 'Game is full!']);
+        }else if($bid < $game->min_bid || $bid > $game->max_bid){
+            return response()->json(['message' => 'Bid not in allowed area!']);
         }else{
-            $bid = request()->game_bid;
-
             if($this->getPlayerBids($game->id) > 0){
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
