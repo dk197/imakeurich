@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Game;
 use App\Player;
 use Carbon\Carbon;
@@ -90,20 +91,39 @@ class GameController extends Controller
     public function show(Game $game)
     {
         // mehrere entries pro user bei einem game! -> update entry 
-        $player_number = DB::table('players')->where(['game_id' => $game->id])->count();
-        
+        $player_number = $this->getPlayerNumber($game);
+
         // dd($player_number);
         return view('game.show', compact('game', 'player_number'));
     }
 
     public function enter(Game $game)
     {
-        $bid = request()->game_bid;
+        // check if game is full
+        if($this->getPlayerNumber($game) == $game->max_players){
+            return response()->json(['message' => 'Game is full']);
+        }else{
+            $bid = request()->game_bid;
 
-        // dd($game);
-        $game->addPlayer($bid);
-        
-        return redirect()->back();
+            if($this->getPlayerBids($game->id) > 0){
+                // Player has bid for this game already
+                $game->updatePlayerBid($bid, $game);
+                return redirect()->back();
+            }else{
+                // Player didn't bid yet
+                $game->addPlayer($bid);
+                
+                return redirect()->back();
+            }
+        }               
+    }
+
+    public function getPlayerNumber($game){
+        return DB::table('players')->where(['game_id' => $game->id])->count();
+    }
+
+    public function getPlayerBids($game_id){
+        return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
     }
 
     /**

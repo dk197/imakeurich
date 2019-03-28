@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use App\Game;
+use App\Player;
 
 class Game extends Model
 {
@@ -25,5 +27,12 @@ class Game extends Model
     		'game_id' => $this->id,
     		'bid' => $bid
     	]);
+    }
+
+    public function updatePlayerBid($bid, $game){
+        
+        $user = auth()->user();
+        
+        Player::where(['user_id' => $user->id, 'game_id' => $game->id])->update(['bid' => DB::raw('bid +'.$bid)]);
     }
 }
