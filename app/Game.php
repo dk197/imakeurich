@@ -12,7 +12,7 @@ class Game extends Model
     ];
 
     public function player(){
-    	return $this->hasMany(Player::class);
+    	return $this->hasMany(Player::class)->orderBy('bid', 'DESC');;
     }
 
     public function addPlayer($bid){

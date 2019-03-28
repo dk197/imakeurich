@@ -1,4 +1,4 @@
-/*######### /games start########*/
+/*######### /games overview start########*/
 #game_card{
 	padding: 20px;
 	margin-right: 20px;
@@ -13,4 +13,12 @@
 	padding-inline-start: 0px;
 }
 
-/*######### /games end########*/
+/*######### /games overview end########*/
+
+
+/*########## Game details start#########*/
+
+
+
+
+/*########## Game details end#########*/
