@@ -15,14 +15,24 @@ class Game extends Model
     ];
 
     public function player(){
-    	return $this->hasMany(Player::class)->orderBy('bid', 'DESC');;
+    	return $this->hasMany(Player::class)->orderBy('bid', 'DESC');
     }
 
     public function addPlayer($bid){
 
     	$user = auth()->user();
 
+    	$result = Player::create([
+    		'user_id' => $user->id,
+    		'username' => $user->username,
+    		'game_id' => $this->id,
+    		'bid' => $bid
+    	]);
 
+        //the position of the player in the game
+        $position = $this->getPlayerPosition($this->id, $result->id) + 1;
+
+        
         // ################# Pusher start #############################
 
             $options = array(
@@ -40,25 +50,31 @@ class Game extends Model
                 'game_id' => $this->id,
                 'bid' => $bid,
                 'user_id' => $user->id,
-                'username' => $user->username
+                'username' => $user->username,
+                'position' => $position
             ]);
             
             $pusher->trigger('player_enter', 'player_enter-event', $data);  
 
         // ################# Pusher end ###############################
 
-
-    	return Player::create([
-    		'user_id' => $user->id,
-    		'username' => $user->username,
-    		'game_id' => $this->id,
-    		'bid' => $bid
-    	]);
     }
 
     public function updatePlayerBid($bid, $game){
         
         $user = auth()->user();
+
+        //get Entry which will get updated
+        $result = Player::where(['user_id' => $user->id, 'game_id' => $game->id]);
+
+        // update the Entry
+        $result->update(['bid' => DB::raw('bid +'.$bid)]);
+
+        // convert the Entry-Object to an array
+        $result_array = $result->get()->toArray();
+
+        //the position of the player in the game
+        $position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
 
 
         // ################# Pusher start #############################
@@ -78,14 +94,23 @@ class Game extends Model
                 'game_id' => $game->id,
                 'bid' => $bid,
                 'user_id' => $user->id,
-                'username' => $user->username
+                'username' => $user->username,
+                'position' => $position
             ]);
             
             $pusher->trigger('player_update', 'player_update-event', $data);  
 
         // ################# Pusher end ###############################
 
-        
-        Player::where(['user_id' => $user->id, 'game_id' => $game->id])->update(['bid' => DB::raw('bid +'.$bid)]);
+    }
+
+    //get the Position of the Player based on his bid
+    public function getPlayerPosition($game_id, $player_id){
+        $all_players = DB::table('players')->where(['game_id' => $game_id])->orderBy('bid', 'DESC')->get()->toArray();
+
+        //search for the player ID in the Array of all Player of the selected game and get the index (that array is descending ordered by the Bid)
+        $key = array_search($player_id, array_column($all_players, 'id'));
+
+        return $key;
     }
 }

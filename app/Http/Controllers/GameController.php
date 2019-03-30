@@ -116,7 +116,7 @@ class GameController extends Controller
             }else{
                 // Player didn't bid yet
                 $game->addPlayer($bid);
-                
+
                 return redirect()->back();
             }
         }               

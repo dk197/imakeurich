@@ -52,4 +52,25 @@
 		</table>
 	</div>
 </div>
+
+
+<script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+
+<script>
+
+//################## Player enter event start ################
+var pusher = new Pusher('9512c6943ba979af3517', {
+  cluster: 'eu'
+});
+
+var channel = pusher.subscribe('player_enter');
+channel.bind('player_enter-event', function(data) {
+    console.log(data);
+    
+});
+//################## Player enter event end ##################
+
+</script>
+
+
 @endsection
