@@ -117,7 +117,7 @@ class GameController extends Controller
                 // Player didn't bid yet
                 $game->addPlayer($bid);
 
-                return redirect()->back();
+                return response()->json(['message' => 'Game sucessfully entered']);
             }
         }               
     }

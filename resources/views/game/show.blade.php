@@ -21,7 +21,7 @@
 
 <div class="row">
 	<div class="col-12">
-		<form method="POST" action="/games/{{ $game->id }}/enter">
+		<form method="POST" action="/games/{{ $game->id }}/enter" id="player_enter_form">
 			@csrf
 			<div class="form-group">
 				<label for="game_bid">How much money do you wanna drop in?</label>
@@ -54,21 +54,8 @@
 </div>
 
 
-<script src="https://js.pusher.com/4.2/pusher.min.js"></script>
-
 <script>
 
-//################## Player enter event start ################
-var pusher = new Pusher('9512c6943ba979af3517', {
-  cluster: 'eu'
-});
-
-var channel = pusher.subscribe('player_enter');
-channel.bind('player_enter-event', function(data) {
-    console.log(data);
-    
-});
-//################## Player enter event end ##################
 
 </script>
 
