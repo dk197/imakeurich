@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	var game_id = window.location.pathname.substr(7);
+
 	// ################ enter game start #################
 	var player_enter_form = $('#player_enter_form');
 
@@ -8,8 +10,8 @@ $(document).ready(function(){
 		//cancel default behavior like reloading the page or submitting the form
 		e.preventDefault();
 
+		// serialize the form data
 		var data = player_enter_form.serialize();
-		var game_id = window.location.pathname.substr(7);
 
 		$.ajax({
 			url: '/games/' + game_id + '/enter',
@@ -17,8 +19,10 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response){
-				if(response.message != 'Game sucessfully entered'){
+				if(response.message != 'Game sucessfully entered' && response.message != 'Player sucessfully updated'){
 					alert(response.message);
+				}else{
+					console.log(response.message);
 				}
 			}
 		})
@@ -36,10 +40,27 @@ $(document).ready(function(){
 	var channel = pusher.subscribe('player_enter');
 	channel.bind('player_enter-event', function(data) {
 	    console.log(data);
+
+	    if(data.game_id == game_id){
+	    	var previousPlayer = parseInt(data.position) -1;
+			var player_number = $('#player_table tr').length;
+			var newPlayerRow = '<th class="col_1" scope="row" style="width: 33%">' + data.position + '.</th><td class="text-center col_2" style="width: 33%">' + data.username + '(' + data.bid + ')' + '</td><td class="text-right col_3" style="width: 33%"><a href="#">Zum Profil</a></td></tr>';
+			var newPlayerPosition = parseInt(data.position);
+
+			console.log(newPlayerPosition);
+			console.log(player_number);
+
+			//adjust the position-numbers of the other players
+			for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
+				console.log($('#player_table tr:nth-child(' + i + ')').html());
+	    		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
+	    	}
+
+	    	//insert the new player in the table
+	    	$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow); 
+	    }
 	    
 	});
 	//################## Player enter event end ##################
-	console.log(window.location.pathname.substr(7));	
-
 
 })
