@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	// ################ enter game start #################
 	var player_enter_form = $('#player_enter_form');
 
 	player_enter_form.on('submit', function(e){
@@ -16,10 +17,16 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response){
-				console.log(response);
+				if(response.message != 'Game sucessfully entered'){
+					alert(response.message);
+				}
 			}
 		})
 	})
+
+	// ################ enter game end ###################
+
+
 
 	//################## Player enter event start ################
 	var pusher = new Pusher('9512c6943ba979af3517', {
