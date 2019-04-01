@@ -38,14 +38,14 @@
 			@foreach($game->player as $player)
 				<li>{{ $player->username }} {{ $player->bid }}</li>
 			@endforeach
-		</ul>-->	
+		</ul>-->
 		<table class="table" id="player_table">
 			<tbody>
 				@foreach($game->player as $player)
 					<tr>
 						<th class="col_1" scope="row" style="width: 33%">{{ $loop->iteration }}.</th>
 						<td class="text-center col_2" style="width: 33%">{{ $player->username }} ({{ $player->bid }})</td>
-						<td class="text-right col_3" style="width: 33%"><a href="#">Zum Profil</a></td>
+						<td class="text-right col_3" style="width: 33%"><a href="/profile">Zum Profil</a></td>
 					</tr>
 				@endforeach
 			</tbody>
