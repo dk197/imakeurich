@@ -19,6 +19,10 @@ Route::get('/profile', function () {
     return view('auth/profile');
 });
 
+Route::get('/instructions', function () {
+    return view('instructions');
+});
+
 Auth::routes();
 
 Route::resource('games', 'GameController');
