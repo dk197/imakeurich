@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Game;
 use App\Player;
 use Carbon\Carbon;
+use Pusher\Pusher;
 
 class GameController extends Controller
 {
@@ -103,6 +104,7 @@ class GameController extends Controller
 
         // check if game is full
         if($this->getPlayerNumber($game) == $game->max_players){
+            // $this->endGame($game);
             return response()->json(['message' => 'Game is full!']);
         }else if($bid < $game->min_bid || $bid > $game->max_bid){
             return response()->json(['message' => 'Bid not in allowed area!']);
@@ -110,12 +112,12 @@ class GameController extends Controller
             if($this->getPlayerBids($game->id) > 0){
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
-                return redirect()->back();
+                return response()->json(['message' => 'Player sucessfully updated']);
             }else{
                 // Player didn't bid yet
                 $game->addPlayer($bid);
-                
-                return redirect()->back();
+
+                return response()->json(['message' => 'Game sucessfully entered']);
             }
         }               
     }
@@ -127,6 +129,27 @@ class GameController extends Controller
     public function getPlayerBids($game_id){
         return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
     }
+
+    // public function endGame($game){
+
+    //     // ################# Pusher start #############################
+
+    //         $options = array(
+    //             'cluster' => 'eu'
+    //         );
+     
+    //         $pusher = new Pusher(
+    //             env('PUSHER_APP_KEY'),
+    //             env('PUSHER_APP_SECRET'),
+    //             env('PUSHER_APP_ID'),
+    //             $options
+    //         );
+            
+    //         $pusher->trigger('game_end', 'game_end-event', $data);  
+
+    //     // ################# Pusher end ###############################
+
+    // }
 
     /**
      * Show the form for editing the specified resource.
