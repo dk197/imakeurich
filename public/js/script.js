@@ -41,6 +41,7 @@ $(document).ready(function(){
 	channel.bind('player_enter-event', function(data) {
 	    console.log(data);
 
+	    //only execute at the right page
 	    if(data.game_id == game_id){
 	    	var previousPlayer = parseInt(data.position) -1;
 			var player_number = $('#player_table tr').length;
@@ -50,14 +51,22 @@ $(document).ready(function(){
 			console.log(newPlayerPosition);
 			console.log(player_number);
 
-			//adjust the position-numbers of the other players
-			for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
-				console.log($('#player_table tr:nth-child(' + i + ')').html());
-	    		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
-	    	}
+			//first player in the game
+			if(player_number == 0){
+				$('#player_table tbody').prepend(newPlayerRow);
+			// some other players are there already
+			}else{
+				//adjust the position-numbers of the other players
+				for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
+					console.log($('#player_table tr:nth-child(' + i + ')').html());
+		    		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
+	    		}
 
-	    	//insert the new player in the table
-	    	$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow); 
+		    	//insert the new player in the table
+		    	$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
+			}
+
+			 
 	    }
 	    
 	});
