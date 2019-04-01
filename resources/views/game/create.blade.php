@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="game_max_bid">Min Bid</label>
+			<label for="game_max_bid">Max Bid</label>
 			<input type="number" name="max_bid" id="game_max_bid" class="form-control" placeholder="Max Bid for this game">
 		</div>
 
