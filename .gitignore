@@ -3,8 +3,6 @@
 /public/storage
 /public/js
 /public/css
-package.json
-package-lock.json
 mix-manifest.json
 /storage/*.key
 /vendor
