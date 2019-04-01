@@ -9,6 +9,7 @@ use App\Game;
 use App\Player;
 use Carbon\Carbon;
 use Pusher\Pusher;
+use App\Userstatistics;
 
 class GameController extends Controller
 {
@@ -74,13 +75,13 @@ class GameController extends Controller
         $winning_places = [];
 
         while (sizeof($winning_places) < 3) {
-            $random = rand(2, $max_players); 
+            $random = rand(2, $max_players);
             if(!in_array($random, $winning_places)){
                 array_push($winning_places, $random);
             }
             $random = '';
         }
-        return $winning_places;       
+        return $winning_places;
     }
 
     /**
@@ -91,7 +92,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        // mehrere entries pro user bei einem game! -> update entry 
+        // mehrere entries pro user bei einem game! -> update entry
         $player_number = $this->getPlayerNumber($game);
 
         // dd($player_number);
@@ -100,7 +101,18 @@ class GameController extends Controller
 
     public function enter(Game $game)
     {
+
         $bid = request()->game_bid;
+
+        $currentuser = auth()->user();
+        $userstat = new Userstatistics;
+        $userstat->game_id = $game->id;
+        $userstat->user_id = $currentuser->id;
+        $userstat->username = $currentuser->username;
+        $userstat->value = $bid;
+        $userstat->isBid = true;
+        $userstat->save();
+
 
         // check if game is full
         if($this->getPlayerNumber($game) == $game->max_players){
@@ -119,7 +131,7 @@ class GameController extends Controller
 
                 return response()->json(['message' => 'Game successfully entered']);
             }
-        }               
+        }
     }
 
     public function getPlayerNumber($game){
@@ -137,15 +149,15 @@ class GameController extends Controller
     //         $options = array(
     //             'cluster' => 'eu'
     //         );
-     
+
     //         $pusher = new Pusher(
     //             env('PUSHER_APP_KEY'),
     //             env('PUSHER_APP_SECRET'),
     //             env('PUSHER_APP_ID'),
     //             $options
     //         );
-            
-    //         $pusher->trigger('game_end', 'game_end-event', $data);  
+
+    //         $pusher->trigger('game_end', 'game_end-event', $data);
 
     //     // ################# Pusher end ###############################
 

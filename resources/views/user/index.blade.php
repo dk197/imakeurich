@@ -11,17 +11,17 @@ function time_elapsed_string($datetime, $full = false) {
     $diff->d -= $diff->w * 7;
 
     $string = array(
-        'y' => 'Jahr/e',
-        'm' => 'Monat/e',
-        'w' => 'Woche/n',
-        'd' => 'Tag/en',
-        'h' => 'Stunde/n',
-        'i' => 'Minute/n',
-        's' => 'Sekunde/n',
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
     );
     foreach ($string as $k => &$v) {
         if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
         } else {
             unset($string[$k]);
         }
@@ -30,15 +30,15 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . '' : '';
 }
-$timeago = auth()->user()->created_at;
+$timeago = $user->created_at;
 ?>
 
 @section('content')
 <div class="container">
     <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
       <div class="col-md-6 px-0">
-      <h1 class="display-4 font-italic">Hallo {{Auth::user()->username}},</h1>
-        <p class="lead my-3">hier kannst du die wichtigsten deiner persönlichen Statistiken:</p>
+      <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
+        <p class="lead my-3">here can you see all his personal statistics:</p>
       </div>
     </div>
 
@@ -46,14 +46,27 @@ $timeago = auth()->user()->created_at;
       <div class="col-md-6">
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Warum bin ich nicht so damn rich wie du?</strong>
-            <h3 class="mb-0">Du bist rich seit</h3>
-            <p class="card-text mb-auto">(erste Anmeldung)</p>
+            <strong class="d-inline-block mb-2 text-primary">Why is he so rich?</strong>
+            <h3 class="mb-0">He is rich since</h3>
+            <p class="card-text mb-auto">(first login)</p>
           </div>
           <div class="jumbotron col-auto d-none d-lg-block">
             <h1><?php echo time_elapsed_string($timeago); ?></h1>
           </div>
         </div>
       </div>
+
+        <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-success">All your bids:</strong>
+                    <h3 class="mb-0">You´ve taken</h3><h1 class="btn btn-danger"><?php echo $countbids ?></h1><h3 class="mb-0"> bids since you became rich</h3>
+                </div>
+
+
+
+            </div>
+        </div>
     </div>
+</div>
 @endsection
