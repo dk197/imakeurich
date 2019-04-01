@@ -63,7 +63,12 @@ $(document).ready(function(){
 	    		}
 
 		    	//insert the new player in the table
-		    	$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
+
+		    	if(data.position == 1){
+		    		$('#player_table tbody').prepend(newPlayerRow);
+		    	}else{
+		    		$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
+		    	}
 			}
 
 			 
