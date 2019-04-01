@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/profile', function () {
+    return view('auth/profile');
+});
+
 Auth::routes();
 
 Route::resource('games', 'GameController');
