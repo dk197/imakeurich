@@ -19,10 +19,11 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response){
-				if(response.message != 'Game sucessfully entered' && response.message != 'Player sucessfully updated'){
+				if(response.message != 'Game successfully entered' && response.message != 'Player successfully updated'){
 					alert(response.message);
 				}else{
 					console.log(response.message);
+					$('#game_bid').val('');
 				}
 			}
 		})
@@ -70,11 +71,42 @@ $(document).ready(function(){
 		    		$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
 		    	}
 			}
-
-			 
 	    }
-	    
 	});
 	//################## Player enter event end ##################
+
+
+	//################## Player update event start ################
+	var pusher = new Pusher('9512c6943ba979af3517', {
+	  cluster: 'eu'
+	});
+
+	var channel = pusher.subscribe('player_update');
+	channel.bind('player_update-event', function(data) {
+
+		console.log(data)
+
+		var previousPlayer = parseInt(data.position) -1;
+		var player_number = $('#player_table tr').length;
+		var newPlayerRow = '<th class="col_1" scope="row" style="width: 33%">' + data.position + '.</th><td class="text-center col_2" style="width: 33%">' + data.username + '(' + data.bid + ')' + '</td><td class="text-right col_3" style="width: 33%"><a href="#">Zum Profil</a></td></tr>';
+		var newPlayerPosition = parseInt(data.position);
+
+
+		//adjust the position-numbers of the other players
+		for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
+			console.log($('#player_table tr:nth-child(' + i + ')').html());
+    		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
+		}
+
+    	//insert the new player in the table
+
+    	if(data.position == 1){
+    		$('#player_table tbody').prepend(newPlayerRow);
+    	}else{
+    		$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
+    	}
+
+	});
+	//################## Player update event end ##################
 
 })

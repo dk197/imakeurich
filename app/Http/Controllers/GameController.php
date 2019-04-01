@@ -112,12 +112,12 @@ class GameController extends Controller
             if($this->getPlayerBids($game->id) > 0){
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
-                return response()->json(['message' => 'Player sucessfully updated']);
+                return response()->json(['message' => 'Player successfully updated']);
             }else{
                 // Player didn't bid yet
                 $game->addPlayer($bid);
 
-                return response()->json(['message' => 'Game sucessfully entered']);
+                return response()->json(['message' => 'Game successfully entered']);
             }
         }               
     }
