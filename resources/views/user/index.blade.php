@@ -11,17 +11,17 @@ function time_elapsed_string($datetime, $full = false) {
     $diff->d -= $diff->w * 7;
 
     $string = array(
-        'y' => 'Jahr/e',
-        'm' => 'Monat/e',
-        'w' => 'Woche/n',
-        'd' => 'Tag/en',
-        'h' => 'Stunde/n',
-        'i' => 'Minute/n',
-        's' => 'Sekunde/n',
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
     );
     foreach ($string as $k => &$v) {
         if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
         } else {
             unset($string[$k]);
         }
@@ -55,5 +55,18 @@ $timeago = $user->created_at;
           </div>
         </div>
       </div>
+
+        <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-success">All your bids:</strong>
+                    <h3 class="mb-0">You´ve taken</h3><h1 class="btn btn-danger"><?php echo $countbids ?></h1><h3 class="mb-0"> bids since you became rich</h3>
+                </div>
+
+
+
+            </div>
+        </div>
     </div>
+</div>
 @endsection

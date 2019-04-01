@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Userstatistics;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -16,8 +19,14 @@ class UserController extends Controller
     {
         $user_id = $id;
         $user = User::find($user_id);
+        $userstats = DB::table('Userstatistics')->where('user_id',$user_id)->get();
+        $count = 0;
+        foreach ($userstats as $some)
+        {
+            $count++;
+        }
 
-        return view('user.index')->with('user',$user);
+        return view('user.index')->with('user',$user)->with('countbids',$count);
     }
 
     function addToBalance($coins)
