@@ -37,8 +37,8 @@ $timeago = $user->created_at;
 <div class="container">
     <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
       <div class="col-md-6 px-0">
-      <h1 class="display-4 font-italic">Das ist {{$user->username}},</h1>
-        <p class="lead my-3">hier kannst du seine wichtigsten persönlichen Statistiken einsehen:</p>
+      <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
+        <p class="lead my-3">here can you see all his personal statistics:</p>
       </div>
     </div>
 
@@ -46,9 +46,9 @@ $timeago = $user->created_at;
       <div class="col-md-6">
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Warum bin ich nicht so damn rich wie er?</strong>
-            <h3 class="mb-0">Er ist rich seit</h3>
-            <p class="card-text mb-auto">(erste Anmeldung)</p>
+            <strong class="d-inline-block mb-2 text-primary">Why is he so rich?</strong>
+            <h3 class="mb-0">He is rich since</h3>
+            <p class="card-text mb-auto">(first login)</p>
           </div>
           <div class="jumbotron col-auto d-none d-lg-block">
             <h1><?php echo time_elapsed_string($timeago); ?></h1>
