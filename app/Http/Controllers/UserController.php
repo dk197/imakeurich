@@ -17,22 +17,30 @@ class UserController extends Controller
         //
     }
 
-    function addToBalance($coins)
+    public function addToBalance(Request $request)
     {
+        $coins = $request->input('coins');
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $user->balance = $user->balance + $coins;
         $user->save();
+        return response()->json(['message' => $coins.' Coins successfully added.', 'coins' => $user->balance]);
     }
 
-    function removeFromBalance($coins)
+    public function removeFromBalance(Request $request)
     {
+        $coins = $request->input('coins');
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $user->balance = $user->balance - $coins;
         $user->save();
+        return response()->json(['message' => $coins.' Coins successfully donated.', 'coins' => $user->balance]);
     }
 
+    public function coins()
+    {
+        return view('coins');
+    }
     /**
      * Show the form for creating a new resource.
      *
