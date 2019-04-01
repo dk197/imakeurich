@@ -30,3 +30,4 @@ Route::post('/games/random', 'GameController@setWinningPlaces');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/addB/{coins}', ['uses' =>'UserController@addToBalance']);
+Route::get('/rmB/{coins}', ['uses' =>'UserController@removeFromBalance']);

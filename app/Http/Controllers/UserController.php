@@ -25,6 +25,14 @@ class UserController extends Controller
         $user->save();
     }
 
+    function removeFromBalance($coins)
+    {
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $user->balance = $user->balance - $coins;
+        $user->save();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
