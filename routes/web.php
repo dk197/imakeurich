@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile', function () {
-    return view('auth/profile');
-});
-
 Route::get('/instructions', function () {
     return view('instructions');
 });
@@ -42,3 +38,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/coins', 'UserController@coins');
 
 Route::post('/addBalance', 'UserController@addToBalance');
+
+Route::post('/change/{id}', 'UserController@update');
+
+Route::get('/editUser', 'UserController@showEditPage');
