@@ -173,7 +173,7 @@
 
 
 
-img {
+.img-rounded {
     width: 100px;
     margin: 10px 10px 10px 10px;
     -webkit-transform: scale(1, 1);
@@ -183,7 +183,7 @@ img {
     -webkit-transition-duration: 0.3s; /* Safari */
     }
 
-img:hover {
+.img-rounded:hover {
 	cursor: pointer;
 	-webkit-transform: scale(1.5, 1.5);
     -ms-transform: scale(1.5, 1.5);
