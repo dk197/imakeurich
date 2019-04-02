@@ -84,7 +84,7 @@
                 </div>
                 <h1>Make money, get rich</h1>
                 <div class="links">
-                    <a href="#">How it works</a>
+                    <a href="/instructions">How it works</a>
                     @if (Route::has('login'))
 
                     @auth
