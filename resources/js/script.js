@@ -101,7 +101,6 @@ $(document).ready(function(){
 			data: data,
 			success: function(response) {
                 document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-                console.log(response.message);
             }
 		})
     });
