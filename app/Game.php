@@ -67,13 +67,19 @@ class Game extends Model
         //get Entry which will get updated
         $result = Player::where(['user_id' => $user->id, 'game_id' => $game->id]);
 
+        // convert the Entry-Object to an array before updating
+        $result_array = $result->get()->toArray();
+
+        //the position of the player in the game after updating
+        $previous_position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
+
         // update the Entry
         $result->update(['bid' => DB::raw('bid +'.$bid)]);
 
-        // convert the Entry-Object to an array
+        // convert the Entry-Object to an array after updating
         $result_array = $result->get()->toArray();
 
-        //the position of the player in the game
+        //the position of the player in the game after updating
         $position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
 
 
@@ -95,6 +101,7 @@ class Game extends Model
                 'bid' => $bid,
                 'user_id' => $user->id,
                 'username' => $user->username,
+                'previous_position' => $previous_position,
                 'position' => $position
             ]);
             

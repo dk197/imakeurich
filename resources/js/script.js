@@ -90,22 +90,25 @@ $(document).ready(function(){
 		var player_number = $('#player_table tr').length;
 		var newPlayerRow = '<th class="col_1" scope="row" style="width: 33%">' + data.position + '.</th><td class="text-center col_2" style="width: 33%">' + data.username + '(' + data.bid + ')' + '</td><td class="text-right col_3" style="width: 33%"><a href="#">Zum Profil</a></td></tr>';
 		var newPlayerPosition = parseInt(data.position);
+		var previous_position = data.previous_position;
 
+		console.log($('#player_table').html());
 
 		//adjust the position-numbers of the other players
 		for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
-			console.log($('#player_table tr:nth-child(' + i + ')').html());
+			// console.log($('#player_table tr:nth-child(' + i + ')').html());
     		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
 		}
 
-    	//insert the new player in the table
+		$('#player_table').find('tr:nth-child(' + previous_position + ')').remove();
 
+    	//insert the new player in the table
     	if(data.position == 1){
     		$('#player_table tbody').prepend(newPlayerRow);
     	}else{
     		$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
     	}
-
+    	console.log($('#player_table').html());
 	});
 	//################## Player update event end ##################
 
