@@ -40,4 +40,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/coins', 'UserController@coins');
 
 Route::post('/addBalance', 'UserController@addToBalance');
-Route::post('/removeBalance', 'UserController@removeFromBalance');
