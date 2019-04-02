@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Userstatistics;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,12 +23,37 @@ class UserController extends Controller
         $user = User::find($user_id);
         $userstats = DB::table('Userstatistics')->where('user_id',$user_id)->get();
         $count = 0;
+        $coinsbid = 0;
+        $coinswon = 0;
         foreach ($userstats as $some)
         {
-            $count++;
+            if($some->isBid == 1){
+                $coinsbid = $coinsbid + $some->value;
+                $count++;
+            }else{
+                $coinswon = $coinswon + $some->value;
+            }
         }
+        return view('user.index')->with('user',$user)->with('countbids',$count)->with('coinsbid',$coinsbid)->with('coinswon',$coinswon);
+    }
 
-        return view('user.index')->with('user',$user)->with('countbids',$count);
+    public function allstatistics()
+    {
+        $userstats = DB::table('Userstatistics')->get();
+        $gamesplayed = DB::table('Userstatistics')->max('game_id');
+        $countbids = 0;
+        $coinsbid = 0;
+        $coinswon = 0;
+        foreach ($userstats as $some)
+        {
+            if($some->isBid == 1){
+                $coinsbid = $coinsbid + $some->value;
+                $countbids++;
+            }else{
+                $coinswon = $coinswon + $some->value;
+            }
+        }
+        return view('user.allstatistics')->with('gamesplayed',$gamesplayed)->with('countbids',$countbids)->with('coinsbid',$coinsbid)->with('coinswon',$coinswon);
     }
 
     public function addToBalance(Request $request)
@@ -36,17 +63,7 @@ class UserController extends Controller
         $user = User::find($user_id);
         $user->balance = $user->balance + $coins;
         $user->save();
-        return response()->json(['message' => $coins.' Coins successfully added.', 'coins' => $user->balance]);
-    }
-
-    public function removeFromBalance(Request $request)
-    {
-        $coins = $request->input('coins');
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $user->balance = $user->balance - $coins;
-        $user->save();
-        return response()->json(['message' => $coins.' Coins successfully donated.', 'coins' => $user->balance]);
+        return response()->json(['message' => 'Success: Your Balance now: '.$user->balance , 'coins' => $user->balance]);
     }
 
     public function coins()
@@ -105,7 +122,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user_id = $id;
+        $user = User::find($user_id);
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $password = $request->input('password');
+        $user->password = Hash::make($password);
+        $user->save();
+        $redirectPage = "/user"."/".$id;
+        return redirect($redirectPage);
+    }
+
+    public function showEditPage()
+    {
+        if(auth()->user() != null){
+            return view('user/editUser');
+        }else{
+            return redirect(getenv("HTTP_REFERER"));
+        }
     }
 
     /**

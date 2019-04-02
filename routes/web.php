@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile', function () {
-    return view('auth/profile');
-});
-
 Route::get('/instructions', function () {
     return view('instructions');
 });
@@ -28,6 +24,8 @@ Auth::routes();
 Route::resource('games', 'GameController');
 
 Route::get('/user/{id}', 'UserController@index');
+
+Route::get('/allstatistics', 'UserController@allstatistics');
 
 Route::post('/games/{game}/enter', 'GameController@enter');
 
@@ -40,4 +38,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/coins', 'UserController@coins');
 
 Route::post('/addBalance', 'UserController@addToBalance');
-Route::post('/removeBalance', 'UserController@removeFromBalance');
+
+Route::post('/change/{id}', 'UserController@update');
+
+Route::get('/editUser', 'UserController@showEditPage');

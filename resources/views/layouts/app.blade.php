@@ -38,6 +38,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-link"><a href="/games">Games</a></li>
                         <li class="nav-link"><a href="/instructions">Instructions</a></li>
+                        <li class="nav-link"><a href="/allstatistics">All-Time Statistics</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -65,6 +66,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/user/{{Auth::user()->id}}">Your Profile</a>
+                                    <a class="dropdown-item" href="/editUser">Edit your data</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

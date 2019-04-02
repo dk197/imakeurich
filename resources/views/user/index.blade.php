@@ -34,39 +34,74 @@ $timeago = $user->created_at;
 ?>
 
 @section('content')
-<div class="container">
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-      <div class="col-md-6 px-0">
-      <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
-        <p class="lead my-3">here can you see all his personal statistics:</p>
-      </div>
-    </div>
+</div>
 
-    <div class="row mb-2">
-      <div class="col-md-6">
-        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Why is he so rich?</strong>
-            <h3 class="mb-0">He is rich since</h3>
-            <p class="card-text mb-auto">(first login)</p>
-          </div>
-          <div class="jumbotron col-auto d-none d-lg-block">
-            <h1><?php echo time_elapsed_string($timeago); ?></h1>
-          </div>
-        </div>
-      </div>
+<div id="banner">
+    <div id="cloud-scroll">
+        <div class="container">
+            <div class="jumbotron p-4 p-md-5 text-dark rounded bg-transparent">
+                <div class="row">
+                    <div class="col-md-6 px-0">
+                        @if ($user->id==auth()->user()->id)
 
-        <div class="col-md-6">
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success">All your bids:</strong>
-                    <h3 class="mb-0">You´ve taken</h3><h1 class="btn btn-danger"><?php echo $countbids ?></h1><h3 class="mb-0"> bids since you became rich</h3>
+                                <h1 class="display-4 font-italic">Welcome {{$user->username}},</h1>
+                                <p class="lead my-3">here can you see all your personal statistics:</p>
+                            @else
+                                <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
+                                <p class="lead my-3">here can you see all your personal statistics:</p>
+
+                        @endif
+                    </div>
+                    <div class="col-md-6 px-0">
+                        <!--button-->
+                        <a href="/games"><img src="https://image.flaticon.com/icons/svg/747/747661.svg" alt="Bid now" class="img-rounded"></a>
+                        <a href="/coins"><img src="https://img.icons8.com/color/260/us-dollar.png" alt="Buy Coins" class="img-rounded"></a>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="container">
+        <div class="counter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="employees">
+                                <p class="counter-count1"><?php echo time_elapsed_string($timeago); ?></p>
+                                <p class="employee-p">since
+                                    @if ($user->id==auth()->user()->id)
+                                        you
+                                    @else
+                                        he
+                                    @endif
+                                got rich</p>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="customer">
+                                <p class="counter-count"><?php echo $countbids ?></p>
+                                <p class="customer-p">bids were taken</p>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="design">
+                                <p class="counter-count"><?php echo $coinsbid ?></p>
+                                <p class="design-p">coins were bid</p>
+                            </div>
+                        </div>
 
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="order">
+                                <p class="counter-count"><?php echo $coinswon ?></p>
+                                <p class="order-p">coins were won</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<div>
 @endsection
