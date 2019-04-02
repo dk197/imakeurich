@@ -29,6 +29,8 @@ Route::resource('games', 'GameController');
 
 Route::get('/user/{id}', 'UserController@index');
 
+Route::get('/allstatistics', 'UserController@allstatistics');
+
 Route::post('/games/{game}/enter', 'GameController@enter');
 
 Route::get('/games/{game}/getgamedata', 'GameController@getGameData');

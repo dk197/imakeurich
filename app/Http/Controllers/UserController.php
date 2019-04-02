@@ -21,24 +21,37 @@ class UserController extends Controller
         $user = User::find($user_id);
         $userstats = DB::table('Userstatistics')->where('user_id',$user_id)->get();
         $count = 0;
-        foreach ($userstats as $some)
-        {
-            $count++;
-        }
         $coinsbid = 0;
         $coinswon = 0;
         foreach ($userstats as $some)
         {
             if($some->isBid == 1){
                 $coinsbid = $coinsbid + $some->value;
+                $count++;
             }else{
                 $coinswon = $coinswon + $some->value;
             }
         }
-
-
-
         return view('user.index')->with('user',$user)->with('countbids',$count)->with('coinsbid',$coinsbid)->with('coinswon',$coinswon);
+    }
+
+    public function allstatistics()
+    {
+        $userstats = DB::table('Userstatistics')->get();
+        $gamesplayed = DB::table('Userstatistics')->max('game_id');
+        $countbids = 0;
+        $coinsbid = 0;
+        $coinswon = 0;
+        foreach ($userstats as $some)
+        {
+            if($some->isBid == 1){
+                $coinsbid = $coinsbid + $some->value;
+                $countbids++;
+            }else{
+                $coinswon = $coinswon + $some->value;
+            }
+        }
+        return view('user.allstatistics')->with('gamesplayed',$gamesplayed)->with('countbids',$countbids)->with('coinsbid',$coinsbid)->with('coinswon',$coinswon);
     }
 
     public function addToBalance(Request $request)

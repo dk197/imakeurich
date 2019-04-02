@@ -38,6 +38,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-link"><a href="/games">Games</a></li>
                         <li class="nav-link"><a href="/instructions">Instructions</a></li>
+                        <li class="nav-link"><a href="/allstatistics">All-Time Statistics</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
