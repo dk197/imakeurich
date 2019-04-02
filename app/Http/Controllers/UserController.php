@@ -19,6 +19,8 @@ class UserController extends Controller
      */
     public function index($id)
     {
+
+        if(auth()->user() != null){
         $user_id = $id;
         $user = User::find($user_id);
         $userstats = DB::table('Userstatistics')->where('user_id',$user_id)->get();
@@ -35,6 +37,9 @@ class UserController extends Controller
             }
         }
         return view('user.index')->with('user',$user)->with('countbids',$count)->with('coinsbid',$coinsbid)->with('coinswon',$coinswon);
+        }else{
+            return redirect(getenv("HTTP_REFERER"));
+    }
     }
 
     public function allstatistics()
