@@ -105,6 +105,8 @@ $(document).ready(function(){
 		})
     });
 
+    user_change_form = $('#user_change_form');
+    user_id = $('#user_id_user').val();
 
 });
 window.onload = function() {

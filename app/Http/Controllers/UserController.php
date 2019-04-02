@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Userstatistics;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -120,7 +122,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user_id = $id;
+        $user = User::find($user_id);
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $password = $request->input('password');
+        $user->password = Hash::make($password);
+        $user->save();
+        $redirectPage = "/user"."/".$id;
+        return redirect($redirectPage);
+    }
+
+    public function showEditPage()
+    {
+        if(auth()->user() != null){
+            return view('user/editUser');
+        }else{
+            return redirect(getenv("HTTP_REFERER"));
+        }
     }
 
     /**
