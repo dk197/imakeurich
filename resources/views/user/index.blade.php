@@ -38,7 +38,7 @@ $timeago = $user->created_at;
 
 <div id="banner">
     <div id="cloud-scroll">
-        <div class="container mt-3">
+        <div class="container">
             <div class="jumbotron p-4 p-md-5 text-dark rounded bg-transparent">
                 <div class="row">
                     <div class="col-md-6 px-0">
@@ -47,7 +47,8 @@ $timeago = $user->created_at;
                     </div>
                     <div class="col-md-6 px-0">
                         <!--button-->
-                        
+                        <a href="/games"><img src="https://image.flaticon.com/icons/svg/747/747661.svg" alt="Bid now" class="img-rounded"></a>
+                        <a href="/coins"><img src="https://img.icons8.com/color/260/us-dollar.png" alt="Buy Coins" class="img-rounded"></a>
                     </div>
                 </div>
             </div>
