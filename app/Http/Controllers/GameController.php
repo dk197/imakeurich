@@ -139,9 +139,13 @@ class GameController extends Controller
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
 
+                if($this->getAllGameBids($game->id) >= $game->min_bid){
+                    $this->endGame($game);
+                }
+
                 // subtract bid from user balance
 
-                return response()->json(['message' => 'Player successfully updated']);
+                return response()->json(['message' => 'You Bid successfully']);
             }
 
         // game isn't full and user is not a player
@@ -165,13 +169,14 @@ class GameController extends Controller
 
     }
 
+    // get amount of players of a game
     public function getPlayerNumber($game){
         return DB::table('players')->where(['game_id' => $game->id])->count();
     }
 
-    public function getPlayerBids($game_id){
-        return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
-    }
+    // public function getPlayerBids($game_id){
+    //     return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
+    // }
 
     // check, if user is a player of a specific game -> true, if given user is a player in the given game
     public function findPlayer($user_id, $game_id)
@@ -185,26 +190,64 @@ class GameController extends Controller
         }   
     }
 
-    // public function endGame($game){
+    // get the value of all bids
+    public function getAllGameBids($game_id)
+    {
+        return DB::table('players')->where(['game_id' => $game_id])->sum('bid');
+    }
 
-    //     // ################# Pusher start #############################
+    // get the winners
+    public function getWinners($game)
+    {
+        $allPlayers = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
 
-    //         $options = array(
-    //             'cluster' => 'eu'
-    //         );
+        // array starts at 0 -> winner would be wrong
+        $win_index_1 = $game->win_1 - 1;
+        $win_index_2 = $game->win_2 - 1;
+        $win_index_3 = $game->win_3 - 1;
 
-    //         $pusher = new Pusher(
-    //             env('PUSHER_APP_KEY'),
-    //             env('PUSHER_APP_SECRET'),
-    //             env('PUSHER_APP_ID'),
-    //             $options
-    //         );
 
-    //         $pusher->trigger('game_end', 'game_end-event', $data);
+        $winner_1 = $allPlayers[$win_index_1]->username;
+        $winner_2 = $allPlayers[$win_index_2]->username;
+        $winner_3 = $allPlayers[$win_index_3]->username;
 
-    //     // ################# Pusher end ###############################
 
-    // }
+        $winners = array(
+            'winner_1' => $winner_1,
+            'winner_2' => $winner_2,
+            'winner_3' => $winner_3
+        );
+        
+        return $winners;
+    }
+
+    public function endGame($game){
+
+        // ################# Pusher start #############################
+
+            $options = array(
+                'cluster' => 'eu'
+            );
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                $options
+            );
+
+            
+            $data = array(
+                'game_id' => $game->id,
+                'winners' => $this->getWinners($game)
+            );
+
+            $pusher->trigger('game_end', 'game_end-event', $data);
+
+        // ################# Pusher end ###############################
+
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -62,6 +62,21 @@ $(document).ready(function(){
 	//################## Player change event end ##################
 
 
+	var pusher = new Pusher('9512c6943ba979af3517', {
+	  cluster: 'eu'
+	});
+
+	var channel = pusher.subscribe('game_end');
+	channel.bind('game_end-event', function(data) {
+
+	    //only execute at the right page
+	    if(data.game_id == game_id){
+	 
+	 		alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
+			
+	    }
+	});
+
 
     document.getElementById('watchAdBtn').addEventListener('click', function (e) {
         e.preventDefault();
