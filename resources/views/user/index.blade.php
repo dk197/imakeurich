@@ -63,15 +63,15 @@ $timeago = $user->created_at;
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="design">
-                    <p class="counter-count"><?php echo $countcoins ?></p>
+                    <p class="counter-count"><?php echo $coinsbid ?></p>
                     <p class="design-p">coins were bid</p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="order">
-                    <p class="counter-count">652</p>
-                    <p class="order-p">Orders</p>
+                    <p class="counter-count"><?php echo $coinswon ?></p>
+                    <p class="order-p">coins were won</p>
                 </div>
             </div>
         </div>
