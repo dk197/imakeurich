@@ -47,14 +47,10 @@ class Game extends Model
             );
 
             $data = ([
-                'game_id' => $this->id,
-                'bid' => $bid,
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'position' => $position
+                'game_id' => $this->id
             ]);
             
-            $pusher->trigger('player_enter', 'player_enter-event', $data);  
+            $pusher->trigger('player_change', 'player_change-event', $data);  
 
         // ################# Pusher end ###############################
 
@@ -67,13 +63,19 @@ class Game extends Model
         //get Entry which will get updated
         $result = Player::where(['user_id' => $user->id, 'game_id' => $game->id]);
 
+        // convert the Entry-Object to an array before updating
+        $result_array = $result->get()->toArray();
+
+        //the position of the player in the game after updating
+        $previous_position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
+
         // update the Entry
         $result->update(['bid' => DB::raw('bid +'.$bid)]);
 
-        // convert the Entry-Object to an array
+        // convert the Entry-Object to an array after updating
         $result_array = $result->get()->toArray();
 
-        //the position of the player in the game
+        //the position of the player in the game after updating
         $position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
 
 
@@ -91,14 +93,10 @@ class Game extends Model
             );
 
             $data = ([
-                'game_id' => $game->id,
-                'bid' => $bid,
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'position' => $position
+                'game_id' => $this->id
             ]);
             
-            $pusher->trigger('player_update', 'player_update-event', $data);  
+            $pusher->trigger('player_change', 'player_change-event', $data);   
 
         // ################# Pusher end ###############################
 

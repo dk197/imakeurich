@@ -31,6 +31,8 @@ Route::get('/user/{id}', 'UserController@index');
 
 Route::post('/games/{game}/enter', 'GameController@enter');
 
+Route::get('/games/{game}/getgamedata', 'GameController@getGameData');
+
 Route::post('/games/random', 'GameController@setWinningPlaces');
 
 Route::get('/home', 'HomeController@index')->name('home');

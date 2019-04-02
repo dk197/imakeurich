@@ -99,6 +99,11 @@ class GameController extends Controller
         return view('game.show', compact('game', 'player_number'));
     }
 
+    public function getGameData(Game $game)
+    {
+        return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
+    }
+
     public function enter(Game $game)
     {
 
@@ -124,12 +129,12 @@ class GameController extends Controller
             if($this->getPlayerBids($game->id) > 0){
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
-                return response()->json(['message' => 'Player sucessfully updated']);
+                return response()->json(['message' => 'Player successfully updated']);
             }else{
                 // Player didn't bid yet
                 $game->addPlayer($bid);
 
-                return response()->json(['message' => 'Game sucessfully entered']);
+                return response()->json(['message' => 'Game successfully entered']);
             }
         }
     }
