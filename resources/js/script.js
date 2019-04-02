@@ -19,12 +19,8 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response){
-				if(response.message != 'Game successfully entered' && response.message != 'Player successfully updated'){
-					alert(response.message);
-				}else{
-					console.log(response.message);
-					$('#game_bid').val('');
-				}
+				alert(response.message);
+				$('#game_bid').val('');
 			}
 		})
 	})
@@ -49,7 +45,6 @@ $(document).ready(function(){
 				url: '/games/' + game_id + '/getgamedata',
 				type: 'GET',
 				success: function(response){
-					console.log(response.length);
 
 					// clear current table and add tbody element again
 					$('#player_table').empty();

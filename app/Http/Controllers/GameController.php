@@ -104,6 +104,11 @@ class GameController extends Controller
         return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
     }
 
+    public function joinGame(Game $game)
+    {
+
+    }
+
     public function enter(Game $game)
     {
 
@@ -119,24 +124,45 @@ class GameController extends Controller
         $userstat->save();
 
 
-        // check if game is full
-        if($this->getPlayerNumber($game) == $game->max_players){
-            // $this->endGame($game);
+        // check if game is full and user is not a player
+        if($this->getPlayerNumber($game) == $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
+
             return response()->json(['message' => 'Game is full!']);
-        }else if($bid < $game->min_bid || $bid > $game->max_bid){
-            return response()->json(['message' => 'Bid not in allowed area!']);
-        }else{
-            if($this->getPlayerBids($game->id) > 0){
+
+        // game is full and user is a player
+        }else if($this->getPlayerNumber($game) == $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
+
+            if($bid < $game->min_bid || $bid > $game->max_bid){
+                return response()->json(['message' => 'Bid not in allowed area!']);
+            }else{
+                
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
-                return response()->json(['message' => 'Player successfully updated']);
-            }else{
-                // Player didn't bid yet
-                $game->addPlayer($bid);
 
-                return response()->json(['message' => 'Game successfully entered']);
+                // subtract bid from user balance
+
+                return response()->json(['message' => 'Player successfully updated']);
             }
+
+        // game isn't full and user is not a player
+        }else if($this->getPlayerNumber($game) < $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
+
+            // Add User to the game with the min bid
+            $game->addPlayer($game->min_bid);
+
+            // subtract min bid (for joining the game) from user balance
+
+            return response()->json(['message' => 'Game successfully entered with the min Bid']);
+
+        // game isn't full & user is a player
+        }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
+            
+            return response()->json(['message' => 'Please wait, until the lobby is full!']);
+
+        }else{
+            return response()->json(['message' => 'Unknown error, please contact the ImakeYouRich-Team']);
         }
+
     }
 
     public function getPlayerNumber($game){
@@ -145,6 +171,18 @@ class GameController extends Controller
 
     public function getPlayerBids($game_id){
         return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
+    }
+
+    // check, if user is a player of a specific game -> true, if given user is a player in the given game
+    public function findPlayer($user_id, $game_id)
+    {
+        $result = Player::where(['game_id' => $game_id, 'user_id' => $user_id])->count();
+        
+        if($result == 0){
+            return false;
+        }else{
+            return true; 
+        }   
     }
 
     // public function endGame($game){
