@@ -47,14 +47,10 @@ class Game extends Model
             );
 
             $data = ([
-                'game_id' => $this->id,
-                'bid' => $bid,
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'position' => $position
+                'game_id' => $this->id
             ]);
             
-            $pusher->trigger('player_enter', 'player_enter-event', $data);  
+            $pusher->trigger('player_change', 'player_change-event', $data);  
 
         // ################# Pusher end ###############################
 
@@ -97,15 +93,10 @@ class Game extends Model
             );
 
             $data = ([
-                'game_id' => $game->id,
-                'bid' => $bid,
-                'user_id' => $user->id,
-                'username' => $user->username,
-                'previous_position' => $previous_position,
-                'position' => $position
+                'game_id' => $this->id
             ]);
             
-            $pusher->trigger('player_update', 'player_update-event', $data);  
+            $pusher->trigger('player_change', 'player_change-event', $data);   
 
         // ################# Pusher end ###############################
 

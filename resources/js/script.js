@@ -33,84 +33,38 @@ $(document).ready(function(){
 
 
 
-	//################## Player enter event start ################
+	//################## Player change event start ################
+	
 	var pusher = new Pusher('9512c6943ba979af3517', {
 	  cluster: 'eu'
 	});
 
-	var channel = pusher.subscribe('player_enter');
-	channel.bind('player_enter-event', function(data) {
-	    console.log(data);
+	var channel = pusher.subscribe('player_change');
+	channel.bind('player_change-event', function(data) {
 
 	    //only execute at the right page
 	    if(data.game_id == game_id){
-	    	var previousPlayer = parseInt(data.position) -1;
-			var player_number = $('#player_table tr').length;
-			var newPlayerRow = '<th class="col_1" scope="row" style="width: 33%">' + data.position + '.</th><td class="text-center col_2" style="width: 33%">' + data.username + '(' + data.bid + ')' + '</td><td class="text-right col_3" style="width: 33%"><a href="#">Zum Profil</a></td></tr>';
-			var newPlayerPosition = parseInt(data.position);
+	 
+			$.ajax({
+				url: '/games/' + game_id + '/getgamedata',
+				type: 'GET',
+				success: function(response){
+					console.log(response.length);
 
-			console.log(newPlayerPosition);
-			console.log(player_number);
+					// clear current table and add tbody element again
+					$('#player_table').empty();
+					$('#player_table').prepend('<tbody></tbody>');
 
-			//first player in the game
-			if(player_number == 0){
-				$('#player_table tbody').prepend(newPlayerRow);
-			// some other players are there already
-			}else{
-				//adjust the position-numbers of the other players
-				for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
-					console.log($('#player_table tr:nth-child(' + i + ')').html());
-		    		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
-	    		}
-
-		    	//insert the new player in the table
-
-		    	if(data.position == 1){
-		    		$('#player_table tbody').prepend(newPlayerRow);
-		    	}else{
-		    		$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
-		    	}
-			}
+					// fill the table with new data
+					for (var i = 0; i < response.length; i++) {
+						$('#player_table tbody').append('<tr><th class="col_1" scope="row" style="width: 33%">' + parseInt(i + 1) + '.</th><td class="text-center col_2" style="width: 33%">' + response[i].username + ' (' + response[i].bid + ')</td><td class="text-right col_3" style="width: 33%"><a href="/user/' + response[i].user_id + '">Zum Profil</a></td></tr>');
+					}
+				}
+			})
 	    }
 	});
-	//################## Player enter event end ##################
 
-
-	//################## Player update event start ################
-	var pusher = new Pusher('9512c6943ba979af3517', {
-	  cluster: 'eu'
-	});
-
-	var channel = pusher.subscribe('player_update');
-	channel.bind('player_update-event', function(data) {
-
-		console.log(data)
-
-		var previousPlayer = parseInt(data.position) -1;
-		var player_number = $('#player_table tr').length;
-		var newPlayerRow = '<th class="col_1" scope="row" style="width: 33%">' + data.position + '.</th><td class="text-center col_2" style="width: 33%">' + data.username + '(' + data.bid + ')' + '</td><td class="text-right col_3" style="width: 33%"><a href="#">Zum Profil</a></td></tr>';
-		var newPlayerPosition = parseInt(data.position);
-		var previous_position = data.previous_position;
-
-		console.log($('#player_table').html());
-
-		//adjust the position-numbers of the other players
-		for (var i = parseInt(previousPlayer + 1); i <= player_number; i++) {
-			// console.log($('#player_table tr:nth-child(' + i + ')').html());
-    		$('#player_table tr:nth-child(' + i + ')').find('th').text(i + 1);
-		}
-
-		$('#player_table').find('tr:nth-child(' + previous_position + ')').remove();
-
-    	//insert the new player in the table
-    	if(data.position == 1){
-    		$('#player_table tbody').prepend(newPlayerRow);
-    	}else{
-    		$('#player_table tr:nth-child(' + previousPlayer + ')').after(newPlayerRow);
-    	}
-    	console.log($('#player_table').html());
-	});
-	//################## Player update event end ##################
+	//################## Player change event end ##################
 
 
 

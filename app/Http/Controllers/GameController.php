@@ -99,6 +99,11 @@ class GameController extends Controller
         return view('game.show', compact('game', 'player_number'));
     }
 
+    public function getGameData(Game $game)
+    {
+        return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
+    }
+
     public function enter(Game $game)
     {
 
