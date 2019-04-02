@@ -19,12 +19,8 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response){
-				if(response.message != 'Game successfully entered' && response.message != 'Player successfully updated'){
-					alert(response.message);
-				}else{
-					console.log(response.message);
-					$('#game_bid').val('');
-				}
+				alert(response.message);
+				$('#game_bid').val('');
 			}
 		})
 	})
@@ -49,7 +45,6 @@ $(document).ready(function(){
 				url: '/games/' + game_id + '/getgamedata',
 				type: 'GET',
 				success: function(response){
-					console.log(response.length);
 
 					// clear current table and add tbody element again
 					$('#player_table').empty();
@@ -65,6 +60,23 @@ $(document).ready(function(){
 	});
 
 	//################## Player change event end ##################
+
+
+	var pusher = new Pusher('9512c6943ba979af3517', {
+	  cluster: 'eu'
+	});
+
+	var channel = pusher.subscribe('game_end');
+	channel.bind('game_end-event', function(data) {
+
+	    //only execute at the right page
+	    if(data.game_id == game_id){
+	 
+	 		alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
+			
+	    }
+	});
+
 
 
     $('.coinChanger').on('click', function (e) {

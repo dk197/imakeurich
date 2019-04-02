@@ -104,70 +104,150 @@ class GameController extends Controller
         return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
     }
 
+    public function joinGame(Game $game)
+    {
+
+    }
+
     public function enter(Game $game)
     {
 
         $bid = request()->game_bid;
 
+        $currentuser = auth()->user();
+        $userstat = new Userstatistics;
+        $userstat->game_id = $game->id;
+        $userstat->user_id = $currentuser->id;
+        $userstat->username = $currentuser->username;
+        $userstat->value = $bid;
+        $userstat->isBid = true;
+        $userstat->save();
 
 
+        // check if game is full and user is not a player
+        if($this->getPlayerNumber($game) == $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
 
-        // check if game is full
-        if($this->getPlayerNumber($game) == $game->max_players){
-            // $this->endGame($game);
             return response()->json(['message' => 'Game is full!']);
-        }else if($bid < $game->min_bid || $bid > $game->max_bid){
-            return response()->json(['message' => 'Bid not in allowed area!']);
-        }else{
-            $currentuser = auth()->user();
-            $userstat = new Userstatistics;
-            $userstat->game_id = $game->id;
-            $userstat->user_id = $currentuser->id;
-            $userstat->username = $currentuser->username;
-            $userstat->value = $bid;
-            $userstat->isBid = true;
-            $userstat->save();
-            if($this->getPlayerBids($game->id) > 0){
+
+        // game is full and user is a player
+        }else if($this->getPlayerNumber($game) == $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
+
+            if($bid < $game->min_bid || $bid > $game->max_bid){
+                return response()->json(['message' => 'Bid not in allowed area!']);
+            }else{
+                
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
-                return response()->json(['message' => 'Player successfully updated']);
-            }else{
-                // Player didn't bid yet
-                $game->addPlayer($bid);
 
-                return response()->json(['message' => 'Game successfully entered']);
+                if($this->getAllGameBids($game->id) >= $game->min_bid){
+                    $this->endGame($game);
+                }
+
+                // subtract bid from user balance
+
+                return response()->json(['message' => 'You Bid successfully']);
             }
+
+        // game isn't full and user is not a player
+        }else if($this->getPlayerNumber($game) < $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
+
+            // Add User to the game with the min bid
+            $game->addPlayer($game->min_bid);
+
+            // subtract min bid (for joining the game) from user balance
+
+            return response()->json(['message' => 'Game successfully entered with the min Bid']);
+
+        // game isn't full & user is a player
+        }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
+            
+            return response()->json(['message' => 'Please wait, until the lobby is full!']);
+
+        }else{
+            return response()->json(['message' => 'Unknown error, please contact the ImakeYouRich-Team']);
         }
+
     }
 
+    // get amount of players of a game
     public function getPlayerNumber($game){
         return DB::table('players')->where(['game_id' => $game->id])->count();
     }
 
-    public function getPlayerBids($game_id){
-        return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
+    // public function getPlayerBids($game_id){
+    //     return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
+    // }
+
+    // check, if user is a player of a specific game -> true, if given user is a player in the given game
+    public function findPlayer($user_id, $game_id)
+    {
+        $result = Player::where(['game_id' => $game_id, 'user_id' => $user_id])->count();
+        
+        if($result == 0){
+            return false;
+        }else{
+            return true; 
+        }   
     }
 
-    // public function endGame($game){
+    // get the value of all bids
+    public function getAllGameBids($game_id)
+    {
+        return DB::table('players')->where(['game_id' => $game_id])->sum('bid');
+    }
 
-    //     // ################# Pusher start #############################
+    // get the winners
+    public function getWinners($game)
+    {
+        $allPlayers = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
 
-    //         $options = array(
-    //             'cluster' => 'eu'
-    //         );
+        // array starts at 0 -> winner would be wrong
+        $win_index_1 = $game->win_1 - 1;
+        $win_index_2 = $game->win_2 - 1;
+        $win_index_3 = $game->win_3 - 1;
 
-    //         $pusher = new Pusher(
-    //             env('PUSHER_APP_KEY'),
-    //             env('PUSHER_APP_SECRET'),
-    //             env('PUSHER_APP_ID'),
-    //             $options
-    //         );
 
-    //         $pusher->trigger('game_end', 'game_end-event', $data);
+        $winner_1 = $allPlayers[$win_index_1]->username;
+        $winner_2 = $allPlayers[$win_index_2]->username;
+        $winner_3 = $allPlayers[$win_index_3]->username;
 
-    //     // ################# Pusher end ###############################
 
-    // }
+        $winners = array(
+            'winner_1' => $winner_1,
+            'winner_2' => $winner_2,
+            'winner_3' => $winner_3
+        );
+        
+        return $winners;
+    }
+
+    public function endGame($game){
+
+        // ################# Pusher start #############################
+
+            $options = array(
+                'cluster' => 'eu'
+            );
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                $options
+            );
+
+            
+            $data = array(
+                'game_id' => $game->id,
+                'winners' => $this->getWinners($game)
+            );
+
+            $pusher->trigger('game_end', 'game_end-event', $data);
+
+        // ################# Pusher end ###############################
+
+    }
+
 
     /**
      * Show the form for editing the specified resource.
