@@ -41,30 +41,38 @@ $timeago = $user->created_at;
         <p class="lead my-3">here can you see all his personal statistics:</p>
       </div>
     </div>
+</div>
 
-    <div class="row mb-2">
-      <div class="col-md-6">
-        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Why is he so rich?</strong>
-            <h3 class="mb-0">He is rich since</h3>
-            <p class="card-text mb-auto">(first login)</p>
-          </div>
-          <div class="jumbotron col-auto d-none d-lg-block">
-            <h1><?php echo time_elapsed_string($timeago); ?></h1>
-          </div>
-        </div>
-      </div>
 
-        <div class="col-md-6">
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-success">All your bids:</strong>
-                    <h3 class="mb-0">You´ve taken</h3><h1 class="btn btn-danger"><?php echo $countbids ?></h1><h3 class="mb-0"> bids since you became rich</h3>
+<div class="counter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="employees">
+                    <p class="counter-count"><?php echo time_elapsed_string($timeago); ?></p>
+                    <p class="employee-p">since he got rich</p>
                 </div>
+            </div>
 
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="customer">
+                    <p class="counter-count"><?php echo $countbids ?></p>
+                    <p class="customer-p">bids were taken</p>
+                </div>
+            </div>
 
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="design">
+                    <p class="counter-count">1050</p>
+                    <p class="design-p">Design</p>
+                </div>
+            </div>
 
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="order">
+                    <p class="counter-count">652</p>
+                    <p class="order-p">Orders</p>
+                </div>
             </div>
         </div>
     </div>

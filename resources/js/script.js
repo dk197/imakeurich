@@ -34,7 +34,7 @@ $(document).ready(function(){
 
 
 	//################## Player change event start ################
-	
+
 	var pusher = new Pusher('9512c6943ba979af3517', {
 	  cluster: 'eu'
 	});
@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 	    //only execute at the right page
 	    if(data.game_id == game_id){
-	 
+
 			$.ajax({
 				url: '/games/' + game_id + '/getgamedata',
 				type: 'GET',
@@ -171,5 +171,17 @@ $(document).ready(function(){
                 alert(response.message);
             }
 		})
+    });
+    $('.counter-count').each(function () {
+        alert("swag");
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
     });
 });
