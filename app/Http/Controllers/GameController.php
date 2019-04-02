@@ -109,14 +109,7 @@ class GameController extends Controller
 
         $bid = request()->game_bid;
 
-        $currentuser = auth()->user();
-        $userstat = new Userstatistics;
-        $userstat->game_id = $game->id;
-        $userstat->user_id = $currentuser->id;
-        $userstat->username = $currentuser->username;
-        $userstat->value = $bid;
-        $userstat->isBid = true;
-        $userstat->save();
+
 
 
         // check if game is full
@@ -126,6 +119,14 @@ class GameController extends Controller
         }else if($bid < $game->min_bid || $bid > $game->max_bid){
             return response()->json(['message' => 'Bid not in allowed area!']);
         }else{
+            $currentuser = auth()->user();
+            $userstat = new Userstatistics;
+            $userstat->game_id = $game->id;
+            $userstat->user_id = $currentuser->id;
+            $userstat->username = $currentuser->username;
+            $userstat->value = $bid;
+            $userstat->isBid = true;
+            $userstat->save();
             if($this->getPlayerBids($game->id) > 0){
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
