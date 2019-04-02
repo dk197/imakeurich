@@ -105,6 +105,28 @@ $(document).ready(function(){
 		})
     });
 
+    user_change_form = $('#user_change_form');
+    user_id = $('#user_id_user').val();
+
+    /*$('#user_change_form').on('submit', function (e) {
+        console.log( user_change_form.serialize());
+            e.preventDefault();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
+        $.ajax({
+            url: '/change/' + user_id,
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            success: function(response) {
+                console.log(response.message);
+            }
+        });
+    });*/
 
 });
 window.onload = function() {
