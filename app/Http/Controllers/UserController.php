@@ -36,17 +36,7 @@ class UserController extends Controller
         $user = User::find($user_id);
         $user->balance = $user->balance + $coins;
         $user->save();
-        return response()->json(['message' => $coins.' Coins successfully added.', 'coins' => $user->balance]);
-    }
-
-    public function removeFromBalance(Request $request)
-    {
-        $coins = $request->input('coins');
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $user->balance = $user->balance - $coins;
-        $user->save();
-        return response()->json(['message' => $coins.' Coins successfully donated.', 'coins' => $user->balance]);
+        return response()->json(['message' => 'Success: Your Balance now: '.$user->balance , 'coins' => $user->balance]);
     }
 
     public function coins()
