@@ -49,7 +49,7 @@ $timeago = $user->created_at;
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="employees">
-                    <p class="counter-count"><?php echo time_elapsed_string($timeago); ?></p>
+                    <p class="counter-count1"><?php echo time_elapsed_string($timeago); ?></p>
                     <p class="employee-p">since he got rich</p>
                 </div>
             </div>
@@ -63,8 +63,8 @@ $timeago = $user->created_at;
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="design">
-                    <p class="counter-count">1050</p>
-                    <p class="design-p">Design</p>
+                    <p class="counter-count"><?php echo $countcoins ?></p>
+                    <p class="design-p">coins were bid</p>
                 </div>
             </div>
 

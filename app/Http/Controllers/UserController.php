@@ -25,8 +25,16 @@ class UserController extends Controller
         {
             $count++;
         }
+        $coins = 0;
+        foreach ($userstats as $some)
+        {
+            if($some->isBid == 1){
+                $coins = $coins + $some->value;
+            }
+        }
 
-        return view('user.index')->with('user',$user)->with('countbids',$count);
+
+        return view('user.index')->with('user',$user)->with('countbids',$count)->with('countcoins',$coins);
     }
 
     public function addToBalance(Request $request)
