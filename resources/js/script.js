@@ -67,10 +67,27 @@ $(document).ready(function(){
 	//################## Player change event end ##################
 
 
-
-    document.getElementById('watchAdBtn').addEventListener('click', function (e) {
+    $('.coinChanger').on('click', function (e) {
         e.preventDefault();
-        var data = {coins: "1"};
+        switch(this.id) {
+            case 'watchAdBtn':
+                var data = {coins: "1"};
+              break;
+            case 'buy99':
+                var data = {coins: "99"};
+              break;
+            case 'buy999':
+                var data = {coins: "999"};
+            break;
+            case 'buy9999':
+                var data = {coins: "9999"};
+            break;
+            case 'donate10':
+                var data = {coins: "-10"};
+            break;
+            default:
+                var data = {coins: "0"};
+          }
 
         $.ajaxSetup({
             headers: {
@@ -84,91 +101,6 @@ $(document).ready(function(){
 			data: data,
 			success: function(response) {
                 document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-                alert(response.message);
-            }
-		})
-    });
-
-    document.getElementById('buy99').addEventListener('click', function (e) {
-        e.preventDefault();
-        var data = {coins: "99"};
-
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-		$.ajax({
-			url: '/addBalance',
-			type: 'POST',
-			dataType: 'json',
-			data: data,
-			success: function(response) {
-                document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-                alert(response.message);
-            }
-		})
-    });
-
-    document.getElementById('buy999').addEventListener('click', function (e) {
-        e.preventDefault();
-        var data = {coins: "999"};
-
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-		$.ajax({
-			url: '/addBalance',
-			type: 'POST',
-			dataType: 'json',
-			data: data,
-			success: function(response) {
-                document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-                alert(response.message);
-            }
-		})
-    });
-
-    document.getElementById('buy9999').addEventListener('click', function (e) {
-        e.preventDefault();
-        var data = {coins: "9999"};
-
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-		$.ajax({
-			url: '/addBalance',
-			type: 'POST',
-			dataType: 'json',
-			data: data,
-			success: function(response) {
-                document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-                alert(response.message);
-            }
-		})
-    });
-
-    document.getElementById('donate10').addEventListener('click', function (e) {
-        e.preventDefault();
-        var data = {coins: "10"};
-
-        $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
-		$.ajax({
-			url: '/removeBalance',
-			type: 'POST',
-			dataType: 'json',
-			data: data,
-			success: function(response) {
-                document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-                alert(response.message);
             }
 		})
     });
