@@ -5,17 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header text-center">Watch a ad</div>
+                <div class="card-header text-center">Free Coins</div>
 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 mb-3 text-center">
-                                ADDDADADADADDADDA
+                        <img class="coin-icon" src="images/1Coin.svg">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 mb-3 text-center">
+                        <p> Watch an Ad and get 1 Coin for free! </p>
                         </div>
                     </div>
                     <div class="row">
                             <div class="col-sm-12 text-center">
-                                    <a id="watchAdBtn" class="btn btn-primary btn-block" >watch</a>
+                                    <a id="watchAdBtn" class="btn btn-primary btn-block" >Get 1 Free Coin</a>
                             </div>
                         </div>
                 </div>
@@ -29,12 +34,17 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 mb-3 text-center">
-                                        0.99
+                                    <img class="coin-icon-buy" src="images/99Coins.svg">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mb-3 text-center">
+                                        <p> 99 Coins </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <a id="buy99" class="btn btn-primary btn-block">Buy Now</a>
+                                    <a id="buy99" class="btn btn-primary btn-block">Buy Now for 0,99€</a>
                                 </div>
                         </div>
                     </div>
@@ -47,12 +57,17 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12 mb-3 text-center">
-                                            9.99
+                                        <img class="coin-icon-buy" src="images/999Coins.svg">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 mb-3 text-center">
+                                    <p> 999 Coins </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 text-center">
-                                        <a id="buy999" class="btn btn-primary btn-block">Buy Now</a>
+                                        <a id="buy999" class="btn btn-primary btn-block">Buy Now for 9,99€</a>
                                     </div>
                             </div>
                         </div>
@@ -65,12 +80,17 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-12 mb-3 text-center">
-                                                99.99
+                                            <img class="coin-icon-buy" src="images/9999Coins.svg">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 mb-3 text-center">
+                                        <p> 9999 Coins </p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 text-center">
-                                            <a id="buy9999" class="btn btn-primary btn-block">Buy Now</a>
+                                            <a id="buy9999" class="btn btn-primary btn-block">Buy Now for 99,99€</a>
                                         </div>
                                 </div>
                             </div>
@@ -80,17 +100,22 @@
 
         <div class="col-md-12 mt-4">
                 <div class="card">
-                    <div class="card-header text-center">10 Coins spenden</div>
+                    <div class="card-header text-center">Donation</div>
 
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12 mb-3 text-center">
-                                    Vielen netten Dank, für die Spende 10 Coins.
+                                <img class="coin-icon" src="images/get-money.svg">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 mb-3 text-center">
+                                    Support Us.
                             </div>
                         </div>
                         <div class="row">
                                 <div class="col-sm-12 text-center">
-                                        <a id="donate10" class="btn btn-primary btn-block">Donate</a>
+                                        <a id="donate10" class="btn btn-primary btn-block">Donate 10 Coins</a>
                                 </div>
                             </div>
                     </div>
