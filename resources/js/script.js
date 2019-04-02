@@ -107,6 +107,7 @@ $(document).ready(function(){
 
 
 });
+window.onload = function() {
 $('.counter-count').each(function () {
         $(this).prop('Counter',0).animate({
             Counter: $(this).text()
@@ -118,3 +119,4 @@ $('.counter-count').each(function () {
             }
         });
     });
+}
