@@ -42,8 +42,15 @@ $timeago = $user->created_at;
             <div class="jumbotron p-4 p-md-5 text-dark rounded bg-transparent">
                 <div class="row">
                     <div class="col-md-6 px-0">
-                        <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
-                        <p class="lead my-3">here can you see all his personal statistics:</p>
+                        @if ($user->id==auth()->user()->id)
+
+                                <h1 class="display-4 font-italic">Welcome {{$user->username}},</h1>
+                                <p class="lead my-3">here can you see all your personal statistics:</p>
+                            @else
+                                <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
+                                <p class="lead my-3">here can you see all your personal statistics:</p>
+
+                        @endif
                     </div>
                     <div class="col-md-6 px-0">
                         <!--button-->
@@ -60,7 +67,13 @@ $timeago = $user->created_at;
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="employees">
                                 <p class="counter-count1"><?php echo time_elapsed_string($timeago); ?></p>
-                                <p class="employee-p">since he got rich</p>
+                                <p class="employee-p">since
+                                    @if ($user->id==auth()->user()->id)
+                                        you
+                                    @else
+                                        he
+                                    @endif
+                                got rich</p>
                             </div>
                         </div>
 
