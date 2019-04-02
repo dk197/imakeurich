@@ -51,10 +51,6 @@
     height: 150px;
 }
 
-.btn {
-    border: none;
-}
-
 .button-watch {
     background-color: #B0FE76;
 }
@@ -67,4 +63,39 @@
     background-color: #FFA552;
 }
 
+
 /*########## Coins Style end########*/
+
+/*########## Navbar Styles start########*/
+
+.btn-secondary {
+    background-color: #2F3061;
+}
+
+.nav-link a, .nav-link, #navbarDropdown {
+   color: #2F3061;
+    padding: 10px;
+}
+
+.nav-link a:hover, .nav-link:hover, #navbarDropdown:hover {
+    color: #577590;
+    text-decoration: none;
+ }
+
+#navbarBalanceA {
+    margin-top: 3%;
+}
+
+/*########## Navbar Styles end########*/
+
+/*########## Button Styles start########*/
+
+.btn {
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #577590;
+}
+
+/*########## Button Styles end########*/
