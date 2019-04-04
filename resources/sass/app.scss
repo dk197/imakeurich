@@ -169,9 +169,19 @@ html, main {
     border-color: var(--richpurple);
 }
 
+.button-purple:hover {
+    background-color: darken(#7001ba,12%);
+    border-color: darken(#7001ba,12%);
+}
+
 .button-gold {
     background-color: var(--richgold);
     border-color: var(--richgold);
+}
+
+.button-gold:hover {
+    background-color: darken(#efba1a,12%);
+    border-color: darken(#efba1a,12%);
 }
 
 
@@ -224,10 +234,6 @@ html, main {
 /*########## Navbar Styles end########*/
 
 /*########## Button Styles start########*/
-
-.btn-primary:hover {
-    background-color: var(--richgrey);
-}
 
 /*########## Button Styles end########*/
 .btn-circle {

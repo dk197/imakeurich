@@ -20,7 +20,7 @@
                     </div>
                     <div class="row">
                             <div class="col-sm-12 text-center">
-                                    <a id="watchAdBtn" class="btn btn-primary btn-block button-purple coinChanger" >Get 1 Free Coin</a>
+                                    <a id="watchAdBtn" class="btn btn-primary btn-block button-gold coinChanger" >Get 1 Free Coin</a>
                             </div>
                         </div>
                 </div>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="row">
                                 <div class="col-sm-12 text-center">
-                                        <a id="donate10" class="btn btn-primary btn-block button-purple coinChanger">Donate 10 Coins</a>
+                                        <a id="donate10" class="btn btn-primary btn-block button-gold coinChanger">Donate 10 Coins</a>
                                 </div>
                             </div>
                     </div>
