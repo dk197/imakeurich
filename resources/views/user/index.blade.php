@@ -48,7 +48,7 @@ $timeago = $user->created_at;
                                 <p class="lead my-3">here can you see all your personal statistics:</p>
                             @else
                                 <h1 class="display-4 font-italic">Thats {{$user->username}},</h1>
-                                <p class="lead my-3">here can you see all your personal statistics:</p>
+                                <p class="lead my-3">here can you see all his personal statistics:</p>
 
                         @endif
                     </div>
