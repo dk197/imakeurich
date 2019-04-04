@@ -12,7 +12,13 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+/*######### Styles for all Sites start########*/
 
+html, main {
+    background-color: #303030;
+}
+
+/*######### Styles for all Sites end########*/
 
 /*######### /games overview start########*/
 #game_card{
@@ -20,9 +26,9 @@
 	margin-right: 20px;
 	cursor: pointer;
 }
-#game_card:hover{
-	background-color: lightgrey;
-}
+// #game_card:hover{
+// 	background-color: lightgrey;
+// }
 #game_list{
 	list-style: none;
 	text-align: center;
