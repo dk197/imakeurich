@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -36,4 +37,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function changeBalance($byCoins)
+    {
+        $user = Auth::user();
+        $userBalance = $user->balance;
+
+        $userBalance = $userBalance + $byCoins;
+        $user->balance = $userBalance;
+        $user->save();
+
+        $array = array('balance' => $userBalance);
+        return json_encode($array);
+    }
 }

@@ -20,7 +20,8 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				alert(response.message);
-				$('#game_bid').val('');
+                $('#game_bid').val('');
+                document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
 			}
 		})
 	})
@@ -72,8 +73,11 @@ $(document).ready(function(){
 	    //only execute at the right page
 	    if(data.game_id == game_id){
 	 
-	 		alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
+	 		// alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
 			
+	 		console.log(data);
+
+// >>>>>>> b64a29ee57cd8b4b271371b4d53377eaab10f977
 	    }
 	});
 
@@ -112,6 +116,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response) {
+                console.log(response);
                 document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
             }
 		})
