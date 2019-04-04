@@ -8,7 +8,7 @@
                 </div>
                 <h1>Make money, get rich.</h1>
                 <div class="links">
-                    <a class="btn button-welcome" href="/instructions">Let's start!</a>
+                    <a class="btn button-start" href="/instructions">Let's get started!</a>
                 </div>
             </div>
         </div>

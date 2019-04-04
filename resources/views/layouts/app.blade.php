@@ -33,9 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-link"><a href="/games">Games</a></li>
-                        <li class="nav-link"><a href="/instructions">Instructions</a></li>
-                        <li class="nav-link"><a href="/allstatistics">All-Time Statistics</a></li>
+                        <li class="nav-link"><a href="/"><img src="/images/logo_entwurf.png" width="150px"></a></li>
+                        <li class="nav-link mt-1 ml-3"><a href="/games">Games</a></li>
+                        <li class="nav-link mt-1"><a href="/instructions">Instructions</a></li>
+                        <li class="nav-link mt-1"><a href="/allstatistics">All-Time Statistics</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -52,7 +53,7 @@
                             @endif
                         @else
                             <li id="navbarBalance" class="nav-item ">
-                                    <a id="navbarBalanceA" class="btn btn-secondary mr-2" href="/coins" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarBalanceA" class="btn btn-secondary button-gold mr-2" href="/coins" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->balance }} Coins
                                     </a>
                             </li>

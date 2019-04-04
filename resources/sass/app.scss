@@ -51,6 +51,9 @@ html, main {
 
 .card-header {
     font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    background-color: var(--richpurple);
 }
 
 .card-header, .card-header:first-child {
@@ -189,14 +192,14 @@ html, main {
 }
 
 
-.button-welcome {
+.button-start {
     background-color: var(--richpurple);
-    padding: 10px 40px;
-    margin: 30px;
+    padding: 20px 80px;
+    margin: 70px;
     color: #fff;
 }
 
-.button-welcome:hover {
+.button-start:hover {
     background-color: darken(#7001ba,12%);
     color: #fff;
 }
