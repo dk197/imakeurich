@@ -167,7 +167,7 @@ class GameController extends Controller
             $UserClass = new User;
             $newBalance = json_decode($UserClass->changeBalance($game->min_bid));
 
-            return response()->json(['message' => 'Game successfully entered with the min Bid'.$newBalance->balance, 'newBalance' => $newBalance->balance]);
+            return response()->json(['message' => 'Game successfully entered with the min Bid '.$newBalance->balance, 'newBalance' => $newBalance->balance]);
 
         // game isn't full & user is a player
         }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
@@ -184,10 +184,6 @@ class GameController extends Controller
     public function getPlayerNumber($game){
         return DB::table('players')->where(['game_id' => $game->id])->count();
     }
-
-    // public function getPlayerBids($game_id){
-    //     return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
-    // }
 
     // check, if user is a player of a specific game -> true, if given user is a player in the given game
     public function findPlayer($user_id, $game_id)
@@ -229,36 +225,57 @@ class GameController extends Controller
         return $winners;
     }
 
+    // calculate the earnings
     public function getEarnings($game_id)
     {
         $pot = $this->getPot($game_id);
 
         $earnings = array(
-            'win_1' => 0.5 * $pot,
-            'win_2' => 0.1 * $pot,
-            'win_3' => 0.1 * $pot,
-            'win_4' => 0.1 * $pot
+            'win_1' => floor(0.5 * $pot),
+            'win_2' => floor(0.1 * $pot),
+            'win_3' => floor(0.1 * $pot),
+            'win_4' => floor(0.1 * $pot)
         );
 
         return $earnings;
     }
 
+    // set endGame event with some data
     public function endGame($game){
+
+        $winner_ids = array(
+            '0' => $this->getWinners($game)['winner_1'], 
+            '1' => $this->getWinners($game)['winner_2'], 
+            '2' => $this->getWinners($game)['winner_3'], 
+            '3' => $this->getWinners($game)['winner_4']
+        );
 
         //get Usernames based on their IDs
         $winners = array(
-            'winner_1' => User::find($this->getWinners($game)['winner_1'])->username,
-            'winner_2' => User::find($this->getWinners($game)['winner_2'])->username,
-            'winner_3' => User::find($this->getWinners($game)['winner_3'])->username,
-            'winner_4' => User::find($this->getWinners($game)['winner_4'])->username
+            '0' => User::find($winner_ids[0])->username,
+            '1' => User::find($winner_ids[1])->username,
+            '2' => User::find($winner_ids[2])->username,
+            '3' => User::find($winner_ids[3])->username
         ); 
 
         $earnings = array(
-            'winner_1' => $this->getEarnings($game->id)['win_1'],
-            'winner_2' => $this->getEarnings($game->id)['win_2'],
-            'winner_3' => $this->getEarnings($game->id)['win_3'],
-            'winner_4' => $this->getEarnings($game->id)['win_4']
+            '0' => $this->getEarnings($game->id)['win_1'],
+            '1' => $this->getEarnings($game->id)['win_2'],
+            '2' => $this->getEarnings($game->id)['win_3'],
+            '3' => $this->getEarnings($game->id)['win_4']
         );
+
+
+        for ($i=0; $i < count($winners); $i++) { 
+            $userstat = new Userstatistics;
+            $userstat->game_id = $game->id;
+            $userstat->user_id = $winner_ids[$i];
+            $userstat->username = $winners[$i];
+            $userstat->value = $earnings[$i];
+            $userstat->isBid = false;
+            $userstat->save();
+        }
+
 
         $data = array(
             'game_id' => $game->id,
