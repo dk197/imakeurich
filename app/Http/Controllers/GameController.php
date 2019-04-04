@@ -139,7 +139,7 @@ class GameController extends Controller
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
 
-                if($this->getAllGameBids($game->id) >= $game->igw_limit){
+                if($this->getPot($game->id) >= $game->igw_limit){
                     $this->endGame($game);
                 }
 
@@ -202,7 +202,7 @@ class GameController extends Controller
     }
 
     // get the value of all bids
-    public function getAllGameBids($game_id)
+    public function getPot($game_id)
     {
         return DB::table('players')->where(['game_id' => $game_id])->sum('bid');
     }
@@ -229,6 +229,20 @@ class GameController extends Controller
         return $winners;
     }
 
+    public function getEarnings($game_id)
+    {
+        $pot = $this->getPot($game_id);
+
+        $earnings = array(
+            'win_1' => 0.5 * $pot,
+            'win_2' => 0.1 * $pot,
+            'win_3' => 0.1 * $pot,
+            'win_4' => 0.1 * $pot
+        );
+
+        return $earnings;
+    }
+
     public function endGame($game){
 
         //get Usernames based on their IDs
@@ -239,32 +253,21 @@ class GameController extends Controller
             'winner_4' => User::find($this->getWinners($game)['winner_4'])->username
         ); 
 
+        $earnings = array(
+            'winner_1' => $this->getEarnings($game->id)['win_1'],
+            'winner_2' => $this->getEarnings($game->id)['win_2'],
+            'winner_3' => $this->getEarnings($game->id)['win_3'],
+            'winner_4' => $this->getEarnings($game->id)['win_4']
+        );
+
         $data = array(
             'game_id' => $game->id,
             'winners' => $winners,
-            'game_igw' =>$this-> getAllGameBids($game->id)
+            'earnings' => $earnings
         );
 
-        $this->makePusherEvent($data, 'game_end');
+        $game->makePusherEvent($data, 'game_end');
     }
-
-
-    public function makePusherEvent($data, $eventName)
-    {
-        $options = array(
-            'cluster' => 'eu'
-        );
-
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            $options
-        );
-
-        $pusher->trigger($eventName, $eventName.'-event', $data);
-    }
-
 
 
     /**
