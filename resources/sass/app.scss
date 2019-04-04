@@ -31,6 +31,10 @@ html, main {
     margin: 0;
 }
 
+a {
+    color: #fff;
+  }
+
 .table {
     color: white;
 }
@@ -42,6 +46,7 @@ html, main {
 .card {
     border: 0;
     border-radius: 8px;
+    background-color: var(--richgrey);
 }
 
 .card-body {
@@ -338,3 +343,4 @@ html, main {
 .m-b-md {
     margin-bottom: 30px;
 }
+

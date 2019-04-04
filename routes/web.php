@@ -42,3 +42,5 @@ Route::post('/addBalance', 'UserController@addToBalance');
 Route::post('/change/{id}', 'UserController@update');
 
 Route::get('/editUser', 'UserController@showEditPage');
+
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
