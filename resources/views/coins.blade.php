@@ -2,11 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="col-md-12 row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header text-center">Free Coins</div>
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 mb-3 text-center">
@@ -25,9 +24,7 @@
                         </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-sm-12 row mt-4">
+        <div class="row mt-4 pt-0">
             <div class="col-md-4">
                 <div class="card card-coins">
                     <div class="card-header text-center">Buy</div>
@@ -96,7 +93,6 @@
                             </div>
                         </div>
                     </div>
-        </div>
 
         <div class="col-md-12 mt-4">
                 <div class="card">
