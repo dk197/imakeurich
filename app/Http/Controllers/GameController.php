@@ -76,7 +76,7 @@ class GameController extends Controller
         $winning_places = [];
 
         while (sizeof($winning_places) < 3) {
-            $random = rand(2, $max_players);
+            $random = rand(2, $max_players - 1);
             if(!in_array($random, $winning_places)){
                 array_push($winning_places, $random);
             }
