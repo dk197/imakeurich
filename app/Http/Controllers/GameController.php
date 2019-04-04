@@ -223,10 +223,10 @@ class GameController extends Controller
 
 
         $winners = array(
-            'winner_0' => $winner_0->username,
-            'winner_1' => $winner_1->username,
-            'winner_2' => $winner_2->username,
-            'winner_3' => $winner_3->username
+            'winner_0' => $winner_0,
+            'winner_1' => $winner_1,
+            'winner_2' => $winner_2,
+            'winner_3' => $winner_3
         );
 
         return $winners;
