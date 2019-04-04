@@ -114,15 +114,6 @@ class GameController extends Controller
 
         $bid = request()->game_bid;
 
-        $currentuser = auth()->user();
-        $userstat = new Userstatistics;
-        $userstat->game_id = $game->id;
-        $userstat->user_id = $currentuser->id;
-        $userstat->username = $currentuser->username;
-        $userstat->value = $bid;
-        $userstat->isBid = true;
-        $userstat->save();
-
 
         // check if game is full and user is not a player
         if($this->getPlayerNumber($game) == $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
@@ -135,7 +126,16 @@ class GameController extends Controller
             if($bid < $game->min_bid || $bid > $game->max_bid){
                 return response()->json(['message' => 'Bid not in allowed area!']);
             }else{
-                
+
+                $currentuser = auth()->user();
+                $userstat = new Userstatistics;
+                $userstat->game_id = $game->id;
+                $userstat->user_id = $currentuser->id;
+                $userstat->username = $currentuser->username;
+                $userstat->value = $bid;
+                $userstat->isBid = true;
+                $userstat->save();
+
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
 
@@ -151,6 +151,14 @@ class GameController extends Controller
         // game isn't full and user is not a player
         }else if($this->getPlayerNumber($game) < $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
 
+            $currentuser = auth()->user();
+            $userstat = new Userstatistics;
+            $userstat->game_id = $game->id;
+            $userstat->user_id = $currentuser->id;
+            $userstat->username = $currentuser->username;
+            $userstat->value = $bid;
+            $userstat->isBid = true;
+            $userstat->save();
             // Add User to the game with the min bid
             $game->addPlayer($game->min_bid);
 
@@ -160,7 +168,7 @@ class GameController extends Controller
 
         // game isn't full & user is a player
         }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
-            
+
             return response()->json(['message' => 'Please wait, until the lobby is full!']);
 
         }else{
@@ -182,12 +190,12 @@ class GameController extends Controller
     public function findPlayer($user_id, $game_id)
     {
         $result = Player::where(['game_id' => $game_id, 'user_id' => $user_id])->count();
-        
+
         if($result == 0){
             return false;
         }else{
-            return true; 
-        }   
+            return true;
+        }
     }
 
     // get the value of all bids
@@ -217,7 +225,7 @@ class GameController extends Controller
             'winner_2' => $winner_2,
             'winner_3' => $winner_3
         );
-        
+
         return $winners;
     }
 
@@ -236,7 +244,7 @@ class GameController extends Controller
                 $options
             );
 
-            
+
             $data = array(
                 'game_id' => $game->id,
                 'winners' => $this->getWinners($game)
