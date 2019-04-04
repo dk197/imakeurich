@@ -231,37 +231,40 @@ class GameController extends Controller
 
     public function endGame($game){
 
-        // ################# Pusher start #############################
+        //get Usernames based on their IDs
+        $winners = array(
+            'winner_1' => User::find($this->getWinners($game)['winner_1'])->username,
+            'winner_2' => User::find($this->getWinners($game)['winner_2'])->username,
+            'winner_3' => User::find($this->getWinners($game)['winner_3'])->username,
+            'winner_4' => User::find($this->getWinners($game)['winner_4'])->username
+        ); 
 
-            $options = array(
-                'cluster' => 'eu'
-            );
+        $data = array(
+            'game_id' => $game->id,
+            'winners' => $winners,
+            'game_igw' =>$this-> getAllGameBids($game->id)
+        );
 
-            $pusher = new Pusher(
-                env('PUSHER_APP_KEY'),
-                env('PUSHER_APP_SECRET'),
-                env('PUSHER_APP_ID'),
-                $options
-            );
-
-            //get Usernames based on their IDs
-            $winners = array(
-                'winner_1' => User::find($this->getWinners($game)['winner_1'])->username,
-                'winner_2' => User::find($this->getWinners($game)['winner_2'])->username,
-                'winner_3' => User::find($this->getWinners($game)['winner_3'])->username,
-                'winner_4' => User::find($this->getWinners($game)['winner_4'])->username
-            ); 
-
-            $data = array(
-                'game_id' => $game->id,
-                'winners' => $winners
-            );
-
-            $pusher->trigger('game_end', 'game_end-event', $data);
-
-        // ################# Pusher end ###############################
-
+        $this->makePusherEvent($data, 'game_end');
     }
+
+
+    public function makePusherEvent($data, $eventName)
+    {
+        $options = array(
+            'cluster' => 'eu'
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger($eventName, $eventName.'-event', $data);
+    }
+
 
 
     /**
