@@ -41,11 +41,17 @@ class User extends Authenticatable
     public function changeBalance($byCoins)
     {
         $user = Auth::user();
+        $userBalance = $user->balance;
 
-        $userBalance = $user->balance ;
-        $userBalance = $userBalance + $byCoins;
-        $user->balance = $userBalance;
-        $user->save();
-        return  $user->balance;
+        if (($userBalance + $bycoins) >= 0) {
+            $userBalance = $userBalance + $byCoins;
+            $user->balance = $userBalance;
+            $user->save();
+            $changeable = true;
+        } else {
+            $changeable = false;
+        }
+
+        return json(['balance' => $user->balance , 'coinsChange' => $byCoins, 'balanceChangeable' => $changeable]);
     }
 }

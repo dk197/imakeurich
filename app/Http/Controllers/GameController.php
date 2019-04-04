@@ -143,9 +143,10 @@ class GameController extends Controller
                     $this->endGame($game);
                 }
 
-                // subtract bid from user balance
+                $UserClass = new User;
+                $newBalance = $UserClass->changeBalance($bid);
 
-                return response()->json(['message' => 'You Bid successfully']);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance]);
             }
 
         // game isn't full and user is not a player
