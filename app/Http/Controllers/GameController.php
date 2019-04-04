@@ -52,9 +52,7 @@ class GameController extends Controller
 
         $attributes = request()->validate([
             'min_bid' => ['required', 'min:1', 'numeric'],
-            'max_bid' => ['required', 'min:1', 'numeric'],
-            'game_end' => ['required', 'min:1'],
-            'single_bid' => ['required', 'min:0', 'max:1', 'numeric'],
+            'igw_limit' => ['required', 'min:1', 'numeric'],
             'max_players' => ['required', 'min:1', 'numeric']
         ]);
 
@@ -126,7 +124,7 @@ class GameController extends Controller
         // game is full and user is a player
         }else if($this->getPlayerNumber($game) == $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
 
-            if($bid < $game->min_bid || $bid > $game->max_bid){
+            if($bid < $game->min_bid || $bid > $game->igw_limit){
                 return response()->json(['message' => 'Bid not in allowed area!']);
             }else{
 

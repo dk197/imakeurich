@@ -11,7 +11,7 @@ use Pusher\Pusher;
 class Game extends Model
 {
     protected $fillable = [
-        'min_bid', 'max_bid', 'single_bid', 'game_end', 'win_1', 'win_2', 'win_3', 'max_players',
+        'min_bid', 'igw_limit', 'win_1', 'win_2', 'win_3', 'max_players',
     ];
 
     public function player(){
