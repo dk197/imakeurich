@@ -10,6 +10,7 @@ use App\Player;
 use Carbon\Carbon;
 use Pusher\Pusher;
 use App\Userstatistics;
+use App\User;
 
 class GameController extends Controller
 {
@@ -75,7 +76,7 @@ class GameController extends Controller
         $winning_places = [];
 
         while (sizeof($winning_places) < 3) {
-            $random = rand(2, $max_players);
+            $random = rand(2, $max_players - 1);
             if(!in_array($random, $winning_places)){
                 array_push($winning_places, $random);
             }
@@ -114,6 +115,8 @@ class GameController extends Controller
 
         $bid = request()->game_bid;
 
+        $currentuser = auth()->user();
+
 
         // check if game is full and user is not a player
         if($this->getPlayerNumber($game) == $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
@@ -127,7 +130,6 @@ class GameController extends Controller
                 return response()->json(['message' => 'Bid not in allowed area!']);
             }else{
 
-                $currentuser = auth()->user();
                 $userstat = new Userstatistics;
                 $userstat->game_id = $game->id;
                 $userstat->user_id = $currentuser->id;
@@ -143,15 +145,15 @@ class GameController extends Controller
                     $this->endGame($game);
                 }
 
-                // subtract bid from user balance
+                $UserClass = new User;
+                $newBalance = json_decode($UserClass->changeBalance($bid));
 
-                return response()->json(['message' => 'You Bid successfully']);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
             }
 
         // game isn't full and user is not a player
         }else if($this->getPlayerNumber($game) < $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
 
-            $currentuser = auth()->user();
             $userstat = new Userstatistics;
             $userstat->game_id = $game->id;
             $userstat->user_id = $currentuser->id;
@@ -159,12 +161,15 @@ class GameController extends Controller
             $userstat->value = $bid;
             $userstat->isBid = true;
             $userstat->save();
+
             // Add User to the game with the min bid
             $game->addPlayer($game->min_bid);
 
             // subtract min bid (for joining the game) from user balance
+            $UserClass = new User;
+            $newBalance = json_decode($UserClass->changeBalance($game->min_bid));
 
-            return response()->json(['message' => 'Game successfully entered with the min Bid']);
+            return response()->json(['message' => 'Game successfully entered with the min Bid'.$newBalance->balance, 'newBalance' => $newBalance->balance]);
 
         // game isn't full & user is a player
         }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
@@ -216,10 +221,10 @@ class GameController extends Controller
         $win_index_3 = $game->win_3 - 1;
 
 
-        $winner_0 = User::find($allPlayers[$win_index_0]->userid);
-        $winner_1 = User::find($allPlayers[$win_index_1]->userid);
-        $winner_2 = User::find($allPlayers[$win_index_2]->userid);
-        $winner_3 = User::find($allPlayers[$win_index_3]->userid);
+        $winner_0 = $allPlayers[$win_index_0]->user_id;
+        $winner_1 = $allPlayers[$win_index_1]->user_id;
+        $winner_2 = $allPlayers[$win_index_2]->user_id;
+        $winner_3 = $allPlayers[$win_index_3]->user_id;
 
 
         $winners = array(
@@ -247,10 +252,16 @@ class GameController extends Controller
                 $options
             );
 
+            $winners = array(
+                'winner_0' => $this->getWinners($game)['winner_0'],
+                'winner_1' => $this->getWinners($game)['winner_1'],
+                'winner_2' => $this->getWinners($game)['winner_2'],
+                'winner_3' => $this->getWinners($game)['winner_3']
+            ); 
 
             $data = array(
                 'game_id' => $game->id,
-                'winners' => $this->getWinners($game)
+                'winners' => $winners
             );
 
             $pusher->trigger('game_end', 'game_end-event', $data);
