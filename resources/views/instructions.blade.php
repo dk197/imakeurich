@@ -25,7 +25,7 @@
             <p>You have to be 18 years or older to gamble. Gambling can be addictive. More information at: https://www.responsiblegambling.org or by calling the free hotline 0800 137 27 00.</p>
         </div>
         <div class="col-sm-6 mb-1">
-            <p>Spielteilnahme ab 18 Jahren. Glückspiel kann süchtig machen. Mehr Infos unter: https://www.spielen-mit-verantwortung.de oder unter der kostenloser Hotline 0800 137 27 00.</p>
+            <p>Spielteilnahme ab 18 Jahren. Glückspiel kann süchtig machen. Mehr Infos unter: https://www.spielen-mit-verantwortung.de oder unter der kostenlosen Hotline 0800 137 27 00.</p>
         </div>
         <div class="links">
                     <a class="btn button-start" href="/games">Really! Let's get started!</a>
