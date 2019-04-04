@@ -43,15 +43,11 @@ class User extends Authenticatable
         $user = Auth::user();
         $userBalance = $user->balance;
 
-        if (($userBalance + $bycoins) >= 0) {
-            $userBalance = $userBalance + $byCoins;
-            $user->balance = $userBalance;
-            $user->save();
-            $changeable = true;
-        } else {
-            $changeable = false;
-        }
+        $userBalance = $userBalance + $byCoins;
+        $user->balance = $userBalance;
+        $user->save();
 
-        return json(['balance' => $user->balance , 'coinsChange' => $byCoins, 'balanceChangeable' => $changeable]);
+        $array = array('balance' => $userBalance);
+        return json_encode($array);
     }
 }

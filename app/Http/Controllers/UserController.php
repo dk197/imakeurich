@@ -65,7 +65,8 @@ class UserController extends Controller
     {
         $coins = $request->input('coins');
         $UserClass = new User;
-        $newBalance = $UserClass->changeBalance($coins);
+        $newBalance = json_decode($UserClass->changeBalance($coins));
+
         return response()->json(['message' => 'Success: Your Balance now: '.$newBalance->balance , 'coins' => $newBalance->balance]);
     }
 
