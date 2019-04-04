@@ -124,7 +124,7 @@ class GameController extends Controller
         // game is full and user is a player
         }else if($this->getPlayerNumber($game) == $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
 
-            if($bid < $game->min_bid || $bid > $game->igw_limit){
+            if($bid < $game->min_bid){
                 return response()->json(['message' => 'Bid not in allowed area!']);
             }else{
 
@@ -207,29 +207,23 @@ class GameController extends Controller
         return DB::table('players')->where(['game_id' => $game_id])->sum('bid');
     }
 
-    // get the winners
+    // get the userIDs of the winners
     public function getWinners($game)
     {
         $allPlayers = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
 
-        // array starts at 0 -> winner would be wrong
-        $win_index_0 = 0;
-        $win_index_1 = $game->win_1 - 1;
-        $win_index_2 = $game->win_2 - 1;
-        $win_index_3 = $game->win_3 - 1;
-
-
-        $winner_0 = $allPlayers[$win_index_0]->user_id;
-        $winner_1 = $allPlayers[$win_index_1]->user_id;
-        $winner_2 = $allPlayers[$win_index_2]->user_id;
-        $winner_3 = $allPlayers[$win_index_3]->user_id;
+        // -1 cause the array starts at 0
+        $winner_1 = $allPlayers[0]->user_id;
+        $winner_2 = $allPlayers[$game->win_1 - 1]->user_id;
+        $winner_3 = $allPlayers[$game->win_2 - 1]->user_id;
+        $winner_4 = $allPlayers[$game->win_3 - 1]->user_id;
 
 
         $winners = array(
-            'winner_0' => $winner_0,
             'winner_1' => $winner_1,
             'winner_2' => $winner_2,
-            'winner_3' => $winner_3
+            'winner_3' => $winner_3,
+            'winner_4' => $winner_4
         );
 
         return $winners;
@@ -250,11 +244,12 @@ class GameController extends Controller
                 $options
             );
 
+            //get Usernames based on their IDs
             $winners = array(
-                'winner_0' => $this->getWinners($game)['winner_0'],
-                'winner_1' => $this->getWinners($game)['winner_1'],
-                'winner_2' => $this->getWinners($game)['winner_2'],
-                'winner_3' => $this->getWinners($game)['winner_3']
+                'winner_1' => User::find($this->getWinners($game)['winner_1'])->username,
+                'winner_2' => User::find($this->getWinners($game)['winner_2'])->username,
+                'winner_3' => User::find($this->getWinners($game)['winner_3'])->username,
+                'winner_4' => User::find($this->getWinners($game)['winner_4'])->username
             ); 
 
             $data = array(

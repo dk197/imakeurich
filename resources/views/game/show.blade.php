@@ -12,7 +12,7 @@
 		<p>Minimal bid: {{ $game->min_bid }} IGW | Maximal bid: {{ $game->igw_limit }} IGW</p>
 	</div>
 	<div class="col-4 text-right">
-		<p>Winning Places: {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
+		<p>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
 	</div>
 </div>
 
