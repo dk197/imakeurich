@@ -75,6 +75,8 @@ $(document).ready(function(){
 	 		// alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
 			
 	 		console.log(data);
+
+// >>>>>>> b64a29ee57cd8b4b271371b4d53377eaab10f977
 	    }
 	});
 

@@ -64,11 +64,9 @@ class UserController extends Controller
     public function addToBalance(Request $request)
     {
         $coins = $request->input('coins');
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $user->balance = $user->balance + $coins;
-        $user->save();
-        return response()->json(['message' => 'Success: Your Balance now: '.$user->balance , 'coins' => $user->balance]);
+        $UserClass = new User;
+        $newBalance = $UserClass->changeBalance($coins);
+        return response()->json(['message' => 'Success: Your Balance now: '.$newBalance , 'coins' => $newBalance]);
     }
 
     public function coins()
