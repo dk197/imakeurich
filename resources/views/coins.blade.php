@@ -29,7 +29,7 @@
 
         <div class="col-sm-12 row mt-4">
             <div class="col-md-4">
-                <div class="card">
+                <div class="card card-coins">
                     <div class="card-header text-center">Buy</div>
                         <div class="card-body">
                             <div class="row">
