@@ -116,6 +116,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response) {
+                console.log(response);
                 document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
             }
 		})
