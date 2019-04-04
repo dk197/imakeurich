@@ -32,7 +32,7 @@
 			<input type="number" name="max_players" id="game_max_players" class="form-control" placeholder="Max Players of the game (min 5)">
 		</div>
 
-		<button type="submit" class="btn btn-primary">Create</button>
+		<button type="submit" class="btn btn-primary button-purple">Create</button>
 	</form>
 
 

@@ -40,12 +40,20 @@ a {
     text-decoration: none;
   }
 
+h1 {
+    margin-bottom: 20px;
+}
+
 .table {
     color: white;
 }
 
 .btn {
     font-size: 14px;
+}
+
+.btn:active {
+    border: inherit;
 }
 
 .card {
@@ -349,3 +357,11 @@ a {
     margin-bottom: 30px;
 }
 
+.safety-note {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.age-validation {
+    margin-bottom: 20px;
+}

@@ -27,7 +27,7 @@
 				<label for="game_bid">How much money do you wanna drop in?</label>
 				<input type="number" name="game_bid" id="game_bid" class="form-control" placeholder="Amount of IGW u wanna spend">
 			</div>
-			<button type="submit" class="btn btn-primary">GO IN</button>
+			<button type="submit" class="btn btn-primary button-gold">GO IN</button>
 		</form>
 	</div>
 </div>
