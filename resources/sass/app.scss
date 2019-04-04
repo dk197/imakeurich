@@ -8,6 +8,10 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+:root {
+    --richgold: #efba1a;
+  }
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -127,7 +131,7 @@ html, main {
 /*########## Navbar Styles start########*/
 
 .btn-secondary {
-    background-color: #2F3061;
+    background-color: var(--richgold);
 }
 
 .nav-link a, .nav-link, #navbarDropdown {
