@@ -38,9 +38,9 @@ $timeago = $user->created_at;
 
 <div id="banner">
     <div id="cloud-scroll">
-        <div class="container">
-            <div class="jumbotron p-4 p-md-5 text-dark rounded bg-transparent">
-                <div class="row">
+        <div class="container container-userStat">
+            <div class="jumbotron p-4 p-md-5 rounded bg-transparent">
+                <div class="row row-userStat">
                     <div class="col-md-6 px-0">
                         @if ($user->id==auth()->user()->id)
 
