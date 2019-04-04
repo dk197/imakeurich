@@ -38,8 +38,8 @@ $timeago = $user->created_at;
 
 <div id="banner">
     <div id="cloud-scroll">
-        <div class="container">
-            <div class="jumbotron p-4 p-md-5 text-dark rounded bg-transparent">
+        <div class="container container-userStat">
+            <div class="jumbotron p-4 p-md-5 rounded bg-transparent">
                 <div class="row">
                     <div class="col-md-6 px-0">
                         @if ($user->id==auth()->user()->id)
@@ -60,9 +60,8 @@ $timeago = $user->created_at;
                 </div>
             </div>
         </div>
-        <div class="container">
         <div class="counter">
-                <div class="container">
+                <div class="container container-userStat">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="employees">
@@ -100,7 +99,6 @@ $timeago = $user->created_at;
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 <div>
