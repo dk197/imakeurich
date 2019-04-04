@@ -12,8 +12,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #303030;
+                color: #ffffff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -49,7 +49,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #ffffff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -65,19 +65,6 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <!-- @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif -->
             <div class="content">
                 <div class="title m-b-md">
                     I make u rich
@@ -88,7 +75,7 @@
                     @if (Route::has('login'))
 
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/games') }}">Games</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

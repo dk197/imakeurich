@@ -8,10 +8,27 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+:root {
+    --richgold: #efba1a;
+  }
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+/*######### Styles for all Sites start########*/
+
+html, main {
+    background-color: #303030;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+/*######### Styles for all Sites end########*/
+
 
 
 /*######### /games overview start########*/
@@ -20,9 +37,9 @@
 	margin-right: 20px;
 	cursor: pointer;
 }
-#game_card:hover{
-	background-color: lightgrey;
-}
+// #game_card:hover{
+// 	background-color: lightgrey;
+// }
 #game_list{
 	list-style: none;
 	text-align: center;
@@ -121,7 +138,7 @@
 /*########## Navbar Styles start########*/
 
 .btn-secondary {
-    background-color: #2F3061;
+    background-color: var(--richgold);
 }
 
 .nav-link a, .nav-link, #navbarDropdown {
