@@ -93,17 +93,23 @@ h1 {
 /*######### /games overview start########*/
 #game_card{
 	padding: 20px;
-	margin-right: 20px;
     cursor: pointer;
-    width: 30%;
+    width: 33.3%
 }
-// #game_card:hover{
-// 	background-color: lightgrey;
-// }
+.game-card-body:hover{
+	background-color: var(--richgold);
+}
+.game-card-body {
+    border-radius: 6px;
+}
 #game_list{
 	list-style: none;
 	text-align: center;
 	padding-inline-start: 0px;
+}
+
+.all-games {
+    display: flex;
 }
 
 /*######### /games overview end########*/
@@ -260,7 +266,6 @@ h1 {
 
 /*########## Button Styles start########*/
 
-/*########## Button Styles end########*/
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -286,6 +291,9 @@ h1 {
     line-height: 1.33;
     border-radius: 35px;
   }
+
+/*########## Button Styles end########*/
+
 
   @-webkit-keyframes backgroundScroll {
     from {
