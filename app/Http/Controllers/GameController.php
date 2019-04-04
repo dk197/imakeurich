@@ -146,7 +146,7 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = $UserClass->changeBalance($bid);
 
-                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance]);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balanceChangeable]);
             }
 
         // game isn't full and user is not a player

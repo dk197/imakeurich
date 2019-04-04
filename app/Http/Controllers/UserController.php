@@ -66,7 +66,7 @@ class UserController extends Controller
         $coins = $request->input('coins');
         $UserClass = new User;
         $newBalance = $UserClass->changeBalance($coins);
-        return response()->json(['message' => 'Success: Your Balance now: '.$newBalance , 'coins' => $newBalance]);
+        return response()->json(['message' => 'Success: Your Balance now: '.$newBalance->balance , 'coins' => $newBalance->balance]);
     }
 
     public function coins()
