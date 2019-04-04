@@ -166,6 +166,17 @@ html, main {
     background-color: var(--richpurple);
 }
 
+.button-welcome {
+    background-color: var(--richpurple);
+    padding: 10px 40px;
+    margin: 30px;
+    color: #fff;
+}
+
+.button-welcome:hover {
+    background-color: darken(#7001ba,12%);
+    color: #fff;
+}
 
 /*########## Coins Style end########*/
 
@@ -246,8 +257,6 @@ html, main {
     }
   }
 
-
-
 .img-rounded {
     width: 100px;
     margin: 10px 10px 10px 10px;
@@ -267,3 +276,35 @@ html, main {
     -webkit-transition-duration: 0.3s; /* Safari */
 
     }
+
+.full-height {
+    height: 100vh;
+    }
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    }
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
