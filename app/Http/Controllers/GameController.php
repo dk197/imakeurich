@@ -124,7 +124,7 @@ class GameController extends Controller
         // game is full and user is a player
         }else if($this->getPlayerNumber($game) == $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
 
-            if($bid < $game->min_bid || $bid > $game->igw_limit){
+            if($bid < $game->min_bid){
                 return response()->json(['message' => 'Bid not in allowed area!']);
             }else{
 
@@ -139,12 +139,12 @@ class GameController extends Controller
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
 
-                if($this->getAllGameBids($game->id) >= $game->igw_limit){
+                if($this->getPot($game->id) >= $game->igw_limit){
                     $this->endGame($game);
                 }
 
                 $UserClass = new User;
-                $newBalance = json_decode($UserClass->changeBalance($bid));
+                $newBalance = json_decode($UserClass->changeBalance(- $bid, $currentuser->id));
 
                 return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
             }
@@ -165,9 +165,9 @@ class GameController extends Controller
 
             // subtract min bid (for joining the game) from user balance
             $UserClass = new User;
-            $newBalance = json_decode($UserClass->changeBalance($game->min_bid));
+            $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
 
-            return response()->json(['message' => 'Game successfully entered with the min Bid'.$newBalance->balance, 'newBalance' => $newBalance->balance]);
+            return response()->json(['message' => 'Game successfully entered with the min Bid '.$newBalance->balance, 'newBalance' => $newBalance->balance]);
 
         // game isn't full & user is a player
         }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
@@ -185,10 +185,6 @@ class GameController extends Controller
         return DB::table('players')->where(['game_id' => $game->id])->count();
     }
 
-    // public function getPlayerBids($game_id){
-    //     return DB::table('players')->where(['game_id' => $game_id, 'user_id' => auth()->user()->id])->count();
-    // }
-
     // check, if user is a player of a specific game -> true, if given user is a player in the given game
     public function findPlayer($user_id, $game_id)
     {
@@ -202,70 +198,94 @@ class GameController extends Controller
     }
 
     // get the value of all bids
-    public function getAllGameBids($game_id)
+    public function getPot($game_id)
     {
         return DB::table('players')->where(['game_id' => $game_id])->sum('bid');
     }
 
-    // get the winners
+    // get the userIDs of the winners
     public function getWinners($game)
     {
         $allPlayers = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
 
-        // array starts at 0 -> winner would be wrong
-        $win_index_0 = 0;
-        $win_index_1 = $game->win_1 - 1;
-        $win_index_2 = $game->win_2 - 1;
-        $win_index_3 = $game->win_3 - 1;
-
-
-        $winner_0 = $allPlayers[$win_index_0]->user_id;
-        $winner_1 = $allPlayers[$win_index_1]->user_id;
-        $winner_2 = $allPlayers[$win_index_2]->user_id;
-        $winner_3 = $allPlayers[$win_index_3]->user_id;
+        // -1 cause the array starts at 0
+        $winner_1 = $allPlayers[0]->user_id;
+        $winner_2 = $allPlayers[$game->win_1 - 1]->user_id;
+        $winner_3 = $allPlayers[$game->win_2 - 1]->user_id;
+        $winner_4 = $allPlayers[$game->win_3 - 1]->user_id;
 
 
         $winners = array(
-            'winner_0' => $winner_0,
             'winner_1' => $winner_1,
             'winner_2' => $winner_2,
-            'winner_3' => $winner_3
+            'winner_3' => $winner_3,
+            'winner_4' => $winner_4
         );
 
         return $winners;
     }
 
+    // calculate the earnings
+    public function getEarnings($game_id)
+    {
+        $pot = $this->getPot($game_id);
+
+        $earnings = array(
+            'win_1' => floor(0.5 * $pot),
+            'win_2' => floor(0.1 * $pot),
+            'win_3' => floor(0.1 * $pot),
+            'win_4' => floor(0.1 * $pot)
+        );
+
+        return $earnings;
+    }
+
+    // set endGame event with some data
     public function endGame($game){
 
-        // ################# Pusher start #############################
+        $winner_ids = array(
+            '0' => $this->getWinners($game)['winner_1'], 
+            '1' => $this->getWinners($game)['winner_2'], 
+            '2' => $this->getWinners($game)['winner_3'], 
+            '3' => $this->getWinners($game)['winner_4']
+        );
 
-            $options = array(
-                'cluster' => 'eu'
-            );
+        //get Usernames based on their IDs
+        $winners = array(
+            '0' => User::find($winner_ids[0])->username,
+            '1' => User::find($winner_ids[1])->username,
+            '2' => User::find($winner_ids[2])->username,
+            '3' => User::find($winner_ids[3])->username
+        ); 
 
-            $pusher = new Pusher(
-                env('PUSHER_APP_KEY'),
-                env('PUSHER_APP_SECRET'),
-                env('PUSHER_APP_ID'),
-                $options
-            );
+        $earnings = array(
+            '0' => $this->getEarnings($game->id)['win_1'],
+            '1' => $this->getEarnings($game->id)['win_2'],
+            '2' => $this->getEarnings($game->id)['win_3'],
+            '3' => $this->getEarnings($game->id)['win_4']
+        );
 
-            $winners = array(
-                'winner_0' => $this->getWinners($game)['winner_0'],
-                'winner_1' => $this->getWinners($game)['winner_1'],
-                'winner_2' => $this->getWinners($game)['winner_2'],
-                'winner_3' => $this->getWinners($game)['winner_3']
-            ); 
+        // add user statistics and IGW to the users
+        for ($i=0; $i < count($winners); $i++) { 
+            $userstat = new Userstatistics;
+            $userstat->game_id = $game->id;
+            $userstat->user_id = $winner_ids[$i];
+            $userstat->username = $winners[$i];
+            $userstat->value = $earnings[$i];
+            $userstat->isBid = false;
+            $userstat->save();
 
-            $data = array(
-                'game_id' => $game->id,
-                'winners' => $winners
-            );
+            $UserClass = new User;
+            $newBalance = json_decode($UserClass->changeBalance($earnings[$i], $winner_ids[$i]));
+        }
 
-            $pusher->trigger('game_end', 'game_end-event', $data);
+        $data = array(
+            'game_id' => $game->id,
+            'winners' => $winners,
+            'earnings' => $earnings
+        );
 
-        // ################# Pusher end ###############################
-
+        $game->makePusherEvent($data, 'game_end');
     }
 
 

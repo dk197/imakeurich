@@ -9,13 +9,10 @@
 		<p>Spieler {{ $player_number }}/{{ $game->max_players }}</p>
 	</div>
 	<div class="col-4 text-center">
-		<p>Minimal bid: {{ $game->min_bid }} IGW | Maximal bid: {{ $game->igw_limit }} IGW</p>
+		<p>Minimal bid: {{ $game->min_bid }} IGW | Ending Pot: minimal {{ $game->igw_limit }} IGW</p>
 	</div>
 	<div class="col-4 text-right">
-		<p>Game ending: {{ $game->game_end }}</p>
-	</div>
-	<div class="col-12">
-		<p>Winning Places: {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
+		<p>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
 	</div>
 </div>
 

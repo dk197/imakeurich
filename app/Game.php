@@ -32,28 +32,11 @@ class Game extends Model
         //the position of the player in the game
         $position = $this->getPlayerPosition($this->id, $result->id) + 1;
 
-        
-        // ################# Pusher start #############################
-
-            $options = array(
-                'cluster' => 'eu'
-            );
-     
-            $pusher = new Pusher(
-                env('PUSHER_APP_KEY'),
-                env('PUSHER_APP_SECRET'),
-                env('PUSHER_APP_ID'),
-                $options
-            );
-
             $data = ([
                 'game_id' => $this->id
             ]);
             
-            $pusher->trigger('player_change', 'player_change-event', $data);  
-
-        // ################# Pusher end ###############################
-
+            $this->makePusherEvent($data, 'player_change');
     }
 
     public function updatePlayerBid($bid, $game){
@@ -79,27 +62,11 @@ class Game extends Model
         $position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
 
 
-        // ################# Pusher start #############################
-
-            $options = array(
-                'cluster' => 'eu'
-            );
-     
-            $pusher = new Pusher(
-                env('PUSHER_APP_KEY'),
-                env('PUSHER_APP_SECRET'),
-                env('PUSHER_APP_ID'),
-                $options
-            );
-
             $data = ([
                 'game_id' => $this->id
             ]);
             
-            $pusher->trigger('player_change', 'player_change-event', $data);   
-
-        // ################# Pusher end ###############################
-
+            $this->makePusherEvent($data, 'player_change');
     }
 
     //get the Position of the Player based on his bid
@@ -110,5 +77,21 @@ class Game extends Model
         $key = array_search($player_id, array_column($all_players, 'id'));
 
         return $key;
+    }
+
+    public function makePusherEvent($data, $eventName)
+    {
+        $options = array(
+            'cluster' => 'eu'
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $pusher->trigger($eventName, $eventName.'-event', $data);
     }
 }
