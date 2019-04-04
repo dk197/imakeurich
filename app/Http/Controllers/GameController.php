@@ -210,20 +210,23 @@ class GameController extends Controller
         $allPlayers = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
 
         // array starts at 0 -> winner would be wrong
+        $win_index_0 = 0;
         $win_index_1 = $game->win_1 - 1;
         $win_index_2 = $game->win_2 - 1;
         $win_index_3 = $game->win_3 - 1;
 
 
-        $winner_1 = $allPlayers[$win_index_1]->username;
-        $winner_2 = $allPlayers[$win_index_2]->username;
-        $winner_3 = $allPlayers[$win_index_3]->username;
+        $winner_0 = User::find($allPlayers[$win_index_0]->userid);
+        $winner_1 = User::find($allPlayers[$win_index_1]->userid);
+        $winner_2 = User::find($allPlayers[$win_index_2]->userid);
+        $winner_3 = User::find($allPlayers[$win_index_3]->userid);
 
 
         $winners = array(
-            'winner_1' => $winner_1,
-            'winner_2' => $winner_2,
-            'winner_3' => $winner_3
+            'winner_0' => $winner_0->username,
+            'winner_1' => $winner_1->username,
+            'winner_2' => $winner_2->username,
+            'winner_3' => $winner_3->username
         );
 
         return $winners;
