@@ -35,6 +35,11 @@ a {
     color: #fff;
   }
 
+  a:hover {
+    color: var(--richgold);
+    text-decoration: none;
+  }
+
 .table {
     color: white;
 }

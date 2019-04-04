@@ -46,25 +46,11 @@ $timeago = $user->created_at;
 
             @endif
         </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 justify-content-center">
-                        <a href="/games"><img src="https://image.flaticon.com/icons/svg/747/747661.svg" alt="Bid now" class="img-rounded"></a>
-                        <a href="/games">Bid now</a>
-                    </div>
-                    <div class="col-md-3 justify-content-center">
-                        <a href="/coins"><img src="https://img.icons8.com/color/260/us-dollar.png" alt="Buy Coins" class="img-rounded"></a>
-                        <a href="/games">Buy Coins</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="col-md-12 row justify-content-center">
+    <div class="col-md-12 row justify-content-center ">
         <div class="col-md-12">
             <div class="card">
-        <div class="card-header text-center">
+        <div class="card-header text-center mt-4">
                 @if ($user->id==auth()->user()->id)
                     About you
                 @else
@@ -95,28 +81,28 @@ $timeago = $user->created_at;
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="employees">
-                            <p class="counter-count1"><?php echo time_elapsed_string($timeago); ?></p>
+                            <a href="/editUser"><img src="/images/edituser.png" width="98px" class="mb-2"></a>
                             <p class="employee-p"><a href="/editUser">Edit Profile</a></p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="customer">
-                            <img src="/images/bidnow.png" width="98px" class="mb-2">
+                            <a href="/games"><img src="/images/bidnow.png" width="98px" class="mb-2"></a>
                             <p class="customer-p"><a href="/games">Bid Now</a></p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="design">
-                            <img src="/images/coin.png" width="98px" class="mb-2">
+                            <a href="/coins"><img src="/images/coin.png" width="98px" class="mb-2"></a>
                             <p class="design-p"><a href="/coins">Buy Coins</a></p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="order">
-                            <p class="counter-count"><?php echo $coinswon ?></p>
+                            <a href="{{ url('/logout') }}"><img src="/images/logout.png" width="98px" class="mb-2"></a>
                             <p class="order-p"><a href="{{ url('/logout') }}">Log out</a></p>
                         </div>
                     </div>
