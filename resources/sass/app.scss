@@ -31,6 +31,10 @@ html, main {
     margin: 0;
 }
 
+.btn {
+    font-size: 14px;
+}
+
 .card {
     border: 0;
     border-radius: 8px;
@@ -38,6 +42,11 @@ html, main {
 
 .card-body {
     border-radius: 0 0 6px 6px;
+    font-size: 16px;
+}
+
+.card-header {
+    font-size: 20px;
 }
 
 .card-header, .card-header:first-child {
@@ -157,16 +166,29 @@ html, main {
 
 .button-watch {
     background-color: var(--richpurple);
+    border-color: var(--richpurple);
 }
 
 .button-buy {
     background-color: var(--richgold);
+    border-color: var(--richpurple);
 }
 
 .button-donate {
     background-color: var(--richpurple);
+    border-color: var(--richpurple)
 }
 
+.password-link {
+    color: white;
+    border-color: white;
+    margin-left: 15px;
+}
+
+.password-link:hover {
+    color: white;
+    text-transform: none;
+}
 
 /*########## Coins Style end########*/
 
@@ -193,10 +215,6 @@ html, main {
 /*########## Navbar Styles end########*/
 
 /*########## Button Styles start########*/
-
-.btn {
-    border: none;
-}
 
 .btn-primary:hover {
     background-color: var(--richgrey);

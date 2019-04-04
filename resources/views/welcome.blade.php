@@ -48,15 +48,6 @@
                 font-size: 84px;
             }
 
-            .links > a {
-                color: #ffffff;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-            }
-
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -70,7 +61,7 @@
                 </div>
                 <h1>Make money, get rich.</h1>
                 <div class="links">
-                    <a href="/instructions">How it works</a>
+                    <a class="btn btn-primary btn-block button-buy" href="/instructions">How it works</a>
                     @if (Route::has('login'))
 
                     @auth
