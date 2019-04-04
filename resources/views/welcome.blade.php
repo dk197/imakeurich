@@ -14,7 +14,7 @@
             html, body {
                 background-color: #303030;
                 color: #ffffff;
-                font-family: 'Nunito', sans-serif;
+                font-family: 'Oswald', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -55,7 +55,6 @@
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
-                text-transform: uppercase;
             }
 
             .m-b-md {
@@ -67,15 +66,15 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    I make u rich
+                    <img width="1000px" src="images/logo_entwurf.png">
                 </div>
-                <h1>Make money, get rich</h1>
+                <h1>Make money, get rich.</h1>
                 <div class="links">
                     <a href="/instructions">How it works</a>
                     @if (Route::has('login'))
 
                     @auth
-                        <a href="{{ url('/games') }}">Games</a>
+                        <a class="btn btn-primary btn-block button-buy" href="{{ url('/games') }}">Games</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

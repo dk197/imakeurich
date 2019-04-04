@@ -34,7 +34,7 @@ $timeago = $user->created_at;
 ?>
 
 @section('content')
-</div>
+
 
 <div id="banner">
     <div id="cloud-scroll">
@@ -101,5 +101,5 @@ $timeago = $user->created_at;
             </div>
     </div>
 </div>
-<div>
+
 @endsection
