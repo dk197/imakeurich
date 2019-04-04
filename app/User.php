@@ -38,9 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function changeBalance($byCoins)
+    public function changeBalance($byCoins, $user_id)
     {
-        $user = Auth::user();
+        $user = User::find($user_id);
         $userBalance = $user->balance;
 
         $userBalance = $userBalance + $byCoins;

@@ -20,6 +20,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				alert(response.message);
+				console.log(response);
                 $('#game_bid').val('');
                 document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
 			}

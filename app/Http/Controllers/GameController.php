@@ -144,7 +144,7 @@ class GameController extends Controller
                 }
 
                 $UserClass = new User;
-                $newBalance = json_decode($UserClass->changeBalance($bid));
+                $newBalance = json_decode($UserClass->changeBalance(- $bid, $currentuser->id));
 
                 return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
             }
@@ -165,7 +165,7 @@ class GameController extends Controller
 
             // subtract min bid (for joining the game) from user balance
             $UserClass = new User;
-            $newBalance = json_decode($UserClass->changeBalance($game->min_bid));
+            $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
 
             return response()->json(['message' => 'Game successfully entered with the min Bid '.$newBalance->balance, 'newBalance' => $newBalance->balance]);
 
@@ -265,7 +265,7 @@ class GameController extends Controller
             '3' => $this->getEarnings($game->id)['win_4']
         );
 
-
+        // add user statistics and IGW to the users
         for ($i=0; $i < count($winners); $i++) { 
             $userstat = new Userstatistics;
             $userstat->game_id = $game->id;
@@ -274,8 +274,10 @@ class GameController extends Controller
             $userstat->value = $earnings[$i];
             $userstat->isBid = false;
             $userstat->save();
-        }
 
+            $UserClass = new User;
+            $newBalance = json_decode($UserClass->changeBalance($earnings[$i], $winner_ids[$i]));
+        }
 
         $data = array(
             'game_id' => $game->id,
