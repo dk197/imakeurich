@@ -32,14 +32,23 @@ html, main {
 
 .card {
     border: 0;
+    border-radius: 8px;
+}
+
+.card-body {
+    border-radius: 0 0 6px 6px;
+}
+
+.card-header, .card-header:first-child {
+    border-radius: 6px 6px 0 0;
 }
 
 .card-header, .card-body {
     background-color: var(--richanthracite);
 }
 
-.container-userStat, .row-userStat {
-    background-color: var(--richanthracite);
+.card-coins {
+    padding: 0px;
 }
 
 /*######### Styles for all Sites end########*/
@@ -119,8 +128,17 @@ html, main {
 .employee-p,.customer-p,.order-p,.design-p
 {
     font-size: 24px;
-    color: #000000;
+    color: #ffffff;
     line-height: 34px;
+}
+
+.container-userStat, .row-userStat {
+    background-color: var(--richanthracite);
+    border-radius: 6px;
+}
+
+.counter {
+    background-color: var(--richgrey);
 }
 
 /*########## Coins Style start########*/
