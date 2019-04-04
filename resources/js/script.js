@@ -72,8 +72,9 @@ $(document).ready(function(){
 	    //only execute at the right page
 	    if(data.game_id == game_id){
 	 
-	 		alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
+	 		// alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
 			
+	 		console.log(data);
 	    }
 	});
 
