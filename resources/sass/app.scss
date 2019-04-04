@@ -40,12 +40,24 @@ a {
     text-decoration: none;
   }
 
+h1 {
+    margin-bottom: 20px;
+}
+
+p, label, li {
+    font-size: 16px;
+}
+
 .table {
     color: white;
 }
 
 .btn {
     font-size: 14px;
+}
+
+.btn:active {
+    border: inherit;
 }
 
 .card {
@@ -85,17 +97,23 @@ a {
 /*######### /games overview start########*/
 #game_card{
 	padding: 20px;
-	margin-right: 20px;
     cursor: pointer;
-    width: 30%;
+    width: 33.3%
 }
-// #game_card:hover{
-// 	background-color: lightgrey;
-// }
+.game-card-body:hover{
+	background-color: var(--richgold);
+}
+.game-card-body {
+    border-radius: 6px;
+}
 #game_list{
 	list-style: none;
 	text-align: center;
 	padding-inline-start: 0px;
+}
+
+.all-games {
+    display: flex;
 }
 
 /*######### /games overview end########*/
@@ -169,6 +187,18 @@ a {
     background-color: var(--richgrey);
 }
 
+.enter-button {
+    margin-bottom: 20px;
+}
+
+#player_table {
+    font-size: 18px;
+}
+
+.statistics-card {
+    background-color: var(--richanthracite);
+}
+
 /*########## Coins Style start########*/
 
 .coin-icon {
@@ -234,7 +264,7 @@ a {
     border-color: var(--richgold);
 }
 
-.nav-link a, .nav-link, #navbarDropdown {
+.nav-link, .nav-link a, .nav-link, #navbarDropdown {
    color: #fff;
     padding: 10px;
 }
@@ -252,7 +282,6 @@ a {
 
 /*########## Button Styles start########*/
 
-/*########## Button Styles end########*/
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -278,6 +307,9 @@ a {
     line-height: 1.33;
     border-radius: 35px;
   }
+
+/*########## Button Styles end########*/
+
 
   @-webkit-keyframes backgroundScroll {
     from {
@@ -349,3 +381,11 @@ a {
     margin-bottom: 30px;
 }
 
+.safety-note {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.age-validation {
+    margin-bottom: 20px;
+}

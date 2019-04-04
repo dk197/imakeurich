@@ -24,7 +24,7 @@
                   <small>   (if you dont want to change it: type your current)</small>
                   <input type="password" autocomplete="new-password" class="form-control" id="password" name="password" required placeholder="Password">
                 </div>
-                <button type="submit" id="userChangeSubmit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="userChangeSubmit" class="btn btn-primary button-purple">Submit</button>
               </form>
         </div>
     </div>
