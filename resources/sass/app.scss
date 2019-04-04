@@ -10,16 +10,19 @@
 
 :root {
     --richgold: #efba1a;
+    --richgrey: #303030;
+    --richanthracite: #232323;
+    --richpurple: #7001ba;
   }
 
 .navbar-laravel {
-  background-color: #fff;
+  background-color: var(--richanthracite);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 /*######### Styles for all Sites start########*/
 
 html, main {
-    background-color: #303030;
+    background-color: var(--richgrey);
     color: #ffffff;
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
@@ -68,7 +71,7 @@ html, main {
 .counter-count
 {
     font-size: 18px;
-    background-color: #00b3e7;
+    background-color: var(--richpurple);
     border-radius: 50%;
     position: relative;
     color: #ffffff;
@@ -86,7 +89,7 @@ html, main {
 .counter-count1
 {
     font-size: 18px;
-    background-color: #00b3e7;
+    background-color: var(--richpurple);
     border-radius: 50%;
     position: relative;
     color: #ffffff;
@@ -121,15 +124,15 @@ html, main {
 }
 
 .button-watch {
-    background-color: #B0FE76;
+    background-color: var(--richpurple);
 }
 
 .button-buy {
-    background-color: #FFE66D;
+    background-color: var(--richgold);
 }
 
 .button-donate {
-    background-color: #FFA552;
+    background-color: var(--richpurple);
 }
 
 
@@ -142,7 +145,7 @@ html, main {
 }
 
 .nav-link a, .nav-link, #navbarDropdown {
-   color: #2F3061;
+   color: #fff;
     padding: 10px;
 }
 
@@ -164,7 +167,7 @@ html, main {
 }
 
 .btn-primary:hover {
-    background-color: #577590;
+    background-color: var(--richgrey);
 }
 
 /*########## Button Styles end########*/
