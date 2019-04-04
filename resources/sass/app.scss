@@ -44,6 +44,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+p, label, li {
+    font-size: 16px;
+}
+
 .table {
     color: white;
 }
@@ -183,6 +187,18 @@ h1 {
     background-color: var(--richgrey);
 }
 
+.enter-button {
+    margin-bottom: 20px;
+}
+
+#player_table {
+    font-size: 18px;
+}
+
+.statistics-card {
+    background-color: var(--richanthracite);
+}
+
 /*########## Coins Style start########*/
 
 .coin-icon {
@@ -248,7 +264,7 @@ h1 {
     border-color: var(--richgold);
 }
 
-.nav-link a, .nav-link, #navbarDropdown {
+.nav-link, .nav-link a, .nav-link, #navbarDropdown {
    color: #fff;
     padding: 10px;
 }
