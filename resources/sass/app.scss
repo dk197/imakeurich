@@ -164,20 +164,16 @@ html, main {
     height: 150px;
 }
 
-.button-watch {
+.button-purple {
     background-color: var(--richpurple);
     border-color: var(--richpurple);
 }
 
-.button-buy {
+.button-gold {
     background-color: var(--richgold);
-    border-color: var(--richpurple);
+    border-color: var(--richgold);
 }
 
-.button-donate {
-    background-color: var(--richpurple);
-    border-color: var(--richpurple);
-}
 
 .button-welcome {
     background-color: var(--richpurple);
@@ -208,6 +204,7 @@ html, main {
 
 .btn-secondary {
     background-color: var(--richgold);
+    border-color: var(--richgold);
 }
 
 .nav-link a, .nav-link, #navbarDropdown {
