@@ -20,7 +20,8 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				alert(response.message);
-				$('#game_bid').val('');
+                $('#game_bid').val('');
+                document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
 			}
 		})
 	})
