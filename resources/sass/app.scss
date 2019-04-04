@@ -16,7 +16,7 @@
   }
 
 .navbar-laravel {
-  background-color: var (var(--richanthracite));
+  background-color: var(--richanthracite);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 /*######### Styles for all Sites start########*/
@@ -145,7 +145,7 @@ html, main {
 }
 
 .nav-link a, .nav-link, #navbarDropdown {
-   color:var(--richpurple);
+   color: #fff;
     padding: 10px;
 }
 
