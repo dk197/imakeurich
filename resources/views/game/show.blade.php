@@ -9,7 +9,7 @@
 		<p>Spieler {{ $player_number }}/{{ $game->max_players }}</p>
 	</div>
 	<div class="col-4 text-center">
-		<p>Minimal bid: {{ $game->min_bid }} IGW | Maximal bid: {{ $game->max_bid }} IGW</p>
+		<p>Minimal bid: {{ $game->min_bid }} IGW | Maximal bid: {{ $game->igw_limit }} IGW</p>
 	</div>
 	<div class="col-4 text-right">
 		<p>Game ending: {{ $game->game_end }}</p>

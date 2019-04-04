@@ -139,7 +139,7 @@ class GameController extends Controller
                 // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
 
-                if($this->getAllGameBids($game->id) >= $game->min_bid){
+                if($this->getAllGameBids($game->id) >= $game->igw_limit){
                     $this->endGame($game);
                 }
 
