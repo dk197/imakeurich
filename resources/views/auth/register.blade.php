@@ -68,7 +68,7 @@
                                     I am at least 18 years old.
                                     <br>
                                 </div>
-                                <button type="submit" class="btn btn-primary button-purple">
+                                <button type="submit" class="btn button-purple">
                                     {{ __('Register') }}
                                 </button>
                             </div>
