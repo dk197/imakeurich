@@ -62,10 +62,11 @@ class UserController extends Controller
     }
 
     public function addToBalance(Request $request)
-    {
+    {   
+        $user_id = auth()->user()->id;
         $coins = $request->input('coins');
         $UserClass = new User;
-        $newBalance = json_decode($UserClass->changeBalance($coins));
+        $newBalance = json_decode($UserClass->changeBalance($coins, $user_id));
 
         return response()->json(['message' => 'Success: Your Balance now: '.$newBalance->balance , 'coins' => $newBalance->balance]);
     }
