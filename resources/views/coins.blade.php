@@ -19,7 +19,7 @@
                     </div>
                     <div class="row">
                             <div class="col-sm-12 text-center">
-                                    <a id="watchAdBtn" class="btn btn-primary btn-block button-gold coinChanger" >Get 1 Free Coin</a>
+                                    <a id="watchAdBtn" class="btn btn-block button-gold coinChanger" >Get 1 Free Coin</a>
                             </div>
                         </div>
                 </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 text-center">
-                                    <a id="buy99" class="btn btn-primary btn-block button-gold coinChanger">Buy Now for 0,99€</a>
+                                    <a id="buy99" class="btn btn-block button-gold coinChanger">Buy Now for 0,99€</a>
                                 </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 text-center">
-                                        <a id="buy999" class="btn btn-primary btn-block button-gold coinChanger">Buy Now for 9,99€</a>
+                                        <a id="buy999" class="btn btn-block button-gold coinChanger">Buy Now for 9,99€</a>
                                     </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 text-center">
-                                            <a id="buy9999" class="btn btn-primary btn-block button-gold coinChanger">Buy Now for 99,99€</a>
+                                            <a id="buy9999" class="btn btn-block button-gold coinChanger">Buy Now for 99,99€</a>
                                         </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="row">
                                 <div class="col-sm-12 text-center">
-                                        <a id="donate10" class="btn btn-primary btn-block button-gold coinChanger">Donate 10 Coins</a>
+                                        <a id="donate10" class="btn btn-block button-gold coinChanger">Donate 10 Coins</a>
                                 </div>
                             </div>
                     </div>

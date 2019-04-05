@@ -31,6 +31,13 @@ html, main {
     margin: 0;
 }
 
+.welcome-background::after{
+    background-image: url(/images/background-money.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: .5;
+}
+
 a {
     color: #fff;
   }
@@ -221,6 +228,12 @@ p, label, li {
     border-color: darken(#7001ba,12%);
 }
 
+.button-purple:active,
+.button-purple:active {
+    background-color: darken(#7001ba,12%) !important;;
+    border-color: darken(#7001ba,12%) !important;;
+}
+
 .button-gold {
     background-color: var(--richgold);
     border-color: var(--richgold);
@@ -229,6 +242,12 @@ p, label, li {
 .button-gold:hover {
     background-color: darken(#efba1a,12%);
     border-color: darken(#efba1a,12%);
+}
+
+.button-gold.active,
+.button-gold:active {
+    background-color: darken(#efba1a,12%) !important;;
+    border-color: darken(#efba1a,12%) !important;;
 }
 
 
@@ -383,4 +402,8 @@ p, label, li {
 
 .age-validation {
     margin-bottom: 20px;
+}
+
+.link-register {
+    margin-top: 20px;
 }

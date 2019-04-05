@@ -54,7 +54,7 @@ $timeago = $user->created_at;
                 @if ($user->id==auth()->user()->id)
                     About you
                 @else
-                    About him
+                    About {{$user->username}}
                 @endif
             </div>
         <div class="card-body">
@@ -122,7 +122,7 @@ $timeago = $user->created_at;
             @if ($user->id==auth()->user()->id)
                 Your statistics
             @else
-                His statistics
+            {{$user->username}}&apos;s statistics
             @endif
         </div>
     <div class="counter">
