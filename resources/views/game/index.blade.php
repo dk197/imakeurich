@@ -4,7 +4,7 @@
 
 
 <h1>All Games</h1>
-<a class="btn btn-primary btn-block button-purple" href="/games/create">Create new Game</a>
+<a class="btn btn-block button-purple" href="/games/create">Create new Game</a>
 
 <div class="row">
     <div class="col-md-12 all-games">

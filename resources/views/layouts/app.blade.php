@@ -53,7 +53,7 @@
                             @endif
                         @else
                             <li id="navbarBalance" class="nav-item ">
-                                    <a id="navbarBalanceA" class="btn btn-secondary button-gold mr-2" href="/coins" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarBalanceA" class="btn button-gold mr-2" href="/coins" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->balance }} Coins
                                     </a>
                             </li>
