@@ -63,6 +63,11 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
+                                <div class="age-validation">
+                                    <input type="checkbox" required name="zutat" value="age-validation">
+                                    I am at least 18 years old.
+                                    <br>
+                                </div>
                                 <button type="submit" class="btn btn-primary button-purple">
                                     {{ __('Register') }}
                                 </button>

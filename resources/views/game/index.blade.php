@@ -7,11 +7,12 @@
 <a class="btn btn-primary btn-block button-purple" href="/games/create">Create new Game</a>
 
 <div class="row">
+    <div class="col-md-12 all-games">
 
 		@foreach($games as $game)
 
-			<div class="card" id="game_card" onclick="location.href='/games/{{ $game->id }}'">
-				<div class="card-body">
+			<div class="col-md-4 card" id="game_card" onclick="location.href='/games/{{ $game->id }}'">
+				<div class="card-body game-card-body">
 					<h5 class="card-title text-center">{{  $game->single_bid === 1 ? "Single Bid" : "Multi Bid" }}</h5>
 					<ul id="game_list">
 						<li>Min bid: {{ $game->min_bid }}</li>
@@ -21,7 +22,8 @@
 				</div>
 			</div>
 
-		@endforeach
+        @endforeach
+    </div>
 
 </div>
 

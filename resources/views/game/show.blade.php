@@ -9,13 +9,10 @@
 		<p>Spieler {{ $player_number }}/{{ $game->max_players }}</p>
 	</div>
 	<div class="col-4 text-center">
-		<p>Minimal bid: {{ $game->min_bid }} IGW | Maximal bid: {{ $game->max_bid }} IGW</p>
+		<p>Minimal bid: {{ $game->min_bid }} IGW | Ending Pot: minimal {{ $game->igw_limit }} IGW</p>
 	</div>
 	<div class="col-4 text-right">
-		<p>Game ending: {{ $game->game_end }}</p>
-	</div>
-	<div class="col-12">
-		<p>Winning Places: {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
+		<p>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
 	</div>
 </div>
 
@@ -27,7 +24,7 @@
 				<label for="game_bid">How much money do you wanna drop in?</label>
 				<input type="number" name="game_bid" id="game_bid" class="form-control" placeholder="Amount of IGW u wanna spend">
 			</div>
-			<button type="submit" class="btn btn-primary">GO IN</button>
+			<button type="submit" class="btn btn-primary button-gold enter-button">GO IN</button>
 		</form>
 	</div>
 </div>
