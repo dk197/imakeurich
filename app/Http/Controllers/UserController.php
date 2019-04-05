@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth', ['except' => ['allstatistics']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +43,7 @@ class UserController extends Controller
         return view('user.index')->with('user',$user)->with('countbids',$count)->with('coinsbid',$coinsbid)->with('coinswon',$coinswon);
         }else{
             return redirect(getenv("HTTP_REFERER"));
-    }
+        }
     }
 
     public function allstatistics()

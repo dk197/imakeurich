@@ -33,8 +33,6 @@ Route::get('/games/{game}/getgamedata', 'GameController@getGameData');
 
 Route::post('/games/random', 'GameController@setWinningPlaces');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/coins', 'UserController@coins');
 
 Route::post('/addBalance', 'UserController@addToBalance');

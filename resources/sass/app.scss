@@ -63,8 +63,8 @@ p, label, li {
     font-size: 14px;
 }
 
-.btn:active {
-    border: inherit;
+.btn:focus {
+    box-shadow: none !important;
 }
 
 .card {
@@ -221,21 +221,25 @@ p, label, li {
 .button-purple {
     background-color: var(--richpurple);
     border-color: var(--richpurple);
+    color: white;
 }
 
 .button-purple:hover {
     background-color: darken(#7001ba,12%);
     border-color: darken(#7001ba,12%);
+    color: white;
 }
 
 .button-gold {
     background-color: var(--richgold);
     border-color: var(--richgold);
+    color: white;
 }
 
 .button-gold:hover {
     background-color: darken(#efba1a,12%);
     border-color: darken(#efba1a,12%);
+    color: white;
 }
 
 .button-start {
