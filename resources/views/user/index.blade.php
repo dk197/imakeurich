@@ -135,7 +135,7 @@ $timeago = $user->created_at;
                                 @if ($user->id==auth()->user()->id)
                                     you
                                 @else
-                                    he
+                                    {{$user->username}}
                                 @endif
                             got rich</p>
                         </div>

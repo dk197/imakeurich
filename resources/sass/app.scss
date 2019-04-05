@@ -232,12 +232,6 @@ p, label, li {
     color: white;
 }
 
-.button-purple:active,
-.button-purple:active {
-    background-color: darken(#7001ba,12%) !important;;
-    border-color: darken(#7001ba,12%) !important;;
-}
-
 .button-gold {
     background-color: var(--richgold);
     border-color: var(--richgold);
@@ -249,13 +243,6 @@ p, label, li {
     border-color: darken(#efba1a,12%);
     color: white;
 }
-
-.button-gold.active,
-.button-gold:active {
-    background-color: darken(#efba1a,12%) !important;;
-    border-color: darken(#efba1a,12%) !important;;
-}
-
 
 .button-start {
     background-color: var(--richpurple);
@@ -408,8 +395,4 @@ p, label, li {
 
 .age-validation {
     margin-bottom: 20px;
-}
-
-.link-register {
-    margin-top: 20px;
 }
