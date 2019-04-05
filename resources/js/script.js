@@ -73,12 +73,12 @@ $(document).ready(function(){
 
 	    //only execute at the right page
 	    if(data.game_id == game_id){
-	 
-	 		// alert('The winners are ' + data.winners.winner_1 + ', ' + data.winners.winner_2 + ' and ' + data.winners.winner_3);
-			
-	 		console.log(data);
+	 			
+	 		for (var i = 0; i < data.winners.length; i++) {
+	 			$('#modal_winners').append('<p>' + data.winners[i] + ': ' + data.earnings[i] + ' IGW</p>');
+	 		}
 
-// >>>>>>> b64a29ee57cd8b4b271371b4d53377eaab10f977
+			$('#game_end_modal').modal('show');
 	    }
 	});
 

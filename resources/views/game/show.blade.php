@@ -9,7 +9,7 @@
 		<p>Spieler {{ $player_number }}/{{ $game->max_players }}</p>
 	</div>
 	<div class="col-4 text-center">
-		<p>Minimal bid: {{ $game->min_bid }} IGW | Ending Pot: minimal {{ $game->igw_limit }} IGW</p>
+		<p>Minimal bid: {{ $game->min_bid }} IGW | Pot limit: {{ $game->igw_limit }} IGW</p>
 	</div>
 	<div class="col-4 text-right">
 		<p>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
@@ -48,6 +48,25 @@
 			</tbody>
 		</table>
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="game_end_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Guess who's rich now? Right, it's...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center" id="modal_winners">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection
