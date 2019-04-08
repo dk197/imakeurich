@@ -63,7 +63,7 @@
                                     </a>
                                 @endif
 
-                                <div class="link-register">
+                                <div class="link-register" style="margin-top:20px;">
                                     <a href="/register">No Account? Register Here</a>
                                 </div>
                             </div>
