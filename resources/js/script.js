@@ -3,13 +3,15 @@ $(document).ready(function(){
 	var game_id = window.location.pathname.substr(7);
 
 	$('.game-card').mouseenter(function(){
-		$(this).find('.card-header').css("background-color", "#efba1a");
-		$(this).find('.card-body').css("background-color", "#efba1a");
+		$(this).find('.card-header').css("background-color", "#7001ba");
+        $(this).find('.card-body').css("background-color", "#7001ba");
+        $(this).find('.game-icon').css("color", "#232323");
 	});
 
 	$('.card').mouseleave(function(){
 		$('.card-header').css("background-color", "#232323");
-		$('.card-body').css("background-color", "#232323");
+        $('.card-body').css("background-color", "#232323");
+        $(this).find('.game-icon').css("color", "#7001ba");
 	});
 
 
@@ -35,7 +37,7 @@ $(document).ready(function(){
 
 				if(response.message == 'You Bid successfully' || response.message == 'Game successfully entered with the min Bid'){
 					document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
-				}  
+				}
 
 			}
 		})
@@ -58,7 +60,7 @@ $(document).ready(function(){
 	    if(data.game_id == game_id){
 
 	    	var max_players = $('#player_number').html().slice(-1);
-	    	
+
 
 			$.ajax({
 				url: '/games/' + game_id + '/getgamedata',
@@ -92,7 +94,7 @@ $(document).ready(function(){
 
 	    //only execute at the right page
 	    if(data.game_id == game_id){
-	 			
+
 	 		for (var i = 0; i < data.winners.length; i++) {
 	 			$('#modal_winners').append('<p>' + data.winners[i] + ': ' + data.earnings[i] + ' IGW</p>');
 	 		}
@@ -139,7 +141,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response) {
 				document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
-            	
+
             	$('#coin_add_modal .modal-body').html('You now have ' + response.coins + ' Coins in your account');
 
             	$('#coin_add_modal').modal('show');

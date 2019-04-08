@@ -12,13 +12,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-4">
-                            <p id="player_number">Player: {{ $player_number }}/{{ $game->max_players }}</p>
+                            <p id="player_number"><i class="fas fa-user-tie game-icon"></i>Player: {{ $player_number }}/{{ $game->max_players }}</p>
                         </div>
                         <div class="col-4 text-center">
-                            <p>Minimal bid: {{ $game->min_bid }} Coins | Pot limit: {{ $game->igw_limit }} coins</p>
+                            <p><i class="fas fa-coins game-icon"></i>Minimal bid: {{ $game->min_bid }} Coins &nbsp &nbsp | &nbsp &nbsp<i class="fas fa-sort-amount-up game-icon"></i>Pot limit: {{ $game->igw_limit }} Coins</p>
                         </div>
                         <div class="col-4 text-right">
-                            <p>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
+                            <p><i class="fas fa-trophy game-icon"></i>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
                         </div>
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="game_bid">How much coins do you wanna drop in?</label>
-                                    <input type="number" name="game_bid" id="game_bid" class="form-control" placeholder="Amount of coins u wanna spend">
+                                    <input type="number" name="game_bid" id="game_bid" class="form-control" placeholder="Amount of coins u wanna spend...">
                                 </div>
-                                <button type="submit" style="margin-top:20px;" class="btn button-gold enter-button">GO IN</button>
+                                <button type="submit" style="margin-top:20px;" class="btn button-gold enter-button">Go in!</button>
                             </form>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                         <tr>
                                             <th class="col_1" scope="row" style="width: 33%">{{ $loop->iteration }}.</th>
                                             <td class="text-center col_2" style="width: 33%">{{ $player->username }} ({{ $player->bid }})</td>
-                                        <td class="text-right col_3" style="width: 33%"><a href="/user/{{$player->id}}">Show profile</a></td>
+                                            <td class="text-right col_3" style="width: 33%"><a class="btn button-purple" href="/user/{{$player->id}}">Show profile</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
