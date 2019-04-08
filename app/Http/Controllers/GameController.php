@@ -99,7 +99,9 @@ class GameController extends Controller
 
     public function getGameData(Game $game)
     {
-        return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
+        $data = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
+
+        return response()->json(['data' => $data, 'player_number' => $this->getPlayerNumber($game)]);
     }
 
     public function enter(Game $game)
@@ -137,7 +139,6 @@ class GameController extends Controller
                 $userstat->isBid = true;
                 $userstat->save();
 
-                // Player has bid for this game already
                 $game->updatePlayerBid($bid, $game);
 
                 if($this->getPot($game->id) >= $game->igw_limit){
@@ -147,7 +148,7 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $bid, $currentuser->id));
 
-                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
             }
 
         // game isn't full and user is not a player
@@ -171,7 +172,7 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
 
-                return response()->json(['message' => 'Game successfully entered with the min Bid', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
+                return response()->json(['message' => 'Game successfully entered with the min Bid', 'newBalance' => $newBalance->balance]);
             }
 
         }else{

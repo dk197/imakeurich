@@ -32,11 +32,11 @@ class Game extends Model
         //the position of the player in the game
         $position = $this->getPlayerPosition($this->id, $result->id) + 1;
 
-            $data = ([
-                'game_id' => $this->id
-            ]);
-            
-            $this->makePusherEvent($data, 'player_change');
+        $data = ([
+            'game_id' => $this->id
+        ]);
+        
+        $this->makePusherEvent($data, 'player_change');
     }
 
     public function updatePlayerBid($bid, $game){
@@ -62,11 +62,11 @@ class Game extends Model
         $position = $this->getPlayerPosition($game->id, $result_array[0]['id']) + 1;
 
 
-            $data = ([
-                'game_id' => $this->id
-            ]);
-            
-            $this->makePusherEvent($data, 'player_change');
+        $data = ([
+            'game_id' => $this->id
+        ]);
+        
+        $this->makePusherEvent($data, 'player_change');
     }
 
     //get the Position of the Player based on his bid
