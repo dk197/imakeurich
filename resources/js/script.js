@@ -128,6 +128,10 @@ $(document).ready(function(){
 			data: data,
 			success: function(response) {
 				document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
+            	
+            	$('#coin_add_modal .modal-body').html('You now have ' + response.coins + ' Coins in your account');
+
+            	$('#coin_add_modal').modal('show');
             }
 		})
     });
