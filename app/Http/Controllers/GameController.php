@@ -91,7 +91,6 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        // mehrere entries pro user bei einem game! -> update entry
         $player_number = $this->getPlayerNumber($game);
 
         // dd($player_number);
@@ -101,11 +100,6 @@ class GameController extends Controller
     public function getGameData(Game $game)
     {
         return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
-    }
-
-    public function joinGame(Game $game)
-    {
-
     }
 
     public function enter(Game $game)
@@ -146,7 +140,7 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $bid, $currentuser->id));
 
-                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
             }
 
         // game isn't full and user is not a player
@@ -167,7 +161,7 @@ class GameController extends Controller
             $UserClass = new User;
             $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
 
-            return response()->json(['message' => 'Game successfully entered with the min Bid '.$newBalance->balance, 'newBalance' => $newBalance->balance]);
+            return response()->json(['message' => 'Game successfully entered with the min Bid '.$newBalance->balance, 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
 
         // game isn't full & user is a player
         }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
@@ -286,6 +280,8 @@ class GameController extends Controller
         );
 
         $game->makePusherEvent($data, 'game_end');
+
+        DB::table('players')->where(['game_id' => $game->id])->delete();
     }
 
 

@@ -3,10 +3,10 @@
 @section('content')
 <div class="row">
 	<div class="col-12">
-		<h1>{{ $game->single_bid === 1 ? "Single Bid" : "Multi Bid"}}</h1>
+		<h1>Multi Bid Millionaire</h1>
 	</div>
 	<div class="col-4">
-		<p>Spieler {{ $player_number }}/{{ $game->max_players }}</p>
+		<p id="player_number">Spieler: {{ $player_number }}/{{ $game->max_players }}</p>
 	</div>
 	<div class="col-4 text-center">
 		<p>Minimal bid: {{ $game->min_bid }} IGW | Pot limit: {{ $game->igw_limit }} IGW</p>
