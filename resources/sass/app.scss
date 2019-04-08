@@ -1,12 +1,14 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
 
 :root {
     --richgold: #efba1a;
@@ -23,7 +25,7 @@
 /*######### Styles for all Sites start########*/
 
 html, main {
-    background-color: var(--richgrey);
+    background-image: url(/images/background-money.jpg);
     color: #ffffff;
     font-family: 'Oswald', sans-serif;
     font-weight: 200;
@@ -49,6 +51,8 @@ a {
 
 h1 {
     margin-bottom: 20px;
+    margin-top: 50px;
+    margin-left: 20px;
 }
 
 p, label, li {
@@ -70,7 +74,7 @@ p, label, li {
 .card {
     border: 0;
     border-radius: 8px;
-    background-color: var(--richgrey);
+    background-color: rgba(0,0,0,0);
 }
 
 .card-body {
@@ -136,7 +140,6 @@ p, label, li {
 /*########## Game details end#########*/
 .counter
 {
-    background-color: #eaecf0;
     text-align: center;
 }
 .employees,.customer,.design,.order
@@ -190,10 +193,6 @@ p, label, li {
 .container-userStat, .row-userStat {
     background-color: var(--richanthracite);
     border-radius: 6px;
-}
-
-.counter {
-    background-color: var(--richgrey);
 }
 
 .enter-button {

@@ -37,7 +37,6 @@ $timeago = $user->created_at;
 
 <div class="container">
     <div class="row col-md-12">
-        <div class="col-md-6">
             @if ($user->id==auth()->user()->id)
 
                 <h1>That&apos;s your profile:</h1>
@@ -45,7 +44,6 @@ $timeago = $user->created_at;
                 <h1>That&apos;s {{$user->username}}:</h1>
 
             @endif
-        </div>
     </div>
     <div class="col-md-12 row justify-content-center ">
         <div class="col-md-12">
@@ -76,34 +74,36 @@ $timeago = $user->created_at;
         <div class="row mt-4">
 <div class="card col-sm-12">
     <div class="card-header text-center">Actions</div>
-    <div class="counter">
-            <div class="container container-userStat">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="employees">
-                            <a href="/editUser"><img src="/images/edituser.png" width="98px" class="mb-2"></a>
-                            <p class="employee-p"><a href="/editUser">Edit Profile</a></p>
+    <div class="card-body">
+        <div class="counter">
+                <div class="container container-userStat">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="employees">
+                                <a href="/editUser"><img src="/images/edituser.png" width="98px" class="mb-2"></a>
+                                <p class="employee-p"><a href="/editUser">Edit Profile</a></p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="customer">
-                            <a href="/games"><img src="/images/bidnow.png" width="98px" class="mb-2"></a>
-                            <p class="customer-p"><a href="/games">Bid Now</a></p>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="customer">
+                                <a href="/games"><img src="/images/bidnow.png" width="98px" class="mb-2"></a>
+                                <p class="customer-p"><a href="/games">Bid Now</a></p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="design">
-                            <a href="/coins"><img src="/images/coin.png" width="98px" class="mb-2"></a>
-                            <p class="design-p"><a href="/coins">Buy Coins</a></p>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="design">
+                                <a href="/coins"><img src="/images/coin.png" width="98px" class="mb-2"></a>
+                                <p class="design-p"><a href="/coins">Buy Coins</a></p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="order">
-                            <a href="{{ url('/logout') }}"><img src="/images/logout.png" width="98px" class="mb-2"></a>
-                            <p class="order-p"><a href="{{ url('/logout') }}">Log out</a></p>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="order">
+                                <a href="{{ url('/logout') }}"><img src="/images/logout.png" width="98px" class="mb-2"></a>
+                                <p class="order-p"><a href="{{ url('/logout') }}">Log out</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,41 +124,43 @@ $timeago = $user->created_at;
             @else
             {{$user->username}}&apos;s statistics
             @endif
-        </div>
-    <div class="counter">
-            <div class="container container-userStat">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="employees">
-                            <p class="counter-count1"><?php echo time_elapsed_string($timeago); ?></p>
-                            <p class="employee-p">since
-                                @if ($user->id==auth()->user()->id)
-                                    you
-                                @else
-                                    {{$user->username}}
-                                @endif
-                            got rich</p>
+    </div>
+    <div class="card-body">
+        <div class="counter">
+                <div class="container container-userStat">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="employees">
+                                <p class="counter-count1"><?php echo time_elapsed_string($timeago); ?></p>
+                                <p class="employee-p">since
+                                    @if ($user->id==auth()->user()->id)
+                                        you
+                                    @else
+                                        {{$user->username}}
+                                    @endif
+                                got rich</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="customer">
-                            <p class="counter-count"><?php echo $countbids ?></p>
-                            <p class="customer-p">bids were taken</p>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="customer">
+                                <p class="counter-count"><?php echo $countbids ?></p>
+                                <p class="customer-p">bids were taken</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="design">
-                            <p class="counter-count"><?php echo $coinsbid ?></p>
-                            <p class="design-p">coins were bid</p>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="design">
+                                <p class="counter-count"><?php echo $coinsbid ?></p>
+                                <p class="design-p">coins were bid</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="order">
-                            <p class="counter-count"><?php echo $coinswon ?></p>
-                            <p class="order-p">coins were won</p>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="order">
+                                <p class="counter-count"><?php echo $coinswon ?></p>
+                                <p class="order-p">coins were won</p>
+                            </div>
                         </div>
                     </div>
                 </div>
