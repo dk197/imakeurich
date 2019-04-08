@@ -26,6 +26,9 @@
 
 html, main {
     background-image: url(/images/background-money.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
     color: #ffffff;
     font-family: 'Oswald', sans-serif;
     font-weight: 200;
