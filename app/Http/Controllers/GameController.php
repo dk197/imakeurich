@@ -168,6 +168,10 @@ class GameController extends Controller
                 // Add User to the game with the min bid
                 $game->addPlayer($game->min_bid);
 
+                // check if game is full now
+                if($this->getPlayerNumber($game) == $game->max_players){
+                    DB::table('games')->where('id', $game->id)->update(['game_status' => "started"]);                }
+
                 // subtract min bid (for joining the game) from user balance
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
@@ -292,6 +296,7 @@ class GameController extends Controller
         $game->makePusherEvent($data, 'game_end');
 
         DB::table('players')->where(['game_id' => $game->id])->delete();
+        DB::table('games')->where('id', $game->id)->update(['game_status' => "pending"]);
     }
 
 

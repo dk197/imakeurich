@@ -71,6 +71,12 @@ $(document).ready(function(){
 				type: 'GET',
 				success: function(response){
 
+					if(response.player_number == max_players){
+						$('.enter-button').html('Bid NOW');
+						$('#player_enter_form .form-group').removeAttr('hidden');
+					}
+
+					// update player counter
 					$('#player_number').html('Spieler: ' + response.player_number + '/' + max_players);
 
 					// clear current table and add tbody element again

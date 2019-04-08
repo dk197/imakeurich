@@ -21,6 +21,7 @@ class CreateGamesTable extends Migration
             $table->unsignedInteger('win_2');
             $table->unsignedInteger('win_3');
             $table->unsignedInteger('max_players');
+            $table->string('game_status')->default('pending');
             $table->timestamps();
         });
     }

@@ -37,11 +37,11 @@
                         <div class="col-12">
                             <form method="POST" action="/games/{{ $game->id }}/enter" id="player_enter_form">
                                 @csrf
-                                <div class="form-group">
+                                <div class="form-group" {{ $game->game_status === 'pending' ? "hidden" : ''}}>
                                     <label for="game_bid">How much coins do you wanna drop in?</label>
                                     <input type="number" name="game_bid" id="game_bid" class="form-control" placeholder="Amount of coins u wanna spend...">
                                 </div>
-                                <button type="submit" style="margin-top:20px;" class="btn button-gold enter-button">Go in!</button>
+                                <button type="submit" class="btn button-gold enter-button">{{ $game->game_status === 'pending' ? 'Enter with min Bid' : 'Bid NOW'}}</button>
                             </form>
                         </div>
                     </div>
