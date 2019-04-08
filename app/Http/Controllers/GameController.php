@@ -91,7 +91,6 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        // mehrere entries pro user bei einem game! -> update entry
         $player_number = $this->getPlayerNumber($game);
 
         // dd($player_number);
@@ -103,11 +102,6 @@ class GameController extends Controller
         return DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
     }
 
-    public function joinGame(Game $game)
-    {
-
-    }
-
     public function enter(Game $game)
     {
 
@@ -115,17 +109,24 @@ class GameController extends Controller
 
         $currentuser = auth()->user();
 
-
         // check if game is full and user is not a player
         if($this->getPlayerNumber($game) == $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
 
             return response()->json(['message' => 'Game is full!']);
+
+        // game isn't full & user is a player
+        }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
+
+            return response()->json(['message' => 'Please wait, until the lobby is full!']);
+
 
         // game is full and user is a player
         }else if($this->getPlayerNumber($game) == $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
 
             if($bid < $game->min_bid){
                 return response()->json(['message' => 'Bid not in allowed area!']);
+            }else if($bid > $this->getUserBalance($currentuser->id)){
+                return response()->json(['message' => 'You dont have enough Coins!']);
             }else{
 
                 $userstat = new Userstatistics;
@@ -146,38 +147,40 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $bid, $currentuser->id));
 
-                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
             }
 
         // game isn't full and user is not a player
         }else if($this->getPlayerNumber($game) < $game->max_players && !$this->findPlayer($currentuser->id, $game->id)){
 
-            $userstat = new Userstatistics;
-            $userstat->game_id = $game->id;
-            $userstat->user_id = $currentuser->id;
-            $userstat->username = $currentuser->username;
-            $userstat->value = $bid;
-            $userstat->isBid = true;
-            $userstat->save();
+            if($game->min_bid > $this->getUserBalance($currentuser->id)){
+                return response()->json(['message' => 'You dont have enough Coins!']);
+            }else{
+                $userstat = new Userstatistics;
+                $userstat->game_id = $game->id;
+                $userstat->user_id = $currentuser->id;
+                $userstat->username = $currentuser->username;
+                $userstat->value = $game->min_bid;
+                $userstat->isBid = true;
+                $userstat->save();
 
-            // Add User to the game with the min bid
-            $game->addPlayer($game->min_bid);
+                // Add User to the game with the min bid
+                $game->addPlayer($game->min_bid);
 
-            // subtract min bid (for joining the game) from user balance
-            $UserClass = new User;
-            $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
+                // subtract min bid (for joining the game) from user balance
+                $UserClass = new User;
+                $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
 
-            return response()->json(['message' => 'Game successfully entered with the min Bid '.$newBalance->balance, 'newBalance' => $newBalance->balance]);
-
-        // game isn't full & user is a player
-        }else if($this->getPlayerNumber($game) < $game->max_players && $this->findPlayer($currentuser->id, $game->id)){
-
-            return response()->json(['message' => 'Please wait, until the lobby is full!']);
+                return response()->json(['message' => 'Game successfully entered with the min Bid', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
+            }
 
         }else{
             return response()->json(['message' => 'Unknown error, please contact the ImakeYouRich-Team']);
         }
+    }
 
+    public function getUserBalance($user_id){
+        return DB::table('users')->where(['id' => $user_id])->value('balance');
     }
 
     // get amount of players of a game
@@ -286,6 +289,8 @@ class GameController extends Controller
         );
 
         $game->makePusherEvent($data, 'game_end');
+
+        DB::table('players')->where(['game_id' => $game->id])->delete();
     }
 
 

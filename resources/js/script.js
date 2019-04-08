@@ -12,6 +12,7 @@ $(document).ready(function(){
 
 		// serialize the form data
 		var data = player_enter_form.serialize();
+		var max_players = $('#player_number').html().slice(-1);
 
 		$.ajax({
 			url: '/games/' + game_id + '/enter',
@@ -22,7 +23,12 @@ $(document).ready(function(){
 				alert(response.message);
 				console.log(response);
                 $('#game_bid').val('');
-                document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
+				$('#player_number').html('Spieler: ' + response.player_number + '/' + max_players);
+
+				if(response.message == 'You Bid successfully' || response.message == 'Game successfully entered with the min Bid'){
+					document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
+				}  
+
 			}
 		})
 	})
@@ -43,6 +49,8 @@ $(document).ready(function(){
 	    //only execute at the right page
 	    if(data.game_id == game_id){
 
+	    	var max_players = $('#player_number').html().slice(-1);
+
 			$.ajax({
 				url: '/games/' + game_id + '/getgamedata',
 				type: 'GET',
@@ -56,6 +64,8 @@ $(document).ready(function(){
 					for (var i = 0; i < response.length; i++) {
 						$('#player_table tbody').append('<tr><th class="col_1" scope="row" style="width: 33%">' + parseInt(i + 1) + '.</th><td class="text-center col_2" style="width: 33%">' + response[i].username + ' (' + response[i].bid + ')</td><td class="text-right col_3" style="width: 33%"><a href="/user/' + response[i].user_id + '">Zum Profil</a></td></tr>');
 					}
+					console.log(response);
+					$('#player_number').html('Spieler: ' + response.player_number + '/' + max_players);
 				}
 			})
 	    }
@@ -79,6 +89,8 @@ $(document).ready(function(){
 	 		}
 
 			$('#game_end_modal').modal('show');
+
+			window.location.href = "/games";
 	    }
 	});
 
@@ -117,8 +129,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response) {
-                console.log(response);
-                document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
+				document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
             }
 		})
     });
