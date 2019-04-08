@@ -11,13 +11,13 @@
                 <div class="card-header text-center">Game Data</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <p id="player_number"><i class="fas fa-user-tie game-icon"></i>Player: {{ $player_number }}/{{ $game->max_players }}</p>
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-6 text-center">
                             <p><i class="fas fa-coins game-icon"></i>Minimal bid: {{ $game->min_bid }} Coins &nbsp &nbsp | &nbsp &nbsp<i class="fas fa-sort-amount-up game-icon"></i>Pot limit: {{ $game->igw_limit }} Coins</p>
                         </div>
-                        <div class="col-4 text-right">
+                        <div class="col-3 text-right">
                             <p><i class="fas fa-trophy game-icon"></i>Winning Places: 1, {{ $game->win_1 }}, {{ $game->win_2 }}, {{ $game->win_3 }}</p>
                         </div>
                     </div>
