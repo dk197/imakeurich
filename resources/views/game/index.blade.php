@@ -8,7 +8,6 @@
     <a class="btn btn-block button-purple" href="/games/create">Create new Game</a>
 </div>
 
-
     @foreach($games as $game)
     <div class="row">
         <div class="col-md-12 all-games">

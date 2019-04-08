@@ -2,6 +2,17 @@ $(document).ready(function(){
 
 	var game_id = window.location.pathname.substr(7);
 
+	$('.card').mouseenter(function(){
+		$('.card-header').css("background-color", "#efba1a");
+		$('.card-body').css("background-color", "#efba1a");
+	});
+
+	$('.card').mouseleave(function(){
+		$('.card-header').css("background-color", "#232323");
+		$('.card-body').css("background-color", "#232323");
+	});
+
+
 	// ################ enter game start #################
 	var player_enter_form = $('#player_enter_form');
 

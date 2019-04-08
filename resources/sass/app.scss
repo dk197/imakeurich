@@ -114,14 +114,15 @@ p, label, li {
     cursor: pointer;
     width: 100%
 }
-.game-card:hover{
-	background-color: var(--richgold);
-}
 
 #game_list{
 	list-style: none;
 	text-align: center;
 	padding-inline-start: 0px;
+}
+
+.test{
+    background-color: var(--richanthracite);
 }
 
 .all-games {
