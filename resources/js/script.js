@@ -23,8 +23,12 @@ $(document).ready(function(){
 				alert(response.message);
 				console.log(response);
                 $('#game_bid').val('');
-                document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
 				$('#player_number').html('Spieler: ' + response.player_number + '/' + max_players);
+
+				if(response.message == 'You Bid successfully' || response.message == 'Game successfully entered with the min Bid'){
+					document.getElementById("navbarBalanceA").textContent = response.newBalance + ' Coins';
+				}  
+
 			}
 		})
 	})
@@ -125,8 +129,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response) {
-                console.log(response);
-                document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
+				document.getElementById("navbarBalanceA").textContent = response.coins + ' Coins';
             }
 		})
     });
