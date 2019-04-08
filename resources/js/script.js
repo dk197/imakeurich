@@ -32,7 +32,11 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: data,
 			success: function(response){
-				alert(response.message);
+
+				$('#game_bid_modal .modal-body').html(response.message);
+
+            	$('#game_bid_modal').modal('show');
+
                 $('#game_bid').val('');
 
 				if(response.message == 'You Bid successfully' || response.message == 'Game successfully entered with the min Bid'){
@@ -75,7 +79,7 @@ $(document).ready(function(){
 
 					// fill the table with new data
 					for (var i = 0; i < response.data.length; i++) {
-						$('#player_table tbody').append('<tr><th class="col_1" scope="row" style="width: 33%">' + parseInt(i + 1) + '.</th><td class="text-center col_2" style="width: 33%">' + response.data[i].username + ' (' + response.data[i].bid + ')</td><td class="text-right col_3" style="width: 33%"><a href="/user/' + response.data[i].user_id + '">Zum Profil</a></td></tr>');
+						$('#player_table tbody').append('<tr><th class="col_1" scope="row" style="width: 33%">' + parseInt(i + 1) + '.</th><td class="text-center col_2" style="width: 33%">' + response.data[i].username + ' (' + response.data[i].bid + ')</td><td class="text-right col_3" style="width: 33%"><a href="/user/' + response.data[i].user_id + '" class="btn button-purple">Zum Profil</a></td></tr>');
 					}
 				}
 			})
@@ -99,9 +103,7 @@ $(document).ready(function(){
 	 			$('#modal_winners').append('<p>' + data.winners[i] + ': ' + data.earnings[i] + ' IGW</p>');
 	 		}
 
-			$('#game_end_modal').modal('show');
-
-			window.location.href = "/games";
+			setTimeout(function(){ $('#game_end_modal').modal('show') }, 5000);
 	    }
 	});
 
