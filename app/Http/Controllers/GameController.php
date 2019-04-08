@@ -25,7 +25,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
+        $games = Game::orderBy('igw_limit', 'DESC')->get();
 
         return view('game.index', compact('games'));
     }
