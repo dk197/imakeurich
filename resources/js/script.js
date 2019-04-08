@@ -2,9 +2,9 @@ $(document).ready(function(){
 
 	var game_id = window.location.pathname.substr(7);
 
-	$('.card').mouseenter(function(){
-		$('.card-header').css("background-color", "#efba1a");
-		$('.card-body').css("background-color", "#efba1a");
+	$('.game-card').mouseenter(function(){
+		$(this).find('.card-header').css("background-color", "#efba1a");
+		$(this).find('.card-body').css("background-color", "#efba1a");
 	});
 
 	$('.card').mouseleave(function(){
