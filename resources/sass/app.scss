@@ -23,7 +23,7 @@
 /*######### Styles for all Sites start########*/
 
 html, main {
-    background-color: var(--richgrey);
+    background-image: url(/images/background-money.jpg);
     color: #ffffff;
     font-family: 'Oswald', sans-serif;
     font-weight: 200;
@@ -70,7 +70,7 @@ p, label, li {
 .card {
     border: 0;
     border-radius: 8px;
-    background-color: var(--richgrey);
+    background-color: rgba(0,0,0,0);
 }
 
 .card-body {
