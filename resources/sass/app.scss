@@ -140,7 +140,6 @@ p, label, li {
 /*########## Game details end#########*/
 .counter
 {
-    background-color: #eaecf0;
     text-align: center;
 }
 .employees,.customer,.design,.order
@@ -194,10 +193,6 @@ p, label, li {
 .container-userStat, .row-userStat {
     background-color: var(--richanthracite);
     border-radius: 6px;
-}
-
-.counter {
-    background-color: var(--richgrey);
 }
 
 .enter-button {
