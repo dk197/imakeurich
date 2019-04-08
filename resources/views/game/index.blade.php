@@ -4,27 +4,28 @@
 
 
 <h1>All Games</h1>
-<a class="btn btn-block button-purple" href="/games/create">Create new Game</a>
+<div class="col-md-12 all-games">
+    <a class="btn btn-block button-purple" href="/games/create">Create new Game</a>
+</div>
 
-<div class="row">
-    <div class="col-md-12 all-games">
 
-		@foreach($games as $game)
-
-			<div class="col-md-4 card" id="game_card" style="background-color: none;" onclick="location.href='/games/{{ $game->id }}'">
-				<div class="card-body game-card-body">
-					<h5 class="card-title text-center">{{  $game->single_bid === 1 ? "Single Bid" : "Multi Bid" }}</h5>
-					<ul id="game_list">
-						<li>Min bid: {{ $game->min_bid }}</li>
-						<li>Max bid: {{ $game->max_bid }}</li>
-						<li>Max Players: {{ $game->max_players }}</li>
-					</ul>
-				</div>
-			</div>
-
-        @endforeach
+    @foreach($games as $game)
+    <div class="row">
+        <div class="col-md-12 all-games">
+            <div class="card game_card game-card" onclick="location.href='/games/{{ $game->id }}'">
+                <div class="card-header text-center">Multi Bid Millionaire</div>
+                <div class="card-body">
+                    <ul id="game_list">
+                        <li>Min bid: {{ $game->min_bid }}</li>
+                        <li>Max bid: {{ $game->igw_limit }}</li>
+                        <li>Max Players: {{ $game->max_players }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
+    @endforeach
+
 
 @endsection
