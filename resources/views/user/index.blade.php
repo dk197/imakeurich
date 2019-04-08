@@ -80,28 +80,28 @@ $timeago = $user->created_at;
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="employees">
-                                <a href="/editUser"><img src="/images/edituser.png" width="98px" class="mb-2"></a>
+                                <a href="/editUser"><img src="/images/edituser.png" width="98px" class="mb-2 img-rounded"></a>
                                 <p class="employee-p"><a href="/editUser">Edit Profile</a></p>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="customer">
-                                <a href="/games"><img src="/images/bidnow.png" width="98px" class="mb-2"></a>
+                                <a href="/games"><img src="/images/bidnow.png" width="98px" class="mb-2 img-rounded"></a>
                                 <p class="customer-p"><a href="/games">Bid Now</a></p>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="design">
-                                <a href="/coins"><img src="/images/coin.png" width="98px" class="mb-2"></a>
+                                <a href="/coins"><img src="/images/coin.png" width="98px" class="mb-2 img-rounded"></a>
                                 <p class="design-p"><a href="/coins">Buy Coins</a></p>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="order">
-                                <a href="{{ url('/logout') }}"><img src="/images/logout.png" width="98px" class="mb-2"></a>
+                                <a href="{{ url('/logout') }}"><img src="/images/logout.png" width="98px" class="mb-2 img-rounded"></a>
                                 <p class="order-p"><a href="{{ url('/logout') }}">Log out</a></p>
                             </div>
                         </div>
