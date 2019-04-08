@@ -11,7 +11,7 @@
 
 		@foreach($games as $game)
 
-			<div class="col-md-4 card" id="game_card" onclick="location.href='/games/{{ $game->id }}'">
+			<div class="col-md-4 card" id="game_card" style="background-color: none;" onclick="location.href='/games/{{ $game->id }}'">
 				<div class="card-body game-card-body">
 					<h5 class="card-title text-center">{{  $game->single_bid === 1 ? "Single Bid" : "Multi Bid" }}</h5>
 					<ul id="game_list">
