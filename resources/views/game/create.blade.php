@@ -13,8 +13,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="game_max_bid">IGW Limit</label>
-			<input type="number" name="igw_limit" id="game_igw_limit" class="form-control" placeholder="Max amount of IGW for this game">
+			<label for="game_max_bid">Pot Limit</label>
+			<input type="number" name="igw_limit" id="game_igw_limit" class="form-control" placeholder="Max amount of coins for this game">
 		</div>
 
 		<div class="form-group">
