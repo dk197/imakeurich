@@ -70,7 +70,7 @@ $(document).ready(function(){
 				url: '/games/' + game_id + '/getgamedata',
 				type: 'GET',
 				success: function(response){
-
+		
 					if(response.player_number == max_players){
 						$('.enter-button').html('Bid NOW');
 						$('#player_enter_form .form-group').removeAttr('hidden');
@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 					// fill the table with new data
 					for (var i = 0; i < response.data.length; i++) {
-						$('#player_table tbody').append('<tr><th class="col_1" scope="row" style="width: 33%">' + parseInt(i + 1) + '.</th><td class="text-center col_2" style="width: 33%">' + response.data[i].username + ' (' + response.data[i].bid + ')</td><td class="text-right col_3" style="width: 33%"><a href="/user/' + response.data[i].user_id + '" class="btn button-purple">Zum Profil</a></td></tr>');
+						$('#player_table tbody').append('<tr><th class="col_1" scope="row" style="width: 33%">' + parseInt(i + 1) + '.</th><td class="text-center col_2" style="width: 33%">' + response.data[i].username + '</td><td class="text-right col_3" style="width: 33%"><a href="/user/' + response.data[i].user_id + '" class="btn button-purple">Zum Profil</a></td></tr>');
 					}
 				}
 			})

@@ -99,7 +99,7 @@ class GameController extends Controller
 
     public function getGameData(Game $game)
     {
-        $data = DB::table('players')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
+        $data = DB::table('players')->select('user_id', 'username', 'game_id')->where(['game_id' => $game->id])->orderBy('bid', 'DESC')->get()->toArray();
 
         return response()->json(['data' => $data, 'player_number' => $this->getPlayerNumber($game)]);
     }

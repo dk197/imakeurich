@@ -69,7 +69,7 @@
                                     @foreach($game->player as $player)
                                         <tr>
                                             <th class="col_1" scope="row" style="width: 33%">{{ $loop->iteration }}.</th>
-                                            <td class="text-center col_2" style="width: 33%">{{ $player->username }} ({{ $player->bid }})</td>
+                                            <td class="text-center col_2" style="width: 33%">{{ $player->username }}</td>
                                             <td class="text-right col_3" style="width: 33%"><a class="btn button-purple" href="/user/{{$player->id}}">Show profile</a></td>
                                         </tr>
                                     @endforeach
