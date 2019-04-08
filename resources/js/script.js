@@ -20,7 +20,6 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				alert(response.message);
-				console.log(response);
                 $('#game_bid').val('');
 
 				if(response.message == 'You Bid successfully' || response.message == 'Game successfully entered with the min Bid'){

@@ -148,7 +148,7 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $bid, $currentuser->id));
 
-                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
+                return response()->json(['message' => 'You Bid successfully', 'newBalance' => $newBalance->balance]);
             }
 
         // game isn't full and user is not a player
@@ -172,7 +172,7 @@ class GameController extends Controller
                 $UserClass = new User;
                 $newBalance = json_decode($UserClass->changeBalance(- $game->min_bid, $currentuser->id));
 
-                return response()->json(['message' => 'Game successfully entered with the min Bid', 'newBalance' => $newBalance->balance, 'player_number' => $this->getPlayerNumber($game)]);
+                return response()->json(['message' => 'Game successfully entered with the min Bid', 'newBalance' => $newBalance->balance]);
             }
 
         }else{
