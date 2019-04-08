@@ -41,7 +41,7 @@
             <div class="card-body">
             You have to be 18 years or older to gamble. Gambling can be addictive. More information at: https://www.responsiblegambling.org or by calling the free hotline 0800 137 27 00.
         </div>
-        <div class="links">
+        <div class="links flex-center">
                     <a class="btn button-start" href="/games">Really! Let's get started!</a>
         </div>
     </div>
