@@ -196,16 +196,20 @@ $(document).ready(function(){
     user_id = $('#user_id_user').val();
 
 });
-window.onload = function() {
-$('.counter-count').each(function () {
-        $(this).prop('Counter',0).animate({
-            Counter: $(this).text()
-        }, {
-            duration: 5000,
-            easing: 'swing',
-            step: function (now) {
-                $(this).text(Math.ceil(now));
-            }
-        });
-    });
+
+
+if(window.location.pathname.substr(-13) == 'allstatistics' || window.location.pathname.substr(1, 5) == 'user/'){
+	window.onload = function() {
+		$('.counter-count').each(function () {
+	        $(this).prop('Counter',0).animate({
+	            Counter: $(this).text()
+	        }, {
+	            duration: 5000,
+	            easing: 'swing',
+	            step: function (now) {
+	                $(this).text(Math.ceil(now));
+	            }
+	        });
+	    });
+	}
 }
