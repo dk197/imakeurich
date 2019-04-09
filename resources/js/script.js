@@ -77,7 +77,8 @@ $(document).ready(function(){
 					}
 
 					// update player counter
-					$('#player_number').html('Spieler: ' + response.player_number + '/' + max_players);
+					$('#player_number').html('');
+					$('#player_number').append('<i class="fas fa-user-tie game-icon"></i>Player: ' + response.player_number + '/' + max_players);
 
 					// clear current table and add tbody element again
 					$('#player_table').empty();
