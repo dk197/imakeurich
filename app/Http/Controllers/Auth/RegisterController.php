@@ -63,9 +63,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $sonderzeichen = array("'", '"', "-", ",", ";", ".", ":", "$", "&", "*", "(", ")", "[", "]", "{", "}", "|", "<", ">", "=", "~", "#", "/");
+
+        $username = str_replace($sonderzeichen, "", $data['username']);
+        $email = str_replace($sonderzeichen, "", $data['email']);
+
         return User::create([
-            'username' => $data['username'],
-            'email' => $data['email'],
+            'username' => $username,
+            'email' => $email,
             'password' => Hash::make($data['password']),
         ]);
     }
