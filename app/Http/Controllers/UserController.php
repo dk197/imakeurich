@@ -27,7 +27,7 @@ class UserController extends Controller
         if(auth()->user() != null){
         $user_id = $id;
         $user = User::find($user_id);
-        $userstats = DB::table('Userstatistics')->where('user_id',$user_id)->get();
+        $userstats = DB::table('userstatistics')->where('user_id',$user_id)->get();
         $count = 0;
         $coinsbid = 0;
         $coinswon = 0;
@@ -48,8 +48,8 @@ class UserController extends Controller
 
     public function allstatistics()
     {
-        $userstats = DB::table('Userstatistics')->get();
-        $gamesplayed = DB::table('Userstatistics')->max('game_id');
+        $userstats = DB::table('userstatistics')->get();
+        $gamesplayed = DB::table('userstatistics')->max('game_id');
         $countbids = 0;
         $coinsbid = 0;
         $coinswon = 0;
@@ -66,7 +66,7 @@ class UserController extends Controller
     }
 
     public function addToBalance(Request $request)
-    {   
+    {
         $user_id = auth()->user()->id;
         $coins = $request->input('coins');
         $UserClass = new User;
