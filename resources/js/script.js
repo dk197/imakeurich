@@ -70,7 +70,7 @@ $(document).ready(function(){
 				url: '/games/' + game_id + '/getgamedata',
 				type: 'GET',
 				success: function(response){
-		
+
 					if(response.player_number == max_players){
 						$('.enter-button').html('Bid NOW');
 						$('#player_enter_form .form-group').removeAttr('hidden');
@@ -106,7 +106,7 @@ $(document).ready(function(){
 	    if(data.game_id == game_id){
 
 	 		for (var i = 0; i < data.winners.length; i++) {
-	 			$('#modal_winners').append('<p>' + data.winners[i] + ': ' + data.earnings[i] + ' IGW</p>');
+	 			$('#modal_winners').append('<p>' + data.winners[i] + ': ' + data.earnings[i] + ' Coins</p>');
 	 		}
 
 			setTimeout(function(){ $('#game_end_modal').modal('show') }, 5000);
