@@ -5,7 +5,8 @@
 
 <h1>All Games</h1>
 <div class="col-md-12 all-games">
-    <a class="btn btn-block button-purple" href="/games/create">Create new Game</a>
+    @if (auth::user()->id === 1) <a class="btn btn-block button-purple" href="/games/create">Create new Game</a>
+    @endif
 </div>
 
     @foreach($games as $game)

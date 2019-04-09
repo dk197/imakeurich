@@ -37,6 +37,8 @@ class GameController extends Controller
      */
     public function create()
     {
+        //abort, if user is not admin (-> ID = 1)
+        abort_if(auth()->user()->id !== 1, 403);
         return view('game.create');
     }
 
@@ -48,12 +50,12 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        abort_if(auth()->user()->id !== 1, 403);
 
         $attributes = request()->validate([
             'min_bid' => ['required', 'min:1', 'numeric'],
-            'igw_limit' => ['required', 'min:1', 'numeric'],
-            'max_players' => ['required', 'min:1', 'numeric']
+            'igw_limit' => ['required', 'min:5', 'numeric'],
+            'max_players' => ['required', 'min:5', 'numeric']
         ]);
 
         //$this, da Funktion nicht global sichtbar ist
