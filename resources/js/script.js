@@ -157,6 +157,36 @@ $(document).ready(function(){
 		})
     });
 
+    var create_game_form = $('#create_game_form');
+
+	create_game_form.on('submit', function(e){
+		e.preventDefault();
+		var data = create_game_form.serialize();
+        console.log(data);
+		$.ajax({
+			url: '/games',
+			type: 'POST',
+			dataType: 'json',
+			data: data,
+			success: function(response){
+                if(response.message == 'success'){
+                    jQuery('.alert-danger').hide();
+                    $('#modal_winners').html('<p>'+response.success+'</p>');
+                    $('#create_game_modal').modal('show');
+                    $('#create_game_modal').on('hide.bs.modal', function(){
+                        window.location.href = "/games";
+                    });
+                }else{
+                    jQuery.each(response.errors, function(key, value){
+                        jQuery('.alert-success').hide();
+                        jQuery('.alert-danger').show();
+                        jQuery('.alert-danger').append('<p>'+value+'</p>');
+                    });
+                }
+			}
+		})
+	});
+
     user_change_form = $('#user_change_form');
     user_id = $('#user_id_user').val();
 

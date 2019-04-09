@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 use App\Game;
 use App\Player;
 use Carbon\Carbon;
@@ -52,11 +53,17 @@ class GameController extends Controller
     {
         abort_if(auth()->user()->id !== 1, 403);
 
-        $attributes = request()->validate([
+        $attributes = request()->all();
+
+        $validator = Validator::make($request->all(), [
             'min_bid' => ['required', 'min:1', 'numeric'],
             'igw_limit' => ['required', 'min:5', 'numeric'],
             'max_players' => ['required', 'min:5', 'numeric']
         ]);
+
+        if($validator->fails()){
+            return response()->json(['message' => 'Failed', 'errors'=>$validator->errors()->all()]);
+        }
 
         //$this, da Funktion nicht global sichtbar ist
         $winning_places = $this->setWinningPlaces($attributes['max_players']);
@@ -68,7 +75,7 @@ class GameController extends Controller
 
         Game::create($attributes);
 
-        return redirect('/games');
+        return response()->json(['message' => 'success', 'success' => 'Successfully added the new game']);
     }
 
     function setWinningPlaces($max_players)
@@ -254,9 +261,9 @@ class GameController extends Controller
     public function endGame($game){
 
         $winner_ids = array(
-            '0' => $this->getWinners($game)['winner_1'], 
-            '1' => $this->getWinners($game)['winner_2'], 
-            '2' => $this->getWinners($game)['winner_3'], 
+            '0' => $this->getWinners($game)['winner_1'],
+            '1' => $this->getWinners($game)['winner_2'],
+            '2' => $this->getWinners($game)['winner_3'],
             '3' => $this->getWinners($game)['winner_4']
         );
 
@@ -266,7 +273,7 @@ class GameController extends Controller
             '1' => User::find($winner_ids[1])->username,
             '2' => User::find($winner_ids[2])->username,
             '3' => User::find($winner_ids[3])->username
-        ); 
+        );
 
         $earnings = array(
             '0' => $this->getEarnings($game->id)['win_1'],
@@ -276,7 +283,7 @@ class GameController extends Controller
         );
 
         // add user statistics and IGW to the users
-        for ($i=0; $i < count($winners); $i++) { 
+        for ($i=0; $i < count($winners); $i++) {
             $userstat = new Userstatistics;
             $userstat->game_id = $game->id;
             $userstat->user_id = $winner_ids[$i];
