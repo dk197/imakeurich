@@ -48,8 +48,8 @@ class UserController extends Controller
 
     public function allstatistics()
     {
-        $userstats = DB::table('Userstatistics')->get();
-        $gamesplayed = DB::table('Userstatistics')->max('game_id');
+        $userstats = DB::table('userstatistics')->get();
+        $gamesplayed = DB::table('userstatistics')->max('game_id');
         $countbids = 0;
         $coinsbid = 0;
         $coinswon = 0;
