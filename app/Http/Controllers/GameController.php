@@ -57,7 +57,7 @@ class GameController extends Controller
 
         $validator = Validator::make($request->all(), [
             'min_bid' => ['required', 'min:1', 'numeric'],
-            'igw_limit' => ['required', 'min:5', 'numeric'],
+            'igw_limit' => ['required', 'min:'.request()->min_bid*request()->max_players*5, 'numeric'],
             'max_players' => ['required', 'min:5', 'numeric']
         ]);
 

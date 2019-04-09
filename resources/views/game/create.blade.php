@@ -7,7 +7,6 @@
 <div class="col-md-12 row justify-content-center">
         <div class="col-md-12">
             <div class="alert alert-danger" style="display:none"></div>
-            <div class="alert alert-success" style="display:none"></div>
             <div class="card">
                 <div class="card-header text-center">Enter game data</div>
                 <div class="card-body">

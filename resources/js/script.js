@@ -170,7 +170,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
                 if(response.message == 'success'){
-                    jQuery('.alert-danger').hide();
+                    jQuery('.alert-danger').html('');
                     $('#modal_winners').html('<p>'+response.success+'</p>');
                     $('#create_game_modal').modal('show');
                     $('#create_game_modal').on('hide.bs.modal', function(){
@@ -178,7 +178,7 @@ $(document).ready(function(){
                     });
                 }else{
                     jQuery.each(response.errors, function(key, value){
-                        jQuery('.alert-success').hide();
+                        jQuery('.alert-danger').html('');
                         jQuery('.alert-danger').show();
                         jQuery('.alert-danger').append('<p>'+value+'</p>');
                     });
