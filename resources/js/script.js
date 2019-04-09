@@ -110,7 +110,11 @@ $(document).ready(function(){
 	 			$('#modal_winners').append('<p>' + data.winners[i] + ': ' + data.earnings[i] + ' Coins</p>');
 	 		}
 
-			setTimeout(function(){ $('#game_end_modal').modal('show') }, 5000);
+			setTimeout(function(){ $('#game_end_modal').modal('show') }, 500);
+
+			$('#game_end_modal').on('hide.bs.modal', function(){
+				window.location.href = "/games";
+			});
 	    }
 	});
 

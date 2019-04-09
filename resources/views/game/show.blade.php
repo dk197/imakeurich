@@ -91,7 +91,7 @@
 		                        <div class="modal-body text-center" id="modal_winners">
 		                        </div>
 		                        <div class="modal-footer">
-		                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to all Games</button>
 		                        </div>
 	                        </div>
 	                    </div>
